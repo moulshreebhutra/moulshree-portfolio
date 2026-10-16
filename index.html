@@ -12,7 +12,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#EDE3D0">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232A2018'/%3E%3Ctext x='32' y='45' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='38' text-anchor='middle' fill='%23F0E6D4'%3EM%3C/text%3E%3C/svg%3E">
-<script>(function(){var r=document.documentElement,P=["plum","cobalt","bloom","indigo"],last=null;try{last=localStorage.getItem("mb-pal");}catch(e){}var W={plum:1,cobalt:1,bloom:1,indigo:1};var c=P.filter(function(x){return x!==last;});var tot=c.reduce(function(a,x){return a+W[x];},0),q=Math.random()*tot,p=c[c.length-1];for(var i=0;i<c.length;i++){q-=W[c[i]];if(q<0){p=c[i];break;}}try{localStorage.setItem("mb-pal",p);}catch(e){}r.setAttribute("data-pal",p);r.classList.add("js");})()</script>
+<script>(function(){var r=document.documentElement,P=["plum","cobalt","bloom","indigo","toned"],last=null;try{last=localStorage.getItem("mb-pal");}catch(e){}var W={plum:1,cobalt:1,bloom:1,indigo:1,toned:1};var c=P.filter(function(x){return x!==last;});var tot=c.reduce(function(a,x){return a+W[x];},0),q=Math.random()*tot,p=c[c.length-1];for(var i=0;i<c.length;i++){q-=W[c[i]];if(q<0){p=c[i];break;}}try{localStorage.setItem("mb-pal",p);}catch(e){}r.setAttribute("data-pal",p);r.classList.add("js");})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -611,6 +611,22 @@ html:root[data-pal="cobalt"][data-mode="dark"][data-pal]:not([data-pal="toned"])
 html:root[data-pal="cobalt"][data-mode="dark"][data-pal]:not([data-pal="toned"]) .navlinks .ind,html:root[data-pal="cobalt"][data-mode="dark"][data-pal]:not([data-pal="toned"]) .ptabs button[aria-selected="true"]{background:color-mix(in srgb,var(--ink) 13%,var(--surface));border-color:color-mix(in srgb,var(--ink) 18%,var(--line))}
 html:root[data-pal="cobalt"][data-mode="dark"][data-pal]:not([data-pal="toned"]) .navlinks a.on,html:root[data-pal="cobalt"][data-mode="dark"][data-pal]:not([data-pal="toned"]) .ptabs button[aria-selected="true"]{color:var(--ink)}
 html:root[data-pal="cobalt"][data-mode="dark"][data-pal]:not([data-pal="toned"]) .wcard{border:1px solid color-mix(in srgb,var(--ink) 8%,transparent)}
+#contact{margin-bottom:clamp(56px,10vw,120px)}
+/* ===== "toned" palette: the original vivid theme (light) + its original dark ===== */
+html:root[data-pal="toned"]{--bg:#F4F1F8;--bg2:#FFFFFF;--surface:#FFFFFF;--surface2:#ECE7F4;--ink:#1B1424;--muted:#625870;--line:#DDD5E8;--brand:#E5352A;--saffron:#B86E00;--lilac:#6B46D6;--teal:#0A8A72;--pink:#C23A73;--blue:#1F63B8;--lime:#6B7A1A;--on:#FFFFFF;--crit:#B42318;--warn:#9A5A06;--info:#27567A;--art-ink:#160E1D;--shadow:rgba(40,20,60,.22);--g1:linear-gradient(150deg,#FF8A5B,#FFB547);--g2:linear-gradient(150deg,#B79CFF,#FF8FB8);--g3:linear-gradient(150deg,#3DD6B5,#C6E05A);--g4:linear-gradient(150deg,#FF5A4F,#FF8FB8);--g5:linear-gradient(150deg,#6FB1FF,#B79CFF);--g6:linear-gradient(150deg,#FFB547,#3DD6B5);color-scheme:light}
+html:root[data-pal="toned"][data-mode="dark"]{--bg:#0D0A12;--bg2:#15101D;--surface:#1B1626;--surface2:#251E33;--ink:#F6F2FB;--muted:#ADA3BE;--line:#2F2842;--brand:#FF5A4F;--saffron:#FFB547;--lilac:#B79CFF;--teal:#3DD6B5;--pink:#FF8FB8;--blue:#6FB1FF;--lime:#C6E05A;--on:#120B18;--crit:#FF8A7D;--warn:#FFC36B;--info:#8DBBE3;--art-ink:#160E1D;--shadow:rgba(0,0,0,.55);color-scheme:dark}
+html:root[data-pal="toned"] .hero{background:radial-gradient(620px 420px at 88% 8%,color-mix(in srgb,var(--brand) 50%,transparent),transparent 70%),radial-gradient(520px 400px at 4% 100%,color-mix(in srgb,var(--lilac) 42%,transparent),transparent 70%),radial-gradient(420px 300px at 58% 96%,color-mix(in srgb,var(--saffron) 32%,transparent),transparent 70%),var(--bg2)}
+html:root[data-pal="toned"] .co.vu{background:radial-gradient(520px 340px at 90% 0%,color-mix(in srgb,var(--pink) 45%,transparent),transparent 70%),radial-gradient(420px 300px at 0% 100%,color-mix(in srgb,var(--lilac) 40%,transparent),transparent 70%),var(--bg2)}
+html:root[data-pal="toned"] .co.lq{background:radial-gradient(520px 340px at 90% 0%,color-mix(in srgb,var(--blue) 45%,transparent),transparent 70%),radial-gradient(420px 300px at 0% 100%,color-mix(in srgb,var(--teal) 38%,transparent),transparent 70%),var(--bg2)}
+html:root[data-pal="toned"] .tp.tl{--accent:var(--teal);background:radial-gradient(560px 380px at 92% 0%,color-mix(in srgb,var(--teal) 42%,transparent),transparent 70%),radial-gradient(440px 320px at 0% 100%,color-mix(in srgb,var(--blue) 36%,transparent),transparent 70%),var(--bg2)}
+html:root[data-pal="toned"] .tp.sv{--accent:var(--saffron);background:radial-gradient(560px 380px at 92% 0%,color-mix(in srgb,var(--saffron) 42%,transparent),transparent 70%),radial-gradient(440px 320px at 0% 100%,color-mix(in srgb,var(--lime) 30%,transparent),transparent 70%),var(--bg2)}
+html:root[data-pal="toned"] .contact{background:radial-gradient(520px 360px at 100% 100%,color-mix(in srgb,var(--brand) 38%,transparent),transparent 70%),radial-gradient(420px 300px at 0% 0%,color-mix(in srgb,var(--lilac) 34%,transparent),transparent 70%),var(--bg2)}
+html:root[data-pal="toned"] .name span{background:linear-gradient(100deg,var(--brand),var(--saffron));-webkit-background-clip:text;background-clip:text;color:transparent}
+html:root[data-pal="toned"] .btn.solid{background:var(--brand);border-color:var(--brand);color:var(--on)}
+html:root[data-pal="toned"] .tp .btn.solid{background:var(--accent);border-color:var(--accent)}
+html:root[data-pal="toned"] .mono-logo i{background:linear-gradient(135deg,var(--brand),var(--saffron));color:#150B12}
+html:root[data-pal="toned"] .np-bar i{background:linear-gradient(90deg,var(--brand),var(--saffron))}
+
 
 /* motion layer: subtle, honours reduced motion */
 .skip{position:absolute;left:12px;top:-60px;z-index:60;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;transition:top .2s}
