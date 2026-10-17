@@ -1001,6 +1001,46 @@ button,a,.chip{touch-action:manipulation}
   li::marker{transition:color .2s}li:hover::marker{color:var(--brand)}
 }
 html:root[data-pal="toned"][data-mode="dark"]{--g1:linear-gradient(150deg,color-mix(in srgb,#FF8A5B 84%,var(--bg)),color-mix(in srgb,#FFB547 80%,var(--bg)));--g2:linear-gradient(150deg,color-mix(in srgb,#B79CFF 84%,var(--bg)),color-mix(in srgb,#FF8FB8 80%,var(--bg)));--g3:linear-gradient(150deg,color-mix(in srgb,#3DD6B5 84%,var(--bg)),color-mix(in srgb,#C6E05A 80%,var(--bg)));--g4:linear-gradient(150deg,color-mix(in srgb,#FF5A4F 84%,var(--bg)),color-mix(in srgb,#FF8FB8 80%,var(--bg)));--g5:linear-gradient(150deg,color-mix(in srgb,#6FB1FF 84%,var(--bg)),color-mix(in srgb,#B79CFF 80%,var(--bg)));--g6:linear-gradient(150deg,color-mix(in srgb,#FFB547 84%,var(--bg)),color-mix(in srgb,#3DD6B5 80%,var(--bg)))}
+
+/* ---- Haikei shapes + Motion Primitives ports (theme-aware via --sig/--s2/--s3) ---- */
+.hero{isolation:isolate}
+.hero>*:not(.hk-blobs){position:relative;z-index:1}
+.hk-blobs{position:absolute;inset:-60px -40px auto auto;width:min(820px,90%);height:480px;z-index:0;pointer-events:none;opacity:.2;filter:blur(52px) saturate(.85)}
+html[data-mode="dark"] .hk-blobs{opacity:.13}
+@media (prefers-reduced-motion:no-preference){.hk-blobs{animation:hkFloat 24s var(--ease-in-out,ease-in-out) infinite alternate}}
+@keyframes hkFloat{to{translate:-30px 22px;rotate:5deg}}
+@media(max-width:900px){.hk-blobs{width:calc(100% + 80px);height:420px}}
+.contact{position:relative;overflow:hidden;isolation:isolate}
+.contact>*:not(.hk-waves){position:relative;z-index:1}
+.hk-waves{position:absolute;left:0;right:0;bottom:0;width:100%;height:42%;pointer-events:none;z-index:0}
+html[data-mode="dark"] .hk-waves{opacity:.6}
+/* TextEffect */
+.te-w{display:inline-block;white-space:nowrap}.te-c{display:inline-block}
+html.te .hero .name{animation:none!important}
+html.te .te-c{opacity:0;filter:blur(12px);transform:translateY(20px);animation:teIn .55s var(--ease-out,ease-out) forwards;animation-delay:calc(var(--i)*30ms + 80ms)}
+@keyframes teIn{to{opacity:1;filter:blur(0);transform:none}}
+/* TextShimmer */
+@media (prefers-reduced-motion:no-preference){
+ .shim{--sp:44px;background:linear-gradient(90deg,#0000 calc(50% - var(--sp)),var(--sig,currentColor),#0000 calc(50% + var(--sp))) no-repeat,linear-gradient(var(--ink,currentColor),var(--ink,currentColor));background-size:250% 100%,auto;-webkit-background-clip:text;background-clip:text;color:transparent;background-position:100% center;animation:shim 2.2s linear 1s 2}
+}
+@keyframes shim{to{background-position:0% center}}
+/* TextLoop */
+.tloop{display:inline-grid;vertical-align:bottom;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+.tloop>span{grid-area:1/1;white-space:nowrap;opacity:0;transform:translateY(100%);transition:opacity .3s var(--ease-out,ease-out),transform .3s var(--ease-out,ease-out);pointer-events:none}
+.tloop>span.on{opacity:1;transform:none;color:var(--sig,inherit)}
+.tloop>span.off{opacity:0;transform:translateY(-100%)}
+/* BorderTrail on the now-playing card until it is played */
+.np{position:relative;overflow:clip;overflow-clip-margin:2px}
+.btrail{display:none}
+@supports (offset-path:rect(0 auto auto 0 round 24px)){
+ @media (prefers-reduced-motion:no-preference){
+  .btrail{display:block;position:absolute;inset:-1px;border-radius:inherit;border:2px solid transparent;pointer-events:none;z-index:3;
+   -webkit-mask:linear-gradient(transparent,transparent) padding-box,linear-gradient(#000,#000) border-box;-webkit-mask-composite:source-in;mask:linear-gradient(transparent,transparent) padding-box,linear-gradient(#000,#000) border-box;mask-composite:intersect;transition:opacity .4s var(--ease-out,ease-out)}
+  .btrail i{position:absolute;width:130px;aspect-ratio:1;background:radial-gradient(circle,var(--sig,#B8407A),transparent 68%);offset-path:rect(0 auto auto 0 round 130px);animation:trail 6s linear infinite}
+  .np.ran .btrail{opacity:0}
+ }
+}
+@keyframes trail{from{offset-distance:0%}to{offset-distance:100%}}
 </style>
 </head>
 <body>
@@ -1024,9 +1064,9 @@ html:root[data-pal="toned"][data-mode="dark"]{--g1:linear-gradient(150deg,color-
 
 <!-- 1. INTRO -->
 <section id="intro" aria-label="Introduction">
-  <div class="hero">
+  <div class="hero"><svg class="hk-blobs" viewBox="0 0 800 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path fill="var(--sig,#B8407A)" d="M752.6,120.0C752.4,158.5 713.0,208.1 682.0,228.3C651.0,248.5 598.8,249.5 566.6,241.4C534.3,233.2 503.5,210.5 488.5,179.5C473.4,148.4 463.6,88.4 476.2,55.2C488.9,22.0 529.9,-10.1 564.4,-19.8C599.0,-29.4 652.0,-26.0 683.4,-2.7C714.8,20.6 752.8,81.5 752.6,120.0Z"/><path fill="var(--s2,#8A5CC2)" d="M813.3,300.0C815.8,329.5 808.7,377.2 789.9,392.7C771.2,408.2 726.0,401.1 700.8,392.8C675.5,384.5 653.0,366.4 638.4,343.1C623.7,319.7 603.1,278.8 612.9,252.7C622.7,226.7 670.0,192.9 697.0,186.8C724.0,180.7 755.5,197.0 774.9,215.9C794.3,234.7 810.8,270.5 813.3,300.0Z"/><path fill="var(--s3,#E2915F)" d="M234.4,400.0C236.8,428.5 213.2,457.4 188.2,475.2C163.3,493.1 115.4,511.6 84.7,507.2C54.1,502.7 18.4,475.9 4.1,448.7C-10.2,421.6 -15.0,372.0 -1.0,344.2C13.0,316.3 59.0,288.2 88.1,281.6C117.1,274.9 149.0,284.6 173.3,304.3C197.7,324.0 231.9,371.5 234.4,400.0Z"/></svg>
     <div>
-      <span class="tag"><b></b>Open to APM and PM roles · Bengaluru</span>
+      <span class="tag"><b></b><span class="shim">Open to APM and PM roles · Bengaluru</span></span>
       <h1 class="name">Moulshree <span>Bhutra</span></h1>
       <p class="role">Product Manager.</p>
       <p class="tagline">I sketch the flow before I write the PRD. Founding APM at Vudio.ai, where I helped a video tool grow into a marketing suite for 1,000+ D2C brands, including Shoppers Stop and Godrej.</p>
@@ -1040,7 +1080,7 @@ html:root[data-pal="toned"][data-mode="dark"]{--g1:linear-gradient(150deg,color-
       </div>
     </div>
 
-    <aside class="np" id="np" aria-label="Career, shown as a playable now-playing card" data-i="2">
+    <aside class="np" id="np" aria-label="Career, shown as a playable now-playing card" data-i="2"><span class="btrail" aria-hidden="true"><i></i></span>
       <div class="np-top">
         <div class="np-art" id="np-art"><img src="logos/moulshree.jpg" alt="Moulshree Bhutra" width="84" height="84"></div>
         <div>
@@ -1471,9 +1511,9 @@ html:root[data-pal="toned"][data-mode="dark"]{--g1:linear-gradient(150deg,color-
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="contact" aria-label="Contact">
+<section id="contact" class="contact" aria-label="Contact"><svg class="hk-waves" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0.0,104.4C33.3,103.7 133.3,102.3 200.0,100.5C266.7,98.6 333.3,94.4 400.0,93.2C466.7,92.1 533.3,95.2 600.0,93.7C666.7,92.2 733.3,84.5 800.0,84.2C866.7,83.9 933.3,95.9 1000.0,91.9C1066.7,88.0 1166.7,65.6 1200.0,60.4L1200,200L0,200Z" fill="var(--s2,#8A5CC2)" fill-opacity="0.1"/><path d="M0.0,117.0C33.3,119.5 133.3,134.4 200.0,132.4C266.7,130.4 333.3,104.1 400.0,104.8C466.7,105.6 533.3,131.6 600.0,136.6C666.7,141.7 733.3,138.8 800.0,135.1C866.7,131.3 933.3,117.9 1000.0,114.0C1066.7,110.2 1166.7,112.4 1200.0,112.1L1200,200L0,200Z" fill="var(--s3,#E2915F)" fill-opacity="0.1"/><path d="M0.0,153.4C33.3,153.1 133.3,148.4 200.0,151.3C266.7,154.2 333.3,170.8 400.0,170.8C466.7,170.8 533.3,156.5 600.0,151.4C666.7,146.2 733.3,141.4 800.0,139.9C866.7,138.3 933.3,138.3 1000.0,142.0C1066.7,145.7 1166.7,158.6 1200.0,162.0L1200,200L0,200Z" fill="var(--sig,#B8407A)" fill-opacity="0.14"/></svg>
   <span class="eyebrow">Say hello</span>
-  <h2>Let's build something people want.</h2>
+  <h2 aria-label="Let's build something people want."><span aria-hidden="true">Let's build something <span class="tloop"><span class="on">people want.</span><span>people love.</span><span>worth using.</span><span>that sticks.</span></span></span></h2>
   <p>I am looking for an APM or PM role in Bengaluru, in-office or remote. If your team is hiring, I would love to talk.</p>
   <div class="mailrow">
     <code id="mailaddr">moulshreebhutra@gmail.com</code>
@@ -2239,5 +2279,54 @@ html:root[data-pal="toned"][data-mode="dark"]{--g1:linear-gradient(150deg,color-
 })();
 </script>
 <script>(function(){var n=document.querySelector('.nav');if(!n)return;var t=false;function u(){n.classList.toggle('edge',window.scrollY>4);t=false}addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(u)}},{passive:true});u()})();</script>
+
+<script>
+/* Motion Primitives ports: TextEffect, TextLoop, Magnetic, BorderTrail stop */
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,root=document.documentElement;
+  /* TextEffect: split the name into characters, words stay unbroken */
+  var h1=document.querySelector('.hero .name');
+  if(h1&&!reduce){
+    var i=0;h1.setAttribute('aria-label',h1.textContent.trim());
+    (function walk(el){[].slice.call(el.childNodes).forEach(function(n){
+      if(n.nodeType===3){var frag=document.createDocumentFragment();
+        n.nodeValue.split(/(\s+)/).forEach(function(w){
+          if(!w)return;if(/^\s+$/.test(w)){frag.appendChild(document.createTextNode(' '));return}
+          var ws=document.createElement('span');ws.className='te-w';ws.setAttribute('aria-hidden','true');
+          w.split('').forEach(function(ch){var c=document.createElement('span');c.className='te-c';c.style.setProperty('--i',i++);c.textContent=ch;ws.appendChild(c)});
+          frag.appendChild(ws)});
+        el.replaceChild(frag,n);
+      }else if(n.nodeType===1)walk(n)})})(h1);
+    root.classList.add('te');
+  }
+  /* TextLoop: rotate the contact headline while it is on screen */
+  var loop=document.querySelector('.tloop');
+  if(loop&&!reduce){
+    var items=[].slice.call(loop.children),k=0,timer=null;
+    function tick(){var cur=items[k];cur.classList.remove('on');cur.classList.add('off');
+      setTimeout(function(){cur.classList.remove('off')},300);
+      k=(k+1)%items.length;items[k].classList.add('on')}
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting&&!timer)timer=setInterval(tick,2400);
+      else if(!e.isIntersecting&&timer){clearInterval(timer);timer=null}})}).observe(loop);
+  }
+  /* BorderTrail: fades once the demo has been run */
+  var npc=document.getElementById('np');
+  if(npc)npc.addEventListener('click',function(e){if(e.target.closest('button'))npc.classList.add('ran')});
+  /* Magnetic: spring pull toward the cursor (stiffness 26.7, damping 4.1, mass .2) */
+  if(reduce||!matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+  [].forEach.call(document.querySelectorAll('.hero .cta .btn,#np-cta,#btn-copy,.contact .mailrow .btn'),function(el){
+    var x=0,y=0,vx=0,vy=0,tx=0,ty=0,raf=0,last=0,K=26.7,C=4.1,M=.2,I=.32,R=110;
+    function step(t){var dt=Math.min(.032,(t-(last||t))/1000)||.016;last=t;
+      var ax=(-K*(x-tx)-C*vx)/M,ay=(-K*(y-ty)-C*vy)/M;vx+=ax*dt;vy+=ay*dt;x+=vx*dt;y+=vy*dt;
+      el.style.translate=x.toFixed(2)+'px '+y.toFixed(2)+'px';
+      if(Math.abs(x-tx)+Math.abs(y-ty)+Math.abs(vx)+Math.abs(vy)>.05)raf=requestAnimationFrame(step);else{raf=0;last=0;if(!tx&&!ty)el.style.translate=''}}
+    function go(){if(!raf)raf=requestAnimationFrame(step)}
+    el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),d=Math.hypot(dx,dy);
+      var sc=Math.max(0,1-d/R);tx=dx*I*sc;ty=dy*I*sc;go()});
+    el.addEventListener('pointerleave',function(){tx=0;ty=0;go()});
+  });
+})();
+</script>
 </body>
 </html>
