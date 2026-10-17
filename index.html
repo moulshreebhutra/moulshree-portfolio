@@ -52,7 +52,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-property:opacity,color,background-color,border-color!important;transition-duration:.15s!important}}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;padding-inline:16px;padding-block:0 0}
 .wrap{max-width:1180px;margin-inline:auto}
 button,input,textarea{font:inherit;color:inherit}
@@ -212,10 +212,10 @@ h1,h2,h3,h4{font-family:var(--font-display);margin:0;text-wrap:balance;letter-sp
 .np-stats b{font-weight:700}
 .np-steps{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);position:relative}
 .np-steps::before{content:"";position:absolute;left:12.5%;right:12.5%;top:7px;height:4px;border-radius:2px;background:var(--line)}
-.np-steps::after{content:"";position:absolute;left:12.5%;top:7px;height:4px;border-radius:2px;width:calc(var(--fill,2) * 25%);background:linear-gradient(90deg,var(--brand),var(--saffron));transition:width .5s ease}
+.np-steps::after{content:"";position:absolute;left:12.5%;top:7px;height:4px;border-radius:2px;width:75%;transform-origin:0 50%;transform:scaleX(calc(var(--fill,2) / 3));background:linear-gradient(90deg,var(--brand),var(--saffron));transition:transform .3s var(--ease-in-out)}
 .np-steps li{position:relative;z-index:1;text-align:center}
 .np-steps button{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;font-size:12px;color:var(--muted)}
-.np-steps button i{width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--line);transition:all .25s}
+.np-steps button i{width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--line);transition:transform .2s var(--ease-out),border-color .2s ease,background-color .2s ease}
 .np-steps button.done i{border-color:var(--saffron);background:var(--saffron)}
 .np-steps button.now i{border-color:var(--brand);background:var(--ink);transform:scale(1.2)}
 .np-steps button.now{color:var(--ink);font-weight:700}
@@ -226,7 +226,7 @@ h1,h2,h3,h4{font-family:var(--font-display);margin:0;text-wrap:balance;letter-sp
 .np-ctrl button:hover{transform:scale(1.1)}
 .np-ctrl .play{width:48px;height:48px}
 .np-badges{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:14px}
-.np-badges span{font-size:11px;font-weight:600;padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);opacity:.55;filter:grayscale(1);transition:all .35s}
+.np-badges span{font-size:11px;font-weight:600;padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);opacity:.55;filter:grayscale(1);transition:opacity .25s ease,filter .25s ease,color .2s ease,border-color .2s ease}
 .np-badges span.on{opacity:1;filter:none;color:var(--ink);border-color:var(--saffron);background:color-mix(in srgb,var(--saffron) 18%,transparent)}
 .np-badges span.pop{animation:npop .5s ease}
 @keyframes npop{0%{transform:scale(.8)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
@@ -859,6 +859,33 @@ html[data-mode="dark"] .hero,html[data-mode="dark"] .tp,html[data-mode="dark"] .
 @media (prefers-reduced-transparency:reduce){.nav{background:var(--bg);-webkit-backdrop-filter:none;backdrop-filter:none}}
 @media (prefers-contrast:more){.nav{background:var(--bg);backdrop-filter:none}.card,.wcard,.pin,.chip,.btn,.ep,.lqt,.hero,.tp,.contact,.co{border-color:var(--ink)!important}.lead,.tagline{color:var(--ink)}}
 @media (prefers-reduced-motion:reduce){.btn:active,.chip:active,.wcard:active,.pin:active{transform:none}}
+
+/* ===== motion pass (Emil Kowalski skills: emil-design-eng, animate, review-animations, animation-performance) ===== */
+:root{--ease-out:cubic-bezier(.23,1,.32,1);--ease-in-out:cubic-bezier(.77,0,.175,1);--ease-drawer:cubic-bezier(.32,.72,0,1)}
+/* hover motion only where a real pointer hovers; touch taps must not leave things lifted */
+@media not ((hover:hover) and (pointer:fine)){
+  .wcard:hover,.ep:hover,.pin:hover,.lqt:hover,.btn:hover,.np-ctrl button:hover,.how article:hover,.chip:hover,.tag:hover,img:hover{transform:none}
+  .btn.solid:hover{filter:none}
+}
+/* UI stays under ~300ms; entrances use a strong ease-out */
+.navlinks .ind.rdy{transition:transform .28s var(--ease-out),width .28s var(--ease-out),opacity .2s ease}
+.np .np-art{transition:background .25s ease}
+.veil{transition:filter .3s var(--ease-out),opacity .3s var(--ease-out)}
+.pd-body:not([hidden]){animation:mUp .3s var(--ease-out)}
+.proj-panel:not([hidden]),.pd-body .tpane:not([hidden]){animation:mFade .2s ease}
+.pd-toggle small{transition:transform .2s var(--ease-out)}
+.skip{transition:top .18s var(--ease-out)}
+@media (prefers-reduced-motion:no-preference){
+  html.js .hero .tag,html.js .hero .name,html.js .hero .role,html.js .hero .tagline,html.js .hero .chips-row,html.js .hero .cta,html.js .hero .np{animation:mUp .6s var(--ease-out) both}
+  html.js .rv{transition:opacity .5s var(--ease-out) var(--d,0s),transform .5s var(--ease-out) var(--d,0s)}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s;animation-timing-function:ease}
+}
+/* asymmetric press: snap down on press (fast), settle back on release (spring) */
+.btn,.chip,.ptabs button,.qchip,.themebtn,.navlinks a{transition-timing-function:var(--spring)}
+/* swipe row on small screens: cards off to the side must not wait for a reveal */
+@media (max-width:999px){html.js .wrapped .rv{opacity:1;transform:none}}
+/* performance: promote only the things that move a lot; never on containers */
+.navlinks .ind{will-change:transform}
 #contact{margin-bottom:clamp(56px,10vw,120px)}
 /* ===== "toned" palette: the original vivid theme (light) + its original dark ===== */
 html:root[data-pal="toned"]{--bg:#F4F1F8;--bg2:#FFFFFF;--surface:#FFFFFF;--surface2:#ECE7F4;--ink:#1B1424;--muted:#625870;--line:#DDD5E8;--brand:#E5352A;--saffron:#B86E00;--lilac:#6B46D6;--teal:#0A8A72;--pink:#C23A73;--blue:#1F63B8;--lime:#6B7A1A;--on:#FFFFFF;--crit:#B42318;--warn:#9A5A06;--info:#27567A;--art-ink:#160E1D;--shadow:rgba(40,20,60,.22);--g1:linear-gradient(150deg,color-mix(in srgb,#FF8A5B 66%,var(--bg)),color-mix(in srgb,#FFB547 60%,var(--bg)));--g2:linear-gradient(150deg,color-mix(in srgb,#B79CFF 66%,var(--bg)),color-mix(in srgb,#FF8FB8 60%,var(--bg)));--g3:linear-gradient(150deg,color-mix(in srgb,#3DD6B5 66%,var(--bg)),color-mix(in srgb,#C6E05A 60%,var(--bg)));--g4:linear-gradient(150deg,color-mix(in srgb,#FF5A4F 66%,var(--bg)),color-mix(in srgb,#FF8FB8 60%,var(--bg)));--g5:linear-gradient(150deg,color-mix(in srgb,#6FB1FF 66%,var(--bg)),color-mix(in srgb,#B79CFF 60%,var(--bg)));--g6:linear-gradient(150deg,color-mix(in srgb,#FFB547 66%,var(--bg)),color-mix(in srgb,#3DD6B5 60%,var(--bg)));color-scheme:light}
