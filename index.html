@@ -833,6 +833,32 @@ html:root[data-pal][data-mode="dark"]:not(#v):not(#c):not(#p) .tp .btn.solid{col
 html:root[data-pal] .wcard,html:root[data-pal] .pin .art{filter:saturate(.8) brightness(1.02)}
 html:root[data-pal][data-mode="dark"] .wcard,html:root[data-pal][data-mode="dark"] .pin .art{filter:saturate(.78) brightness(.9)}
 html:root[data-pal]:not(#v):not(#c) .btn.solid,html:root[data-pal]:not(#v):not(#c):not(#p) .tp .btn.solid{filter:saturate(.85)}
+
+/* ===== Apple-style craft layer (fluid response, materials, type, accessibility) ===== */
+:root{--spring:linear(0, 0.069, 0.211, 0.367, 0.509, 0.629, 0.725, 0.799, 0.855, 0.896, 0.926, 0.948, 0.964, 0.975, 0.982, 0.988, 0.992, 0.994, 0.996, 0.997, 0.998, 0.999, 1);--spring-fallback:cubic-bezier(.2,.8,.2,1)}
+@supports not (transition-timing-function:linear(0,1)){:root{--spring:cubic-bezier(.2,.8,.2,1)}}
+/* type: size-specific tracking + optical sizing */
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+h1,h2,h3,h4,.name,.tp h2,.wcard b,.pin .art b{font-optical-sizing:auto}
+body{letter-spacing:0}
+.h2,.contact h2{letter-spacing:-.035em;line-height:1.02}
+h3,h4,.pin h5,.how h3{letter-spacing:-.015em;line-height:1.15}
+.lead,.tagline,.about p{line-height:1.6}
+.eyebrow,.chip,.btn,.navlinks a{letter-spacing:.005em}
+/* response: feedback on press, instantly */
+.btn:active,.chip:active,.navlinks a:active,.ptabs button:active,.qchip:active,.themebtn:active{transform:scale(.97);transition:transform 90ms ease-out}
+.wcard:active,.pin:active,.ep:active,.lqt:active,.how article:active,.card:active{transform:scale(.985);transition:transform 110ms ease-out}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+/* materials: translucent nav, scroll-edge effect instead of a hard divider */
+.nav{background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);border-bottom-color:transparent;transition:border-color .3s,box-shadow .3s,background-color .3s}
+.nav.edge{border-bottom-color:color-mix(in srgb,var(--line) 70%,transparent);box-shadow:0 8px 24px -18px rgba(0,0,0,.35)}
+/* depth: larger surfaces read thicker */
+.hero,.tp,.contact,.co{box-shadow:0 1px 0 color-mix(in srgb,#fff 40%,transparent) inset,0 24px 60px -36px rgba(0,0,0,.28)}
+html[data-mode="dark"] .hero,html[data-mode="dark"] .tp,html[data-mode="dark"] .contact,html[data-mode="dark"] .co{box-shadow:0 1px 0 color-mix(in srgb,#fff 6%,transparent) inset,0 30px 70px -40px rgba(0,0,0,.7)}
+/* accessibility: transparency, contrast, motion */
+@media (prefers-reduced-transparency:reduce){.nav{background:var(--bg);-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media (prefers-contrast:more){.nav{background:var(--bg);backdrop-filter:none}.card,.wcard,.pin,.chip,.btn,.ep,.lqt,.hero,.tp,.contact,.co{border-color:var(--ink)!important}.lead,.tagline{color:var(--ink)}}
+@media (prefers-reduced-motion:reduce){.btn:active,.chip:active,.wcard:active,.pin:active{transform:none}}
 #contact{margin-bottom:clamp(56px,10vw,120px)}
 /* ===== "toned" palette: the original vivid theme (light) + its original dark ===== */
 html:root[data-pal="toned"]{--bg:#F4F1F8;--bg2:#FFFFFF;--surface:#FFFFFF;--surface2:#ECE7F4;--ink:#1B1424;--muted:#625870;--line:#DDD5E8;--brand:#E5352A;--saffron:#B86E00;--lilac:#6B46D6;--teal:#0A8A72;--pink:#C23A73;--blue:#1F63B8;--lime:#6B7A1A;--on:#FFFFFF;--crit:#B42318;--warn:#9A5A06;--info:#27567A;--art-ink:#160E1D;--shadow:rgba(40,20,60,.22);--g1:linear-gradient(150deg,color-mix(in srgb,#FF8A5B 66%,var(--bg)),color-mix(in srgb,#FFB547 60%,var(--bg)));--g2:linear-gradient(150deg,color-mix(in srgb,#B79CFF 66%,var(--bg)),color-mix(in srgb,#FF8FB8 60%,var(--bg)));--g3:linear-gradient(150deg,color-mix(in srgb,#3DD6B5 66%,var(--bg)),color-mix(in srgb,#C6E05A 60%,var(--bg)));--g4:linear-gradient(150deg,color-mix(in srgb,#FF5A4F 66%,var(--bg)),color-mix(in srgb,#FF8FB8 60%,var(--bg)));--g5:linear-gradient(150deg,color-mix(in srgb,#6FB1FF 66%,var(--bg)),color-mix(in srgb,#B79CFF 60%,var(--bg)));--g6:linear-gradient(150deg,color-mix(in srgb,#FFB547 66%,var(--bg)),color-mix(in srgb,#3DD6B5 60%,var(--bg)));color-scheme:light}
@@ -853,7 +879,7 @@ html:root[data-pal="toned"] .np-bar i{background:linear-gradient(90deg,var(--bra
 /* motion layer: subtle, honours reduced motion */
 .skip{position:absolute;left:12px;top:-60px;z-index:60;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;transition:top .2s}
 .skip:focus{top:10px}
-.btn{transition:transform .2s cubic-bezier(.3,.7,.2,1),background-color .2s,border-color .2s,filter .2s,box-shadow .2s}
+.btn{transition:transform .2s var(--spring),background-color .2s,border-color .2s,filter .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-1px)}
 .btn:active{transform:translateY(0) scale(.97)}
 .btn:disabled:hover{transform:none}
@@ -861,7 +887,7 @@ html:root[data-pal="toned"] .np-bar i{background:linear-gradient(90deg,var(--bra
 .navlinks{position:relative}
 .navlinks a{position:relative;z-index:1}
 .navlinks .ind{position:absolute;left:0;top:0;z-index:0;border-radius:999px;background:var(--ink);pointer-events:none;opacity:0}
-.navlinks .ind.rdy{opacity:1;transition:transform .4s cubic-bezier(.3,.7,.2,1),width .4s cubic-bezier(.3,.7,.2,1),opacity .2s}
+.navlinks .ind.rdy{opacity:1;transition:transform .4s var(--spring),width .4s var(--spring),opacity .2s}
 html.js .navlinks.hasind a.on{background:transparent!important}
 .ptabs button{transition:background-color .2s,color .2s,border-color .2s}
 .themebtn{transition:border-color .2s,transform .2s}
@@ -875,12 +901,12 @@ button,a,.chip{touch-action:manipulation}
 @keyframes mFade{from{opacity:0}}
 @keyframes mSpin{from{opacity:0;transform:rotate(-80deg) scale(.6)}}
 @keyframes mPop{0%{transform:translateY(8px) scale(.96);opacity:0}100%{transform:none;opacity:1}}
-.pd-body:not([hidden]){animation:mUp .45s cubic-bezier(.2,.7,.2,1)}
+.pd-body:not([hidden]){animation:mUp .45s var(--spring)}
 .proj-panel:not([hidden]),.pd-body .tpane:not([hidden]){animation:mFade .35s ease}
 @media (prefers-reduced-motion:no-preference){
-  html.js .hero .tag,html.js .hero .name,html.js .hero .role,html.js .hero .tagline,html.js .hero .chips-row,html.js .hero .cta,html.js .hero .np{animation:mUp .8s cubic-bezier(.2,.7,.2,1) both}
+  html.js .hero .tag,html.js .hero .name,html.js .hero .role,html.js .hero .tagline,html.js .hero .chips-row,html.js .hero .cta,html.js .hero .np{animation:mUp .8s var(--spring) both}
   html.js .hero .name{animation-delay:.08s}html.js .hero .role{animation-delay:.16s}html.js .hero .tagline{animation-delay:.24s}html.js .hero .chips-row{animation-delay:.32s}html.js .hero .cta{animation-delay:.4s}html.js .hero .np{animation-delay:.3s}
-  html.js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .7s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+  html.js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s var(--spring) var(--d,0s),transform .7s var(--spring) var(--d,0s)}
   html.js .rv.in{opacity:1;transform:none}
   html.tt,html.tt *,html.tt *::before,html.tt *::after{transition:background-color .25s ease,color .25s ease,border-color .25s ease,fill .25s ease,stroke .25s ease,box-shadow .25s ease!important}
   ::view-transition-old(root),::view-transition-new(root){animation-duration:.3s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
@@ -893,7 +919,7 @@ button,a,.chip{touch-action:manipulation}
   .how article,.pin,.lqt,.ep{position:relative}
   .how article::after,.pin::after,.lqt::after,.ep::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(200px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--brand) 3%,transparent),transparent 65%)}
   .how article:hover::after,.pin:hover::after,.lqt:hover::after,.ep:hover::after{opacity:1}
-  .how article,.ep,.lqt{transition:transform .25s cubic-bezier(.3,.7,.2,1),box-shadow .25s}
+  .how article,.ep,.lqt{transition:transform .25s var(--spring),box-shadow .25s}
   .how article:hover,.ep:hover,.lqt:hover{transform:translateY(-3px);box-shadow:0 18px 36px -26px var(--shadow)}
 }
 /* animated project logos (projects only) */
@@ -909,7 +935,7 @@ button,a,.chip{touch-action:manipulation}
 
 /* every surface reacts to the pointer in the same quiet way */
 @media (hover:hover) and (prefers-reduced-motion:no-preference){
-  .np,.panel,.gx,.theme,.fb,.liner,.prdbody,.card,.wcard,.how article,.ep,.lqt,.pin{transition:border-color .25s,transform .25s cubic-bezier(.3,.7,.2,1),box-shadow .25s}
+  .np,.panel,.gx,.theme,.fb,.liner,.prdbody,.card,.wcard,.how article,.ep,.lqt,.pin{transition:border-color .25s,transform .25s var(--spring),box-shadow .25s}
   .np:hover,.panel:hover,.gx:hover,.theme:hover,.fb:hover,.liner:hover,.prdbody:hover,.card:hover,.how article:hover,.ep:hover,.lqt:hover,.pin:hover{border-color:color-mix(in srgb,var(--brand) 32%,var(--line));transform:translateY(-2px);box-shadow:0 16px 32px -26px var(--shadow)}
   .hero,.co,.tp,.contact{transition:border-color .3s}
   .hero:hover,.co:hover,.contact:hover{border-color:color-mix(in srgb,var(--brand) 28%,var(--line))}
@@ -920,10 +946,10 @@ button,a,.chip{touch-action:manipulation}
 @media (hover:hover) and (prefers-reduced-motion:no-preference){
   h1,h2,h3,h4,h5,h6{transition:color .25s ease}
   h1:hover,h2:hover,h3:hover,h4:hover,h5:hover,h6:hover{color:color-mix(in srgb,var(--ink) 82%,var(--brand))}
-  .chip,.tag,.badge,.eyebrow,.label,.k{transition:transform .2s cubic-bezier(.3,.7,.2,1),border-color .2s,color .2s,background-color .2s}
+  .chip,.tag,.badge,.eyebrow,.label,.k{transition:transform .2s var(--spring),border-color .2s,color .2s,background-color .2s}
   .chip:hover,.tag:hover,.badge:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--brand) 40%,var(--line))}
   .eyebrow:hover,.label:hover,.k:hover{color:var(--ink)}
-  img,.lg,.plogo,.tkimg,.eduimg{transition:transform .3s cubic-bezier(.3,.7,.2,1),filter .3s}
+  img,.lg,.plogo,.tkimg,.eduimg{transition:transform .3s var(--spring),filter .3s}
   img:hover{transform:scale(1.035)}
   p a,li a,dd a,.note a,.lead a{text-decoration-color:color-mix(in srgb,var(--brand) 0%,transparent);text-underline-offset:3px;transition:color .2s,text-decoration-color .2s}
   p a:hover,li a:hover,dd a:hover,.note a:hover,.lead a:hover{color:var(--brand);text-decoration-color:var(--brand)}
@@ -2185,5 +2211,6 @@ html:root[data-pal="toned"][data-mode="dark"]{--g1:linear-gradient(150deg,color-
   },{passive:true});
 })();
 </script>
+<script>(function(){var n=document.querySelector('.nav');if(!n)return;var t=false;function u(){n.classList.toggle('edge',window.scrollY>4);t=false}addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(u)}},{passive:true});u()})();</script>
 </body>
 </html>
