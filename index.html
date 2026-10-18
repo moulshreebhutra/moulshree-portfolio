@@ -13,7 +13,7 @@
 <meta name="theme-color" content="#FBF9FF">
 <link rel="icon" type="image/jpeg" href="logos/moulshree.jpg">
 <link rel="apple-touch-icon" href="logos/moulshree.jpg">
-<script>(function(){var r=document.documentElement,T=["lavender","cream"],last=null;try{last=localStorage.getItem("mb-tone");}catch(e){}var c=T.filter(function(x){return x!==last;}),t=c[Math.floor(Math.random()*c.length)];try{localStorage.setItem("mb-tone",t);}catch(e){}r.setAttribute("data-pal","indigo");r.setAttribute("data-tone",t);r.classList.add("js");})()</script>
+<script>(function(){var r=document.documentElement,T=["lavender","cream","blush","sky"],last=null,t=null;try{var q=new URLSearchParams(location.search).get("tone")||location.hash.slice(1);if(T.indexOf(q)>-1)t=q;}catch(e){}try{last=localStorage.getItem("mb-tone");}catch(e){}if(!t){var c=T.filter(function(x){return x!==last;});t=c[Math.floor(Math.random()*c.length)];}try{localStorage.setItem("mb-tone",t);}catch(e){}r.setAttribute("data-pal","indigo");r.setAttribute("data-tone",t);r.classList.add("js");})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -1015,6 +1015,16 @@ html:root[data-pal="indigo"][data-tone="cream"]:not(#v):not(#c):not(#l){--bg:#FB
  --saffron:#DFA23C;--lilac:#6C63E8;--teal:#3AA39D;--pink:#E0699A;--blue:#4A86E8;--lime:#7BB058;--sig:#9E7A55;--s2:#C7A47F;--s3:#B39274}
 html:root[data-pal="indigo"][data-tone="cream"][data-mode="dark"]:not(#v):not(#c):not(#l){--bg:#0A0A0B;--bg2:#111113;--surface:#151517;--surface2:#1C1C1F;--ink:#F7F7F8;--muted:#A3A3AB;--line:#28282C;--brand:#F7F7F8;--on:#0A0A0B;--shadow:rgba(0,0,0,.55);--art-ink:#F7F7F8;
  --saffron:#F2C46B;--lilac:#A39DFF;--teal:#6FD3C9;--pink:#F39BC0;--blue:#82AAFF;--lime:#A9D88A;--sig:#E4D2BA;--s2:#F1E6D6;--s3:#CDB596}
+
+/* ---- blush and sky themes ---- */
+html:root[data-pal="indigo"][data-tone="blush"]:not(#v):not(#c):not(#l){--bg:#FFF9FB;--bg2:#FDF1F5;--surface:#FFFFFF;--surface2:#FBEAF1;--ink:#2B1A21;--muted:#7A6670;--line:#F4E3EA;--brand:#2B1A21;--on:#FFF9FB;--shadow:rgba(110,40,70,.09);--art-ink:#2B1A21;--sig:#C96F95;--s2:#E3A3BD;--s3:#C892B3;
+ --saffron:#DFA23C;--lilac:#6C63E8;--teal:#3AA39D;--pink:#E0699A;--blue:#4A86E8;--lime:#7BB058;}
+html:root[data-pal="indigo"][data-tone="blush"][data-mode="dark"]:not(#v):not(#c):not(#l){--bg:#0A0A0B;--bg2:#111113;--surface:#151517;--surface2:#1C1C1F;--ink:#F7F7F8;--muted:#A3A3AB;--line:#28282C;--brand:#F7F7F8;--on:#0A0A0B;--shadow:rgba(0,0,0,.55);--art-ink:#F7F7F8;
+ --saffron:#F2C46B;--lilac:#A39DFF;--teal:#6FD3C9;--pink:#F39BC0;--blue:#82AAFF;--lime:#A9D88A;--sig:#F5C3D5;--s2:#FADBE6;--s3:#E8AAC1}
+html:root[data-pal="indigo"][data-tone="sky"]:not(#v):not(#c):not(#l){--bg:#F8FCFF;--bg2:#EEF6FD;--surface:#FFFFFF;--surface2:#E7F2FC;--ink:#16222E;--muted:#5E6E7D;--line:#DFEBF7;--brand:#16222E;--on:#F8FCFF;--shadow:rgba(30,80,130,.09);--art-ink:#16222E;--sig:#4F96CF;--s2:#8CC2EA;--s3:#79A6D6;
+ --saffron:#DFA23C;--lilac:#6C63E8;--teal:#3AA39D;--pink:#E0699A;--blue:#4A86E8;--lime:#7BB058;}
+html:root[data-pal="indigo"][data-tone="sky"][data-mode="dark"]:not(#v):not(#c):not(#l){--bg:#0A0A0B;--bg2:#111113;--surface:#151517;--surface2:#1C1C1F;--ink:#F7F7F8;--muted:#A3A3AB;--line:#28282C;--brand:#F7F7F8;--on:#0A0A0B;--shadow:rgba(0,0,0,.55);--art-ink:#F7F7F8;
+ --saffron:#F2C46B;--lilac:#A39DFF;--teal:#6FD3C9;--pink:#F39BC0;--blue:#82AAFF;--lime:#A9D88A;--sig:#B6DBF6;--s2:#D4EAFB;--s3:#9DC9EE}
 /* ---- Haikei shapes + Motion Primitives ports (theme-aware via --sig/--s2/--s3) ---- */
 .hero{isolation:isolate}
 .hero>*:not(.hk-blobs){position:relative;z-index:1}
