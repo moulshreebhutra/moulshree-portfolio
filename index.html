@@ -118,7 +118,7 @@ h1,h2,h3,h4{font-family:var(--font-display);margin:0;text-wrap:balance;letter-sp
 .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);padding:12px 20px;border-radius:999px;cursor:pointer;font-weight:700;text-decoration:none;font-size:15px}
 .btn:hover{border-color:var(--ink)}
 .btn.solid{background:var(--brand);border-color:var(--brand);color:var(--on)}
-.btn.solid:hover{filter:brightness(1.08)}
+.btn.solid:hover{filter:brightness(1.02)}
 .btn.ghost{background:transparent}
 .btn:disabled{opacity:.55;cursor:default}
 
@@ -466,7 +466,7 @@ html:root[data-pal][data-pal]:not([data-pal="toned"]) .np[data-i] .np-art{backgr
 .sv .q h4{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-weight:500}
 .sv .chips{display:flex;flex-wrap:wrap;gap:8px}
 .sv .qchip{border:1px solid var(--line);background:var(--bg2);padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:500;font-size:14px}
-.sv .qchip:hover{border-color:var(--accent)}
+.sv .qchip:hover{border-color:color-mix(in srgb,var(--accent) 10%,var(--line))}
 .sv .qchip[aria-pressed="true"]{background:var(--accent);color:var(--on);border-color:var(--accent)}
 .sv textarea{width:100%;min-height:70px;border:1px solid var(--line);border-radius:12px;background:var(--bg2);padding:10px 12px;resize:vertical}
 .sv .rhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;margin-bottom:12px}
@@ -767,24 +767,24 @@ button,a,.chip{touch-action:manipulation}
 /* every surface reacts to the pointer in the same quiet way */
 @media (hover:hover) and (prefers-reduced-motion:no-preference){
   .np,.panel,.gx,.theme,.fb,.liner,.prdbody,.card,.wcard,.how article,.ep,.lqt,.pin{transition:border-color .25s,transform .25s var(--spring),box-shadow .25s}
-  .np:hover,.panel:hover,.gx:hover,.theme:hover,.fb:hover,.liner:hover,.prdbody:hover,.card:hover,.how article:hover,.ep:hover,.lqt:hover,.pin:hover{border-color:color-mix(in srgb,var(--brand) 32%,var(--line));transform:translateY(-2px);box-shadow:0 16px 32px -26px var(--shadow)}
+  .np:hover,.panel:hover,.gx:hover,.theme:hover,.fb:hover,.liner:hover,.prdbody:hover,.card:hover,.how article:hover,.ep:hover,.lqt:hover,.pin:hover{border-color:color-mix(in srgb,var(--brand) 3%,var(--line));transform:translateY(-2px);box-shadow:0 16px 32px -26px var(--shadow)}
   .hero,.co,.tp,.contact{transition:border-color .3s}
-  .hero:hover,.co:hover,.contact:hover{border-color:color-mix(in srgb,var(--brand) 28%,var(--line))}
-  .tp:hover{border-color:color-mix(in srgb,var(--accent) 38%,var(--line))}
+  .hero:hover,.co:hover,.contact:hover{border-color:color-mix(in srgb,var(--brand) 3%,var(--line))}
+  .tp:hover{border-color:color-mix(in srgb,var(--accent) 4%,var(--line))}
 }
 
 /* universal pointer reaction: every heading, chip, image, link and line of text answers the cursor, quietly */
 @media (hover:hover) and (prefers-reduced-motion:no-preference){
   h1,h2,h3,h4,h5,h6{transition:color .25s ease}
-  h1:hover,h2:hover,h3:hover,h4:hover,h5:hover,h6:hover{color:color-mix(in srgb,var(--ink) 82%,var(--brand))}
+  h1:hover,h2:hover,h3:hover,h4:hover,h5:hover,h6:hover{color:color-mix(in srgb,var(--ink) 98%,var(--brand))}
   .chip,.tag,.badge,.eyebrow,.label,.k{transition:transform .2s var(--spring),border-color .2s,color .2s,background-color .2s}
-  .chip:hover,.tag:hover,.badge:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--brand) 40%,var(--line))}
+  .chip:hover,.tag:hover,.badge:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--brand) 4%,var(--line))}
   .eyebrow:hover,.label:hover,.k:hover{color:var(--ink)}
   img,.lg,.plogo,.tkimg,.eduimg{transition:transform .3s var(--spring),filter .3s}
   img:hover{transform:scale(1.035)}
   p a,li a,dd a,.note a,.lead a{text-decoration-color:color-mix(in srgb,var(--brand) 0%,transparent);text-underline-offset:3px;transition:color .2s,text-decoration-color .2s}
-  p a:hover,li a:hover,dd a:hover,.note a:hover,.lead a:hover{color:var(--brand);text-decoration-color:var(--brand)}
-  input:hover,textarea:hover,select:hover{border-color:color-mix(in srgb,var(--brand) 40%,var(--line))}
+  p a:hover,li a:hover,dd a:hover,.note a:hover,.lead a:hover{color:var(--ink);text-decoration-color:color-mix(in srgb,var(--brand) 30%,transparent)}
+  input:hover,textarea:hover,select:hover{border-color:color-mix(in srgb,var(--brand) 4%,var(--line))}
   input,textarea,select{transition:border-color .2s}
   .hot,.cool{transition:color .28s ease}
   .hot{color:var(--ink)!important}
@@ -792,17 +792,17 @@ button,a,.chip{touch-action:manipulation}
 
 @media (hover:hover) and (prefers-reduced-motion:no-preference){
   b,strong,.num,.big,.org,.yr,dt{transition:color .22s ease}
-  b:hover,strong:hover,.num:hover,.big:hover,.org:hover,.yr:hover,dt:hover{color:color-mix(in srgb,var(--ink) 70%,var(--brand))}
+  b:hover,strong:hover,.num:hover,.big:hover,.org:hover,.yr:hover,dt:hover{color:color-mix(in srgb,var(--ink) 97%,var(--brand))}
   .bar,.track{transition:filter .25s}
-  .bar:hover,.track:hover{filter:brightness(1.08) saturate(1.1)}
+  .bar:hover,.track:hover{filter:brightness(1.02)}
   .tab,.ptabs button,.navlinks a{transition:background-color .2s,color .2s,border-color .2s,transform .2s}
-  .ptabs button:not([aria-selected="true"]):hover{border-color:color-mix(in srgb,var(--brand) 40%,var(--line))}
+  .ptabs button:not([aria-selected="true"]):hover{border-color:color-mix(in srgb,var(--brand) 4%,var(--line))}
 }
 
 @media (hover:hover) and (prefers-reduced-motion:no-preference){
   .np-steps button i{transition:transform .2s,border-color .2s}.np-steps button span{transition:color .2s}
-  .np-steps button:hover i{transform:scale(1.18);border-color:var(--brand)}.np-steps button:hover span{color:var(--ink)}
-  li::marker{transition:color .2s}li:hover::marker{color:var(--brand)}
+  .np-steps button:hover i{transform:scale(1.18)}.np-steps button:hover span{color:var(--ink)}
+  li::marker{transition:color .2s}li:hover::marker{color:var(--muted)}
 }
 
 
@@ -894,7 +894,7 @@ html.te .te-c{opacity:0;filter:blur(12px);transform:translateY(20px);animation:t
       </div>
     </div>
 
-    <aside class="np" id="np" aria-label="Career, shown as a playable now-playing card" data-i="2"><span class="btrail" aria-hidden="true"><i></i></span>
+    <aside class="np" id="np" aria-label="Career, shown as a playable now-playing card" data-i="2">
       <div class="np-top">
         <div class="np-art" id="np-art"><img src="logos/moulshree.jpg" alt="Moulshree Bhutra" width="84" height="84"></div>
         <div>
@@ -1325,7 +1325,7 @@ html.te .te-c{opacity:0;filter:blur(12px);transform:translateY(20px);animation:t
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="contact" aria-label="Contact"><svg class="hk-waves" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0.0,104.4C33.3,103.7 133.3,102.3 200.0,100.5C266.7,98.6 333.3,94.4 400.0,93.2C466.7,92.1 533.3,95.2 600.0,93.7C666.7,92.2 733.3,84.5 800.0,84.2C866.7,83.9 933.3,95.9 1000.0,91.9C1066.7,88.0 1166.7,65.6 1200.0,60.4L1200,200L0,200Z" fill="var(--s2,#8A5CC2)" fill-opacity="0.1"/><path d="M0.0,117.0C33.3,119.5 133.3,134.4 200.0,132.4C266.7,130.4 333.3,104.1 400.0,104.8C466.7,105.6 533.3,131.6 600.0,136.6C666.7,141.7 733.3,138.8 800.0,135.1C866.7,131.3 933.3,117.9 1000.0,114.0C1066.7,110.2 1166.7,112.4 1200.0,112.1L1200,200L0,200Z" fill="var(--s3,#E2915F)" fill-opacity="0.1"/><path d="M0.0,153.4C33.3,153.1 133.3,148.4 200.0,151.3C266.7,154.2 333.3,170.8 400.0,170.8C466.7,170.8 533.3,156.5 600.0,151.4C666.7,146.2 733.3,141.4 800.0,139.9C866.7,138.3 933.3,138.3 1000.0,142.0C1066.7,145.7 1166.7,158.6 1200.0,162.0L1200,200L0,200Z" fill="var(--sig,#B8407A)" fill-opacity="0.14"/></svg>
+<section id="contact" class="contact" aria-label="Contact">
   <span class="eyebrow">Say hello</span>
   <h2 aria-label="Let's build something people want."><span aria-hidden="true">Let's build something <span class="tloop"><span class="on">people want.</span><span>people love.</span><span>worth using.</span><span>that sticks.</span></span></span></h2>
   <p>I am looking for an APM or PM role in Bengaluru, in-office or remote. If your team is hiring, I would love to talk.</p>
