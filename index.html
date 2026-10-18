@@ -11,7 +11,7 @@
 <meta property="og:image" content="https://moulshreebhutra.github.io/moulshree-portfolio/logos/og.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#EDE3D0">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232A2018'/%3E%3Ctext x='32' y='45' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='38' text-anchor='middle' fill='%23F0E6D4'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="icon" id="favicon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox=%220 0 64 64%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2216%22 fill=%22#B8407A%22/%3E%3Cg fill=%22none%22 stroke=%22#fff%22 stroke-width=%225.5%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M18 46C18 31 42 33 42.2 22.2%22/%3E%3Ccircle cx=%2246%22 cy=%2218%22 r=%225.5%22/%3E%3C/g%3E%3Ccircle cx=%2218%22 cy=%2246%22 r=%226.5%22 fill=%22#fff%22/%3E%3C/svg%3E">
 <script>(function(){var r=document.documentElement,P=["plum","cobalt","bloom","indigo","toned"],last=null;try{last=localStorage.getItem("mb-pal");}catch(e){}var W={plum:1,cobalt:1,bloom:1,indigo:1,toned:1};var c=P.filter(function(x){return x!==last;});var tot=c.reduce(function(a,x){return a+W[x];},0),q=Math.random()*tot,p=c[c.length-1];for(var i=0;i<c.length;i++){q-=W[c[i]];if(q<0){p=c[i];break;}}try{localStorage.setItem("mb-pal",p);}catch(e){}r.setAttribute("data-pal",p);r.classList.add("js");})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1048,7 +1048,7 @@ html.te .te-c{opacity:0;filter:blur(12px);transform:translateY(20px);animation:t
 <a class="skip" href="#intro">Skip to content</a>
 <header class="nav">
   <div class="nav-in">
-    <a class="mono-logo" href="#intro" aria-label="Moulshree Bhutra, home"><i>M</i><span>Moulshree Bhutra</span></a>
+    <a class="mono-logo" href="#intro" aria-label="Moulshree Bhutra, home"><i><svg viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"><path d="M18 46C18 31 42 33 42.2 22.2"/><circle cx="46" cy="18" r="5.5"/></g><circle cx="18" cy="46" r="6.5" fill="currentColor"/></svg></i><span>Moulshree Bhutra</span></a>
     <nav class="navlinks" aria-label="Sections">
       <a href="#intro" data-nav="intro">Intro</a>
       <a href="#work" data-nav="work">Work</a>
@@ -2327,6 +2327,12 @@ html.te .te-c{opacity:0;filter:blur(12px);transform:translateY(20px);animation:t
     el.addEventListener('pointerleave',function(){tx=0;ty=0;go()});
   });
 })();
+</script>
+<script>
+/* favicon follows the theme: a flow sketched from first dot to goal */
+(function(){try{var c=getComputedStyle(document.documentElement).getPropertyValue('--sig').trim();if(!c)return;
+var svg='<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="16" fill="'+c+'"/><g fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round"><path d="M18 46C18 31 42 33 42.2 22.2"/><circle cx="46" cy="18" r="5.5"/></g><circle cx="18" cy="46" r="6.5" fill="#fff"/></svg>';
+document.getElementById('favicon').href='data:image/svg+xml,'+encodeURIComponent(svg)}catch(e){}})();
 </script>
 </body>
 </html>
