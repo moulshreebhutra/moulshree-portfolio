@@ -10,10 +10,10 @@
 <meta property="og:description" content="Product Manager in Bengaluru, open to APM and PM roles. Two live concept projects, Rationale and Shelfmate, plus work from Vudio.ai and LeadSquared.">
 <meta property="og:image" content="https://moulshreebhutra.github.io/moulshree-portfolio/logos/og.jpg">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#EDE3D0">
+<meta name="theme-color" content="#F6F3FC">
 <link rel="icon" type="image/jpeg" href="logos/moulshree.jpg">
 <link rel="apple-touch-icon" href="logos/moulshree.jpg">
-<script>(function(){var r=document.documentElement,P=["plum","cobalt","bloom","indigo","toned"],last=null;try{last=localStorage.getItem("mb-pal");}catch(e){}var W={plum:1,cobalt:1,bloom:1,indigo:1,toned:1};var c=P.filter(function(x){return x!==last;});var tot=c.reduce(function(a,x){return a+W[x];},0),q=Math.random()*tot,p=c[c.length-1];for(var i=0;i<c.length;i++){q-=W[c[i]];if(q<0){p=c[i];break;}}try{localStorage.setItem("mb-pal",p);}catch(e){}r.setAttribute("data-pal",p);r.classList.add("js");})()</script>
+<script>(function(){var r=document.documentElement;r.setAttribute("data-pal","indigo");r.setAttribute("data-theme-name","lavender");r.classList.add("js");})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -1003,6 +1003,12 @@ button,a,.chip{touch-action:manipulation}
 }
 html:root[data-pal="toned"][data-mode="dark"]{--g1:linear-gradient(150deg,color-mix(in srgb,#FF8A5B 84%,var(--bg)),color-mix(in srgb,#FFB547 80%,var(--bg)));--g2:linear-gradient(150deg,color-mix(in srgb,#B79CFF 84%,var(--bg)),color-mix(in srgb,#FF8FB8 80%,var(--bg)));--g3:linear-gradient(150deg,color-mix(in srgb,#3DD6B5 84%,var(--bg)),color-mix(in srgb,#C6E05A 80%,var(--bg)));--g4:linear-gradient(150deg,color-mix(in srgb,#FF5A4F 84%,var(--bg)),color-mix(in srgb,#FF8FB8 80%,var(--bg)));--g5:linear-gradient(150deg,color-mix(in srgb,#6FB1FF 84%,var(--bg)),color-mix(in srgb,#B79CFF 80%,var(--bg)));--g6:linear-gradient(150deg,color-mix(in srgb,#FFB547 84%,var(--bg)),color-mix(in srgb,#3DD6B5 80%,var(--bg)))}
 
+
+/* ---- single lavender theme ---- */
+html:root[data-pal="indigo"]:not(#v):not(#c):not(#l){--bg:#F6F3FC;--bg2:#EEE8F9;--surface:#FFFFFF;--surface2:#E8E0F6;--ink:#1E1630;--muted:#625878;--line:#E2D9F1;--brand:#1E1630;--on:#F6F3FC;--shadow:rgba(40,20,80,.13);--art-ink:#1E1630;
+ --lilac:#8B6FD6;--pink:#D58BBB;--blue:#7D8EE0;--teal:#6FA9C8;--saffron:#E2A877;--lime:#A3C08E;--sig:#7556C8;--s2:#B9649B;--s3:#5D78CF}
+html:root[data-pal="indigo"][data-mode="dark"]:not(#v):not(#c):not(#l){--bg:#110E19;--bg2:#171322;--surface:#1B1727;--surface2:#231E33;--ink:#EEEAF7;--muted:#A79EBE;--line:#2D2741;--brand:#EEEAF7;--on:#110E19;--shadow:rgba(0,0,0,.5);--art-ink:#EEEAF7;
+ --lilac:#B9A4FF;--pink:#EFA9D3;--blue:#A9B5FF;--teal:#94CDE2;--saffron:#F2C597;--lime:#C1DBAA;--sig:#B9A4FF;--s2:#EFA9D3;--s3:#A9B5FF}
 /* ---- Haikei shapes + Motion Primitives ports (theme-aware via --sig/--s2/--s3) ---- */
 .hero{isolation:isolate}
 .hero>*:not(.hk-blobs){position:relative;z-index:1}
