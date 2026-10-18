@@ -815,6 +815,14 @@ html:root[data-pal="indigo"][data-tone="brown"][data-mode="dark"]:not(#v):not(#c
 html:root[data-pal="indigo"][data-tone="pink"]:not(#v):not(#c):not(#l){--bg:#FFF9FB;--bg2:#FDF1F5;--surface:#FFFFFF;--surface2:#FBEAF1;--ink:#2B1A21;--muted:#7A6670;--line:#F4E3EA;--brand:#2B1A21;--on:#FFF9FB;--shadow:rgba(110,40,70,.09);--art-ink:#2B1A21;--sig:#DB8CAD;--s2:#EFBCD0;--s3:#E2A6C2;--saffron:#DFA23C;--lilac:#6C63E8;--teal:#3AA39D;--pink:#E0699A;--blue:#4A86E8;--lime:#7BB058;}
 html:root[data-pal="indigo"][data-tone="pink"][data-mode="dark"]:not(#v):not(#c):not(#l){--bg:#0A0A0B;--bg2:#111113;--surface:#151517;--surface2:#1C1C1F;--ink:#F7F7F8;--muted:#A3A3AB;--line:#28282C;--brand:#F7F7F8;--on:#0A0A0B;--shadow:rgba(0,0,0,.55);--art-ink:#F7F7F8;--sig:#F8D2E0;--s2:#FCE5EE;--s3:#EDB9CC;--saffron:#F2C46B;--lilac:#A39DFF;--teal:#6FD3C9;--pink:#F39BC0;--blue:#82AAFF;--lime:#A9D88A;}
 html:root[data-pal="indigo"][data-tone]:not([data-mode="dark"]):not(#v):not(#c):not(#l) .btn.solid{color:var(--ink)}
+/* softer buttons in light mode */
+html:root[data-pal]:not([data-mode="dark"]):not(#v):not(#c):not(#l) .navlinks a.on,
+html:root[data-pal]:not([data-mode="dark"]):not(#v):not(#c):not(#l) .ptabs button[aria-selected="true"],
+html:root[data-pal]:not([data-mode="dark"]):not(#v):not(#c):not(#l) .totop,
+html:root[data-pal]:not([data-mode="dark"]):not(#v):not(#c):not(#l) .np-ctrl .play,
+html:root[data-pal]:not([data-mode="dark"]):not(#v):not(#c):not(#l) .np-cta{background:color-mix(in srgb,var(--sig) 38%,var(--surface));color:var(--ink);border-color:color-mix(in srgb,var(--sig) 55%,var(--line))}
+html:root[data-pal]:not([data-mode="dark"]):not(#v):not(#c):not(#l) .navlinks .ind{background:color-mix(in srgb,var(--sig) 38%,var(--surface))}
+html:root[data-pal]:not([data-mode="dark"]):not(#v):not(#c):not(#l) .np-ctrl .play svg{fill:var(--ink)}
 /* ---- Haikei shapes + Motion Primitives ports (theme-aware via --sig/--s2/--s3) ---- */
 .hero{isolation:isolate}
 .hero>*:not(.hk-blobs){position:relative;z-index:1}
