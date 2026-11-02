@@ -809,8 +809,10 @@ button,a,.chip{touch-action:manipulation}
 
 /* ---- one theme: lavender, with a light and a dark mode (tiles and icons keep their own colours) ---- */
 html:root[data-pal="indigo"][data-tone="lavender"]:not(#v):not(#c):not(#l){--bg:#FBF9FF;--bg2:#F5F1FD;--surface:#FFFFFF;--surface2:#F0EAFB;--ink:#221A33;--muted:#6B6284;--line:#EAE3F7;--brand:#221A33;--on:#FBF9FF;--shadow:rgba(60,30,110,.10);--art-ink:#221A33;--sig:#9F87E2;--s2:#C7B6F2;--s3:#B7A2EC;--saffron:#DFA23C;--lilac:#6C63E8;--teal:#3AA39D;--pink:#E0699A;--blue:#4A86E8;--lime:#7BB058;}
-html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l){--bg:#030304;--bg2:#08080A;--surface:#101013;--surface2:#17171B;--ink:#F8F7FB;--muted:#92929C;--line:#212127;--brand:#F8F7FB;--on:#030304;--shadow:rgba(0,0,0,.55);--art-ink:#F8F7FB;--sig:#AD98E9;--s2:#CFC1F5;--s3:#BAA7F0;--saffron:#DFA23C;--lilac:#6C63E8;--teal:#3AA39D;--pink:#E0699A;--blue:#4A86E8;--lime:#7BB058;}
-html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .hero,html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .co.vu,html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .co.lq,html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .tp.tl,html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .tp.sv,html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .contact{background:radial-gradient(620px 420px at 88% 4%,color-mix(in srgb,#8F7BEA 9%,transparent),transparent 70%),var(--bg2)}
+html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l){--bg:#0E0E12;--bg2:#141419;--surface:#1A1A20;--surface2:#222229;--ink:#F7F6FB;--muted:#9C9CA8;--line:#2C2C35;--brand:#F7F6FB;--on:#0E0E12;--shadow:rgba(0,0,0,.5);--art-ink:#F7F6FB;--sig:#9F87E2;--s2:#C7B6F2;--s3:#B7A2EC;--saffron:#DFA23C;--lilac:#6C63E8;--teal:#3AA39D;--pink:#E0699A;--blue:#4A86E8;--lime:#7BB058;}
+html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .hero,html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .co.vu,html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .co.lq,html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .tp.tl,html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .tp.sv,html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .contact{background:radial-gradient(620px 420px at 88% 4%,color-mix(in srgb,#8F7BEA 2.5%,transparent),transparent 70%),var(--bg2)}
+/* dark buttons use the light theme's exact lavender */
+html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .btn.solid,html:root[data-pal="indigo"][data-tone="lavender"][data-mode="dark"]:not(#v):not(#c):not(#l) .tp .btn.solid{background:color-mix(in srgb,#9F87E2 38%,#fff);color:#221A33;border-color:color-mix(in srgb,#9F87E2 55%,#EAE3F7)}
 html:root[data-pal="indigo"][data-tone]:not([data-mode="dark"]):not(#v):not(#c):not(#l) .btn.solid{color:var(--ink)}
 /* softer buttons in light mode */
 html:root[data-pal]:not([data-mode="dark"]):not(#v):not(#c):not(#l) .navlinks a.on,
@@ -827,14 +829,14 @@ html:root[data-pal]:not([data-mode="dark"]):not(#v):not(#c):not(#l) .btn.solid,h
 .hero{isolation:isolate}
 .hero>*:not(.hk-blobs){position:relative;z-index:1}
 .hk-blobs{position:absolute;inset:-60px -40px auto auto;width:min(820px,90%);height:480px;z-index:0;pointer-events:none;opacity:.2;filter:blur(52px) saturate(.85)}
-html[data-mode="dark"] .hk-blobs{opacity:.13}
+html[data-mode="dark"] .hk-blobs{opacity:.04}
 @media (prefers-reduced-motion:no-preference){.hk-blobs{animation:hkFloat 24s var(--ease-in-out,ease-in-out) infinite alternate}}
 @keyframes hkFloat{to{translate:-30px 22px;rotate:5deg}}
 @media(max-width:900px){.hk-blobs{width:calc(100% + 80px);height:420px}}
 .contact{position:relative;overflow:hidden;isolation:isolate}
 .contact>*:not(.hk-waves){position:relative;z-index:1}
 .hk-waves{position:absolute;left:0;right:0;bottom:0;width:100%;height:42%;pointer-events:none;z-index:0}
-html[data-mode="dark"] .hk-waves{opacity:.6}
+html[data-mode="dark"] .hk-waves{opacity:.2}
 /* TextEffect */
 .te-w{display:inline-block;white-space:nowrap}.te-c{display:inline-block}
 html.te .hero .name{animation:none!important}
