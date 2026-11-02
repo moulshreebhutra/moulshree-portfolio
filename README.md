@@ -11,12 +11,9 @@ A single static page, no build step and no dependencies.
 - `index.html`: the whole site (HTML, CSS and a little JavaScript)
 - `logos/`: company, school and profile images used on the page
 
-## Themes
+## Theme
 
-The page picks a colour theme on each visit and never repeats the previous one:
-
-- **Lavender** and **Brown**, each with a light and a dark mode (the sun/moon button switches mode)
-- Sage, peach and butter are also defined. Open the page with `?tone=sage`, `?tone=peach` or `?tone=butter` to see them.
+One colour theme, **lavender**, with a light and a dark mode (the sun/moon button switches mode).
 
 ## Run it locally
 
