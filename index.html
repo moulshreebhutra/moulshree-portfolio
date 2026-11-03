@@ -1091,7 +1091,7 @@ dialog.pm::backdrop{background:rgba(10,8,16,.55);backdrop-filter:blur(3px)}
     <div class="chips-row"><span class="chip">Concept project</span><span class="chip">AI-native</span><span class="chip">Working app</span><span class="chip">AI with fallback</span><span class="chip">Invented data</span></div>
     <div class="pbtns"><button class="btn solid" type="button" data-modal="rationale" aria-haspopup="dialog">Project details</button>
     <a class="btn" href="https://moulshree-rationale.vercel.app" target="_blank" rel="noopener">Live demo <small>↗</small></a>
-    <a class="btn ghost" href="https://github.com/moulshreebhutra/rationale" target="_blank" rel="noopener">Code <small>↗</small></a></div>
+    <a class="btn ghost" href="https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/rationale" target="_blank" rel="noopener">Code <small>↗</small></a></div>
   </div>
 </section>
 
@@ -1106,7 +1106,7 @@ dialog.pm::backdrop{background:rgba(10,8,16,.55);backdrop-filter:blur(3px)}
     <div class="chips-row"><span class="chip">Concept project</span><span class="chip">AI-native</span><span class="chip">Shopper and merchant views</span><span class="chip">Real orders, sample data labelled</span></div>
     <div class="pbtns"><button class="btn solid" type="button" data-modal="shelfmate" aria-haspopup="dialog">Project details</button>
     <a class="btn" href="https://moulshree-shelfmate.vercel.app" target="_blank" rel="noopener">Live demo <small>↗</small></a>
-    <a class="btn ghost" href="https://github.com/moulshreebhutra/shelfmate" target="_blank" rel="noopener">Code <small>↗</small></a></div>
+    <a class="btn ghost" href="https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/shelfmate" target="_blank" rel="noopener">Code <small>↗</small></a></div>
   </div>
 </section>
 
@@ -1137,13 +1137,13 @@ dialog.pm::backdrop{background:rgba(10,8,16,.55);backdrop-filter:blur(3px)}
 /* project details popup */
 (function(){
   var P={
-    rationale:{t:"Rationale",s:"Customer feedback in. A ranked roadmap out.",live:"https://moulshree-rationale.vercel.app",repo:"https://github.com/moulshreebhutra/rationale",
+    rationale:{t:"Rationale",s:"Customer feedback in. A ranked roadmap out.",live:"https://moulshree-rationale.vercel.app",repo:"https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/rationale",
       sec:[["The bet","Show your work on every roadmap decision. Feedback arrives from calls, tickets and renewals, and a PM has to turn it into a ranking that sales, engineering and the CEO will accept."],
         ["How it works","<ul><li><b>Add</b> feedback by pasting lines or uploading a CSV.</li><li><b>Group</b> it by the need underneath, with AI or with plain word-overlap rules.</li><li><b>Rank</b> with one formula: ARR at stake × confidence ÷ effort. You can overrule every input.</li><li><b>Draft</b> a PRD from the evidence, with checks for invented ids and invented numbers.</li><li><b>Share</b> the ranking by link, or export the PRD and a CSV.</li></ul>"],
         ["What I decided","<ul><li>The score is arithmetic, so a head of sales can read it in one line. A single AI priority score was turned down.</li><li>Every theme lists its evidence, and revenue gates are flagged so volume cannot bury them.</li><li>It works without AI: if a model fails or returns something invalid, the page says so and falls back to rules.</li></ul>"],
         ["It is a working app","Real input, real AI calls (Claude first, then Gemini's free tier), real saved links. Rate limits, input caps and a daily AI budget protect the public demo. The customers in the sample are invented, and the problems it solves are hypotheses I would check with eight PM interviews."],
         ["Built with","Next.js, TypeScript, zod validation, Vercel Blob for saved sessions, Anthropic and Gemini APIs, 8 automated tests."]]},
-    shelfmate:{t:"Shelfmate",s:"A routine that builds itself, and a dashboard that proves it.",live:"https://moulshree-shelfmate.vercel.app",repo:"https://github.com/moulshreebhutra/shelfmate",
+    shelfmate:{t:"Shelfmate",s:"A routine that builds itself, and a dashboard that proves it.",live:"https://moulshree-shelfmate.vercel.app",repo:"https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/shelfmate",
       sec:[["The bet","Replace forty skincare choices with one good, checkable answer built only from the store's shelves, and give the merchant the numbers to judge it."],
         ["How it works","<ul><li><b>Shopper:</b> four questions, then a routine with one product per step, inside budget, gentle products only when skin or a note calls for it.</li><li><b>Swap</b> any step, add to cart, place a demo order. The server prices everything.</li><li><b>Merchant:</b> funnel, conversion, order value, margin, swaps and what shoppers typed, all from recorded sessions.</li><li><b>Discount dial:</b> a what-if on real orders with margin guardrails. Shipping it changes what shoppers see.</li></ul>"],
         ["What I decided","<ul><li>The model only picks from the catalog, and every answer is checked. A failed check means the rules-based routine is used instead, so an unsafe or made-up product cannot reach a basket.</li><li>The dashboard separates real sessions from clearly labelled sample sessions, and labels what is observational and what is a what-if.</li><li>No payment, name or address is collected.</li></ul>"],
