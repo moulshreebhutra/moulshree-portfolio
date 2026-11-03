@@ -1,5 +1,8 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import AnimatedNumber from "./AnimatedNumber";
+import ThemeToggle from "./ThemeToggle";
+import { useFlip } from "@/lib/useFlip";
 import { groupByRules } from "@/lib/cluster";
 import { parseFeedback, toCsv } from "@/lib/csv";
 import { checkPrd, mdToHtml, templatePrd, type PrdCheck } from "@/lib/prd";
@@ -32,6 +35,8 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
   const [checks, setChecks] = useState<PrdCheck[] | null>(null);
   const [provider, setProvider] = useState<string>("");
   const fileRef = useRef<HTMLInputElement>(null);
+  const [edge, setEdge] = useState(false);
+  useEffect(() => { const f = () => setEdge(window.scrollY > 4); f(); window.addEventListener("scroll", f, { passive: true }); return () => window.removeEventListener("scroll", f); }, []);
   const { items, themes } = ws;
 
   // restore the last local session (not on shared pages, which show the shared data)
@@ -43,6 +48,7 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
   useEffect(() => { fetch("/api/health").then((r) => r.json()).then(setHealth).catch(() => setHealth(null)); }, []);
 
   const list = useMemo(() => ranked(themes, items), [themes, items]);
+  const flipRef = useFlip<HTMLDivElement>(list.map((t) => t.id).join(","));
   const sel = useMemo(() => themes.find((t) => t.id === selected) ?? list[0], [themes, selected, list]);
   const max = Math.max(1, ...list.map((t) => score(t, items)));
   const assigned = useMemo(() => { const m = new Map<number, Theme>(); themes.forEach((t) => t.itemIds.forEach((id) => m.set(id, t))); return m; }, [themes]);
@@ -138,24 +144,28 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
 
   return (
     <>
-      <header className="top">
+      <a className="skip" href="#main">Skip to content</a>
+      <header className={"top" + (edge ? " edge" : "")}>
         <div className="wrap">
           <div className="brand">
             <svg viewBox="0 0 48 48" width="40" height="40" role="img" aria-label="Rationale logo"><rect x="1" y="1" width="46" height="46" rx="12" fill="none" stroke="var(--line)" strokeWidth="1.5" /><path d="M10 15H38" stroke="var(--accent)" strokeWidth="4" strokeLinecap="round" /><path d="M10 24H30" stroke="var(--muted)" strokeWidth="4" strokeLinecap="round" /><path d="M10 33H22" stroke="var(--muted)" strokeWidth="4" strokeLinecap="round" opacity=".6" /></svg>
             <div>Rationale<small>Customer feedback in. A ranked roadmap out.</small></div>
           </div>
-          <div className="badges" aria-live="polite">
+          <div className="right"><div className="badges" aria-live="polite">
             <span className="badge">Concept project</span>
             {health && (aiOn ? <span className="badge ok">AI on{health.providers.claude && health.providers.gemini ? ": Claude, Gemini fallback" : health.providers.claude ? ": Claude" : ": Gemini"}</span> : <span className="badge warn">AI off: rules only</span>)}
             {health && <span className={"badge " + (health.store.ok && health.store.kind === "vercel-blob" ? "ok" : "warn")}>{health.store.kind === "vercel-blob" && health.store.ok ? "Share links on" : "Share links limited"}</span>}
-          </div>
+          </div><ThemeToggle /></div>
         </div>
       </header>
 
-      <main className="wrap">
+      <main className="wrap" id="main">
         <section className="hero">
           <h1>Show your work on every roadmap decision.</h1>
           <p>Paste feedback from calls, tickets and renewals. Rationale groups it by the need underneath, ranks the themes with one formula you can read aloud, and drafts the PRD from the evidence. Every judgement stays visible and editable.</p>
+          <ol className="stepper" aria-label="Progress">
+            {[["Add feedback", items.length > 0], ["Group and rank", themes.length > 0], ["Draft the PRD", themes.some((t) => !!t.prd)], ["Share", !!shareUrl || !!sharedId]].map(([l, d], i) => <li key={String(l)} className={d ? "done" : ""}><i>{d ? "✓" : i + 1}</i>{l as string}</li>)}
+          </ol>
           {sharedId && <div className="banner info">You are viewing a shared ranking. Changes you make stay in your browser. <a href="/">Start your own</a>.</div>}
           <div className="banner" role="note">Use invented or anonymised feedback. Pasted text is sent to an AI model when you choose AI, and saved links are readable by anyone who has them. Emails, phone numbers and links are stripped before any model call.</div>
         </section>
@@ -163,7 +173,7 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
         <div className="grid">
           <div>
             <section className="panel" aria-labelledby="in-h">
-              <div className="phead"><h3 id="in-h">1. Add feedback</h3><span className="note">{items.length} of {LIMITS.maxItems} items</span></div>
+              <div className="phead"><h2 id="in-h">1. Add feedback</h2><span className="note">{items.length} of {LIMITS.maxItems} items</span></div>
               <label htmlFor="paste">Paste lines, or CSV with customer, tier, arr, text columns</label>
               <textarea id="paste" value={paste} onChange={(e) => setPaste(e.target.value)} placeholder={"Acme Logistics | Enterprise | $84k | Approvals stall when the approver is on leave.\nor just one piece of feedback per line"} />
               <div className="row" style={{ marginTop: 8 }}>
@@ -176,13 +186,13 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
             </section>
 
             <section className="panel" aria-labelledby="inbox-h">
-              <div className="phead"><h3 id="inbox-h">Feedback inbox</h3><span className="note">{items.length - assigned.size > 0 && themes.length ? `${items.length - assigned.size} not grouped` : ""}</span></div>
-              {!items.length ? <div className="empty">Nothing here yet. Paste some feedback, or load the invented sample.</div> : (
+              <div className="phead"><h2 id="inbox-h">Feedback inbox</h2><span className="note">{items.length - assigned.size > 0 && themes.length ? `${items.length - assigned.size} not grouped` : ""}</span></div>
+              {!items.length ? <div className="empty"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="9" width="34" height="26" rx="6"/><path d="M15 43l7-8M17 18h14M17 25h8"/></svg><b>No feedback yet</b><span>Paste some above, or try the invented sample.</span><button className="btn sm" onClick={loadSample}>Load sample</button></div> : (
                 <div className="stack">
-                  {items.map((f) => {
+                  {items.map((f, i) => {
                     const t = assigned.get(f.id);
                     return (
-                      <article key={f.id} className={"fb" + (t ? "" : " un")} style={{ ["--tc" as string]: `var(${colorOf(t)})` }}>
+                      <article key={f.id} className={"fb" + (t ? "" : " un")} style={{ ["--tc" as string]: `var(${colorOf(t)})`, ["--i" as string]: Math.min(i, 10) }}>
                         <div className="fbtop"><span className="id">{fid(f.id)}</span><span className="pill">{t ? t.title.slice(0, 34) : "not grouped"}</span></div>
                         <p>{f.text}</p>
                         <div className="edit">
@@ -207,20 +217,20 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
           <div>
             <section className="panel" aria-labelledby="th-h">
               <div className="phead">
-                <h3 id="th-h">2. Themes, ranked</h3>
+                <h2 id="th-h">2. Themes, ranked</h2>
                 <div className="row">
-                  <button className="btn" onClick={groupAi} disabled={!items.length || busy !== "" || !aiOn} title={aiOn ? "" : "AI is not switched on for this deployment"}>{busy === "group" ? "Grouping…" : "Group with AI"}</button>
+                  <button className={"btn" + (busy === "group" ? " loading" : "")} onClick={groupAi} disabled={!items.length || (busy !== "" && busy !== "group") || !aiOn} title={aiOn ? "" : "AI is not switched on for this deployment"}>{busy === "group" ? "Grouping…" : "Group with AI"}</button>
                   <button className="btn ghost" onClick={groupRules} disabled={!items.length || busy !== ""}>Group by rules</button>
                 </div>
               </div>
               <p className="note" style={{ marginTop: -4 }}>score = ARR at stake × confidence ÷ effort. The AI proposes confidence and effort; the arithmetic is fixed, and you can overrule any input.</p>
-              <div className="status" role="status" aria-live="polite">{status}</div>
-              {!themes.length ? <div className="empty">Add feedback, then group it. Themes show up here, ranked.</div> : (
-                <div className="stack">
+              <div className="status pop" key={status} role="status" aria-live="polite">{status}</div>
+              {busy === "group" ? <div className="stack" aria-hidden="true">{[0, 1, 2].map((k) => <div key={k} className="skel" style={{ height: 150 }} />)}</div> : !themes.length ? <div className="empty"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 14h32M8 24h22M8 34h12"/></svg><b>Themes appear here, ranked</b><span>Add feedback, then group it with AI or by rules.</span></div> : (
+                <div className="stack" ref={flipRef}>
                   {list.map((t, i) => {
                     const s = score(t, items), a = arrOf(t, items);
                     return (
-                      <article key={t.id} className={"theme" + (sel?.id === t.id ? " sel" : "")} style={{ ["--tc" as string]: `var(${colorOf(t)})` }}>
+                      <article key={t.id} data-flip={t.id} className={"theme" + (sel?.id === t.id ? " sel" : "")} style={{ ["--tc" as string]: `var(${colorOf(t)})` }}>
                         <div className="thead">
                           <span className="rank" aria-label={`Rank ${i + 1}`}>{i + 1}</span>
                           <div style={{ flex: 1 }}>
@@ -230,7 +240,7 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
                           </div>
                         </div>
                         <p className="tsum">{t.summary}</p>
-                        <div className="nums"><div>Requests<b>{t.itemIds.length}</b></div><div>ARR at stake<b>${a}k</b></div><div>Score<b>{s.toFixed(1)}</b></div></div>
+                        <div className="nums"><div>Requests<b>{t.itemIds.length}</b></div><div>ARR at stake<b><AnimatedNumber value={a} format={(n) => "$" + Math.round(n) + "k"} /></b></div><div>Score<b><AnimatedNumber value={s} format={(n) => n.toFixed(1)} /></b></div></div>
                         <div className="sl"><label htmlFor={`e${t.id}`}>Effort</label><input id={`e${t.id}`} type="range" min={1} max={5} step={1} value={t.effort} onChange={(e) => patchTheme(t.id, { effort: Number(e.target.value) })} /><output>{t.effort} of 5</output></div>
                         <div className="sl"><label htmlFor={`k${t.id}`}>Confidence</label><input id={`k${t.id}`} type="range" min={20} max={100} step={5} value={Math.round(t.confidence * 100)} onChange={(e) => patchTheme(t.id, { confidence: Number(e.target.value) / 100 })} /><output>{Math.round(t.confidence * 100)}%</output></div>
                         <p className="why">{t.effortWhy}</p>
@@ -246,16 +256,16 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
 
             <section className="panel" aria-labelledby="prd-h">
               <div className="phead">
-                <h3 id="prd-h">3. PRD draft{sel ? `: ${sel.title.slice(0, 40)}` : ""}</h3>
+                <h2 id="prd-h">3. PRD draft{sel ? `: ${sel.title.slice(0, 40)}` : ""}</h2>
                 <div className="row">
-                  <button className="btn" onClick={draftAi} disabled={!sel || busy !== "" || !aiOn} title={aiOn ? "" : "AI is not switched on for this deployment"}>{busy === "prd" ? "Drafting…" : "Draft with AI"}</button>
+                  <button className={"btn" + (busy === "prd" ? " loading" : "")} onClick={draftAi} disabled={!sel || (busy !== "" && busy !== "prd") || !aiOn} title={aiOn ? "" : "AI is not switched on for this deployment"}>{busy === "prd" ? "Drafting…" : "Draft with AI"}</button>
                   <button className="btn ghost" disabled={!sel} onClick={() => sel && download(slug(sel.title) + "-prd.md", prdText)}>Download .md</button>
                 </div>
               </div>
-              {!sel ? <div className="empty">Pick a theme to see its PRD.</div> : (
+              {!sel ? <div className="empty"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 6h16l8 8v28H13z"/><path d="M29 6v8h8M19 24h12M19 31h12"/></svg><b>No PRD yet</b><span>Group your feedback, then pick a theme.</span></div> : (
                 <>
                   <div className="tabs"><button aria-pressed={prdView === "preview"} onClick={() => setPrdView("preview")}>Preview</button><button aria-pressed={prdView === "edit"} onClick={() => setPrdView("edit")}>Edit</button></div>
-                  {prdView === "preview" ? <div className="prd" dangerouslySetInnerHTML={{ __html: mdToHtml(prdText) }} /> : <textarea style={{ minHeight: 280 }} aria-label="PRD markdown" value={prdText} onChange={(e) => patchTheme(sel.id, { prd: e.target.value })} />}
+                  {busy === "prd" ? <div className="stack" aria-hidden="true"><div className="skel" style={{ height: 26, width: "55%" }} /><div className="skel" style={{ height: 14 }} /><div className="skel" style={{ height: 14, width: "90%" }} /><div className="skel" style={{ height: 14, width: "70%" }} /></div> : prdView === "preview" ? <div className="prd swap-in" key={sel.id + (sel.prd ? "p" : "t")} dangerouslySetInnerHTML={{ __html: mdToHtml(prdText) }} /> : <textarea style={{ minHeight: 280 }} aria-label="PRD markdown" value={prdText} onChange={(e) => patchTheme(sel.id, { prd: e.target.value })} />}
                   {shownChecks && <div className="checks" aria-label="Faithfulness checks">{shownChecks.map((c) => <span key={c.label} className={"check" + (c.ok ? "" : " fail")}>{c.ok ? "Passed" : "Check"}: {c.label}</span>)}</div>}
                   {provider && sel.prd && <p className="note">Drafted by {provider === "claude" ? "Claude" : "Gemini"}. Checks re-run as you edit.</p>}
                 </>
@@ -263,9 +273,9 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
             </section>
 
             <section className="panel" aria-labelledby="sh-h">
-              <div className="phead"><h3 id="sh-h">4. Share or export</h3></div>
+              <div className="phead"><h2 id="sh-h">4. Share or export</h2></div>
               <div className="row">
-                <button className="btn" onClick={save} disabled={!themes.length || busy !== ""}>{busy === "save" ? "Saving…" : "Save and get a link"}</button>
+                <button className={"btn" + (busy === "save" ? " loading" : "")} onClick={save} disabled={!themes.length || (busy !== "" && busy !== "save")}>{busy === "save" ? "Saving…" : "Save and get a link"}</button>
                 <button className="btn ghost" disabled={!themes.length} onClick={exportCsv}>Download ranking CSV</button>
               </div>
               {shareUrl && <div className="share" style={{ marginTop: 10 }}><input type="text" readOnly value={shareUrl} aria-label="Share link" onFocus={(e) => e.currentTarget.select()} /><button className="btn ghost sm" onClick={() => navigator.clipboard?.writeText(shareUrl).then(() => setStatus("Link copied."))}>Copy</button></div>}
