@@ -30,23 +30,30 @@ async function claude(r: Req): Promise<string> {
   return t;
 }
 
+// Google retires Gemini model names on a schedule, so try the configured one, then the "latest" alias, then a current preview.
+const geminiModels = () => [...new Set([process.env.GEMINI_MODEL, "gemini-flash-latest", "gemini-3-flash-preview"].filter((m): m is string => !!m))];
+
 async function gemini(r: Req): Promise<string> {
-  const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
-  const res = await fetch(`${process.env.GEMINI_BASE_URL || "https://generativelanguage.googleapis.com"}/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
-    method: "POST",
-    headers: { "x-goog-api-key": process.env.GEMINI_API_KEY!, "content-type": "application/json" },
-    body: JSON.stringify({
-      ...(r.system ? { systemInstruction: { parts: [{ text: r.system }] } } : {}),
-      contents: [{ role: "user", parts: [{ text: r.prompt }] }],
-      generationConfig: { maxOutputTokens: r.maxTokens, temperature: 0.3, ...(r.json ? { responseMimeType: "application/json" } : {}) },
-    }),
-    signal: AbortSignal.timeout(r.timeoutMs ?? 40_000),
-  });
-  if (!res.ok) throw new Error("gemini " + res.status);
-  const j = (await res.json()) as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
-  const t = j.candidates?.[0]?.content?.parts?.map((p) => p.text ?? "").join("") ?? "";
-  if (!t.trim()) throw new Error("gemini empty");
-  return t;
+  let last = "gemini";
+  for (const model of geminiModels()) {
+    const res = await fetch(`${process.env.GEMINI_BASE_URL || "https://generativelanguage.googleapis.com"}/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
+      method: "POST",
+      headers: { "x-goog-api-key": process.env.GEMINI_API_KEY!, "content-type": "application/json" },
+      body: JSON.stringify({
+        ...(r.system ? { systemInstruction: { parts: [{ text: r.system }] } } : {}),
+        contents: [{ role: "user", parts: [{ text: r.prompt }] }],
+        generationConfig: { maxOutputTokens: r.maxTokens, temperature: 0.3, ...(r.json ? { responseMimeType: "application/json" } : {}) },
+      }),
+      signal: AbortSignal.timeout(r.timeoutMs ?? 40_000),
+    }).catch(() => null);
+    if (!res) { last = "gemini network"; continue; }
+    if (!res.ok) { last = "gemini " + res.status; if (res.status === 404 || res.status === 400) continue; throw new Error(last); }
+    const j = (await res.json()) as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
+    const t = j.candidates?.[0]?.content?.parts?.map((p) => p.text ?? "").join("") ?? "";
+    if (t.trim()) return t;
+    last = "gemini empty";
+  }
+  throw new Error(last);
 }
 
 /**

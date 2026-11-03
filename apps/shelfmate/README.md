@@ -28,7 +28,7 @@ npm install
 npm test
 npm run dev
 ```
-Server-only environment variables (set in the host, never committed; see `.env.example`): `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`, optional `ANTHROPIC_MODEL`, `GEMINI_MODEL`, `AI_DAILY_CAP`. `BLOB_READ_WRITE_TOKEN` is added by Vercel when a Blob store is connected; without it sessions and orders live in server memory only, which is fine locally but not across serverless instances. `/api/health` reports the active providers and storage, never a key.
+Server-only environment variables (set in the host, never committed; see `.env.example`): `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`, optional `ANTHROPIC_MODEL`, `GEMINI_MODEL` (default: `gemini-flash-latest`, then `gemini-3-flash-preview`), `AI_DAILY_CAP`. `BLOB_READ_WRITE_TOKEN` is added by Vercel when a Blob store is connected; without it sessions and orders live in server memory only, which is fine locally but not across serverless instances. `/api/health` reports the active providers and storage, never a key.
 
 ## Limits, honestly
 Margins assume a 45% cost of goods, which is an input, not a measured number. A 4-step routine cannot fit under ₹1,500 with this catalog, and the app says so instead of hiding it. Conversion numbers from a handful of real visitors mean little; the sample data exists to show the shape of the dashboard, not to prove anything.

@@ -23,7 +23,7 @@ npm install
 npm test
 npm run dev
 ```
-Environment variables (server only, set in the host, never committed; see `.env.example`): `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`, optional `ANTHROPIC_MODEL`, `GEMINI_MODEL`, `AI_DAILY_CAP`. `BLOB_READ_WRITE_TOKEN` is added by Vercel when a Blob store is connected; without it, saved sessions live in server memory only. `/api/health` reports which providers and which storage are active, and never returns a key.
+Environment variables (server only, set in the host, never committed; see `.env.example`): `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`, optional `ANTHROPIC_MODEL`, `GEMINI_MODEL` (default: `gemini-flash-latest`, then `gemini-3-flash-preview`), `AI_DAILY_CAP`. `BLOB_READ_WRITE_TOKEN` is added by Vercel when a Blob store is connected; without it, saved sessions live in server memory only. `/api/health` reports which providers and which storage are active, and never returns a key.
 
 ## Limits, honestly
 Rules grouping catches repeated wording, not repeated needs. Saved links are readable by anyone who has them. The score is only as good as the ARR and effort inputs.
