@@ -887,6 +887,7 @@ html[data-mode="dark"] .totop{background:var(--surface);border-color:var(--line)
 .pm-body p{margin:0 0 10px}.pm-body ul{margin:0 0 12px}.pm-note{color:var(--muted);font-size:13px}
 dialog.pm{width:min(480px,calc(100vw - 28px))}
 .pm-head{padding-bottom:6px}.pm-foot{border-top:0;padding-top:4px}
+.btn .ar{flex:none;color:var(--arrow);stroke:currentColor}.btn.solid .ar{color:#000}.pm-x{font-family:system-ui,sans-serif}
 </style><script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -1100,8 +1101,8 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
     <p class="syn">An AI copilot for product managers. It groups messy customer feedback by the need underneath, ranks themes by the revenue at stake, and drafts the PRD. Every judgement stays visible and editable.</p>
     <div class="chips-row"><span class="chip">Concept project</span><span class="chip">AI-native</span><span class="chip">Working app</span><span class="chip">AI with fallback</span><span class="chip">Invented data</span></div>
     <div class="pbtns"><button class="btn solid" type="button" data-modal="rationale" aria-haspopup="dialog">Project details</button>
-    <a class="btn" href="https://moulshree-rationale.vercel.app" target="_blank" rel="noopener">Live demo <small>↗</small></a>
-    <a class="btn ghost" href="https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/rationale" target="_blank" rel="noopener">Code <small>↗</small></a></div>
+    <a class="btn" href="https://moulshree-rationale.vercel.app" target="_blank" rel="noopener">Live demo <svg class="ar" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="btn ghost" href="https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/rationale" target="_blank" rel="noopener">Code <svg class="ar" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
   </div>
 </section>
 
@@ -1115,8 +1116,8 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
     <p class="syn">An AI routine builder for a skincare brand. Shoppers answer five questions and get a bundle built only from the store's catalog. The merchant gets conversion, order value and swap data to judge it. The skincare brand is invented.</p>
     <div class="chips-row"><span class="chip">Concept project</span><span class="chip">AI-native</span><span class="chip">Shopper and merchant views</span><span class="chip">Real orders, sample data labelled</span></div>
     <div class="pbtns"><button class="btn solid" type="button" data-modal="shelfmate" aria-haspopup="dialog">Project details</button>
-    <a class="btn" href="https://moulshree-shelfmate.vercel.app" target="_blank" rel="noopener">Live demo <small>↗</small></a>
-    <a class="btn ghost" href="https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/shelfmate" target="_blank" rel="noopener">Code <small>↗</small></a></div>
+    <a class="btn" href="https://moulshree-shelfmate.vercel.app" target="_blank" rel="noopener">Live demo <svg class="ar" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="btn ghost" href="https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/shelfmate" target="_blank" rel="noopener">Code <svg class="ar" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
   </div>
 </section>
 
@@ -1164,7 +1165,7 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
       var p=P[o.getAttribute("data-modal")]; if(!p) return; last=o;
       document.getElementById("pm-t").textContent=p.t; document.getElementById("pm-s").textContent=p.s;
       document.getElementById("pm-b").innerHTML="<p>"+p.d+"</p><ul>"+p.pts.map(function(x){return "<li>"+x+"</li>";}).join("")+"</ul><p class=\"pm-note\">A working app with an invented dataset. Nothing is sold.</p>";
-      document.getElementById("pm-f").innerHTML='<a class="btn solid" href="'+p.live+'" target="_blank" rel="noopener">Open live demo <small>↗</small></a><a class="btn" href="'+p.repo+'" target="_blank" rel="noopener">View code <small>↗</small></a>';
+      document.getElementById("pm-f").innerHTML='<a class="btn solid" href="'+p.live+'" target="_blank" rel="noopener">Open live demo <svg class="ar" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn" href="'+p.repo+'" target="_blank" rel="noopener">View code <svg class="ar" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>';
       d.showModal(); d.querySelector(".pm-body").scrollTop=0; return;
     }
     if(e.target.closest&&e.target.closest("[data-pm-close]")) d.close();
