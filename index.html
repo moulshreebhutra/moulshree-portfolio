@@ -298,7 +298,10 @@ html:root[data-pal][data-pal]:not([data-pal="toned"]) .np[data-i] .np-art{backgr
 @media (max-width:820px){.co{grid-template-columns:minmax(0,1fr)}}
 .co h3{font-size:clamp(34px,6vw,64px);font-weight:800;line-height:1;margin:10px 0 8px}
 .co p{margin:0;color:var(--muted);font-size:18px;max-width:50ch}
-.co .meta{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.co .meta{display:flex;flex-direction:column;gap:8px;align-items:flex-start;align-self:stretch;justify-content:space-between}
+.chips-col{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.co .meta .case{align-self:stretch;margin:0;padding:16px 18px;border-radius:18px;background:color-mix(in srgb,var(--bg) 60%,transparent)}
+.co .meta .case b{font-size:17px;line-height:1.25}
 .co .meta .chip{background:color-mix(in srgb,var(--bg) 60%,transparent)}
 .eps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px}
 .ep{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:grid;grid-template-columns:38px minmax(0,1fr);gap:4px 14px;transition:transform .2s,border-color .2s}
@@ -1016,9 +1019,16 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
       <p>Helped Vudio evolve from a video commerce tool into a full-stack marketing suite for D2C brands, scaling to 1,000+ clients including Shoppers Stop, Godrej and Littlebox India.</p>
     </div>
     <div class="meta">
-      <span class="chip">Founding Associate Product Manager</span>
-      <span class="chip">April 2024 to present</span>
-      <span class="chip">B2B SaaS for D2C brands</span>
+      <a class="case" href="https://drive.google.com/file/d/1x1etNHElwG0osTc6F2aRFEFYNZYmxq6i/view?usp=sharing" target="_blank" rel="noopener">
+        <span class="eyebrow">Case study</span>
+        <b>Self-serve activation: insights and solutions</b>
+        <span class="case-go">Read the case study <svg class="ar" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <div class="chips-col">
+        <span class="chip">Founding Associate Product Manager</span>
+        <span class="chip">April 2024 to present</span>
+        <span class="chip">B2B SaaS for D2C brands</span>
+      </div>
     </div>
   </div>
 
@@ -1046,13 +1056,6 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
     <article class="pin"><div class="art short wg1"><small>Team</small><b>3</b></div><div class="body"><h5>Design pod</h5><p>Led Vudio's design pod, hiring and mentoring three designers and building a new design system for better usability and visual consistency.</p></div></article>
     <article class="pin"><div class="art short wg4"><small>Reach</small><b>10M+</b></div><div class="body"><h5>Widget views</h5><p>Optimised widget and video placement across high-intent, high-traffic pages using Shopify analytics.</p></div></article>
   </div>
-
-  <div class="row-h"><h4>Case study</h4><span>Vudio.ai</span></div>
-  <a class="case" href="https://drive.google.com/file/d/1x1etNHElwG0osTc6F2aRFEFYNZYmxq6i/view?usp=sharing" target="_blank" rel="noopener">
-    <b>Self-serve activation: insights and solutions</b>
-    <span>Why new Vudio users struggled to go live on their own, the redesigns that fixed it, how I prioritised them, and the outcomes.</span>
-    <span class="case-go">Read the case study <svg class="ar" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-  </a>
 
   <div class="co lq">
     <div>
