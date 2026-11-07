@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import ThemeToggle from "./ThemeToggle";
 import { useFlip } from "@/lib/useFlip";
 import { groupByRules } from "@/lib/cluster";
-import { parseFeedback } from "@/lib/csv";
+import { parseFeedback, toCsv } from "@/lib/csv";
 import { checkPrd, mdToHtml, templatePrd } from "@/lib/prd";
 import { SAMPLE_ITEMS, SAMPLE_THEMES } from "@/lib/sample";
 import { arrOf, ranked, score, slug } from "@/lib/score";
@@ -14,13 +14,15 @@ import { LIMITS, type Item, type Theme, type Workspace as WS } from "@/lib/types
 type Stage = "add" | "rank" | "spec";
 const empty: WS = { items: [], themes: [], source: "none" };
 const LEVELS = [{ k: "Low", v: 1 }, { k: "Medium", v: 3 }, { k: "High", v: 5 }];
+const CONF = [{ k: "Low", v: 0.4 }, { k: "Medium", v: 0.7 }, { k: "High", v: 0.95 }];
+const confOf = (c: number) => (c < 0.55 ? 0 : c < 0.85 ? 1 : 2);
 const levelOf = (e: number) => (e <= 2 ? 0 : e === 3 ? 1 : 2);
 const who = (p: string) => (p === "claude" ? "Claude" : p === "gemini" ? "Gemini" : "simple rules");
 
 interface Health { ai: boolean; providers: { claude: boolean; gemini: boolean } }
 
-function download(name: string, text: string) {
-  const url = URL.createObjectURL(new Blob([text], { type: "text/markdown" }));
+function download(name: string, text: string, type = "text/markdown") {
+  const url = URL.createObjectURL(new Blob([text], { type }));
   const a = document.createElement("a");
   a.href = url; a.download = name; a.click();
   setTimeout(() => URL.revokeObjectURL(url), 500);
@@ -61,9 +63,19 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
     setSelected(null); setProvider(""); setError(""); setStage("rank");
   }
 
-  async function rank(raw: string) {
+  function regroupRules() {
+    setWs((w) => ({ ...w, themes: groupByRules(w.items), source: "rules" }));
+    setProvider(""); setToast("Regrouped with the simple rules.");
+  }
+  function exportCsv() {
+    const rows: (string | number)[][] = [["rank", "theme", "customers", "arr_k", "confidence", "effort", "priority"]];
+    list.forEach((t, i) => rows.push([i + 1, t.title, t.itemIds.length, arrOf(t, items), t.confidence, t.effort, Math.round(score(t, items))]));
+    download("rationale-ranking.csv", toCsv(rows), "text/csv");
+  }
+
+  async function rank(raw: string, again = false) {
     setError("");
-    const r = parseFeedback(raw);
+    const r = again ? { items: items.map(({ id: _id, ...x }) => x), skipped: 0, note: "" } : parseFeedback(raw);
     if (!r.items.length) { setError("I couldn't find any feedback in that. Put one comment per line, or upload a CSV with customer, tier, arr and text columns."); return; }
     const take = r.items.slice(0, LIMITS.maxItems);
     const parsed = take.map((x, i) => ({ ...x, id: i + 1 })) as Item[];
@@ -170,9 +182,21 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
                 <p className="lede">{list.length} themes from {items.length} comments{provider ? `, grouped by ${who(provider)}` : ""}. The top one has the most revenue riding on it for the least effort.</p>
               </div>
               <div className="row">
+                <button className="btn ghost" onClick={exportCsv}>Export CSV</button>
                 <button className={"btn ghost" + (busy === "share" ? " loading" : "")} onClick={share} disabled={busy === "share"}>Share</button>
                 <button className="btn ghost" onClick={startOver}>Start over</button>
               </div>
+            </div>
+            <dl className="strip">
+              <div><dt>Comments</dt><dd>{items.length}</dd></div>
+              <div><dt>Themes</dt><dd>{list.length}</dd></div>
+              <div><dt>Revenue in play</dt><dd>${items.reduce((n, i) => n + i.arr, 0)}k</dd></div>
+              <div><dt>Blocking a deal</dt><dd>{list.filter((t) => t.blocksRevenue).length}</dd></div>
+            </dl>
+            <div className="regroup row">
+              <span className="note">Not the grouping you expected?</span>
+              {aiOn && <button className={"btn ghost sm" + (busy === "rank" ? " loading" : "")} disabled={busy === "rank"} onClick={() => rank("", true)}>Regroup with AI</button>}
+              <button className="btn ghost sm" onClick={regroupRules}>Regroup by rules</button>
             </div>
             <div className="stack" ref={flipRef}>
               {list.map((t, i) => {
@@ -189,6 +213,7 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
                     <div className="facts">
                       <span><b>{t.itemIds.length}</b> {t.itemIds.length === 1 ? "customer" : "customers"}</span>
                       <span><b><AnimatedNumber value={a} format={(n) => "$" + Math.round(n) + "k"} /></b> at stake</span>
+                      <span className={"sev " + t.severity}>{t.severity}</span>
                       {t.blocksRevenue && <span className="gate">Blocks a renewal or deal</span>}
                     </div>
                     <div className="pbar" role="img" aria-label={`Priority ${Math.round((s / max) * 100)} out of 100`}><i style={{ width: pct + "%" }} /></div>
@@ -197,11 +222,17 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
                         <span className="seglab">Effort</span>
                         {LEVELS.map((l, k) => <button key={l.k} aria-pressed={levelOf(t.effort) === k} onClick={() => patchTheme(t.id, { effort: l.v })}>{l.k}</button>)}
                       </div>
+                      <div className="seg" role="group" aria-label={`Confidence for ${t.title}`}>
+                        <span className="seglab">Sure it's real</span>
+                        {CONF.map((l, k) => <button key={l.k} aria-pressed={confOf(t.confidence) === k} onClick={() => patchTheme(t.id, { confidence: l.v })}>{l.k}</button>)}
+                      </div>
                       <button className={"btn" + (i === 0 ? "" : " ghost")} onClick={() => openSpec(t)}>Write the spec</button>
                     </div>
+                    <p className="formula">Priority {Math.round(s)} = ${a}k × {t.confidence} ÷ {t.effort}</p>
                     <details className="more">
                       <summary>What customers said</summary>
                       <ul>{t.itemIds.map((id) => byId.get(id)).filter(Boolean).map((f) => <li key={f!.id}><q>{f!.text}</q><span>{f!.customer}, {f!.tier}, ${f!.arr}k</span></li>)}</ul>
+                      <label className="rename">Theme name <input value={t.title} maxLength={80} onChange={(e) => patchTheme(t.id, { title: e.target.value })} /></label>
                       <p className="note">Effort estimate: {t.effortWhy || "Set by you."}</p>
                     </details>
                   </article>
@@ -210,7 +241,7 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
             </div>
             <details className="how">
               <summary>How the ranking works</summary>
-              <p>Priority = revenue at stake × how sure we are the need is real ÷ effort. Change an effort level and the order updates. {aiOn ? "The AI proposes the effort and confidence; the arithmetic never changes." : "Without AI, themes are grouped by repeated wording."}</p>
+              <p>Priority = revenue at stake × how sure we are the need is real ÷ effort. Change effort or confidence and the order updates. {aiOn ? "The AI proposes the effort and confidence; the arithmetic never changes." : "Without AI, themes are grouped by repeated wording."}</p>
             </details>
           </section>
         )}
@@ -235,13 +266,21 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
             ) : (
               <>
                 <div className="doc">
+                  <div className="tabs" role="group" aria-label="Spec view">
+                    <button aria-pressed={!editing} onClick={() => setEditing(false)}>Preview</button>
+                    <button aria-pressed={editing} onClick={() => setEditing(true)}>Edit</button>
+                    <button className="link" onClick={() => { patchTheme(sel.id, { prd: templatePrd(sel, items) }); setToast("Reset to the template."); }}>Use the template</button>
+                  </div>
                   {editing ? <textarea aria-label="Edit the spec" value={specText} onChange={(e) => patchTheme(sel.id, { prd: e.target.value })} style={{ minHeight: 420 }} /> : <div className="prose" dangerouslySetInnerHTML={{ __html: mdToHtml(specText) }} />}
                 </div>
                 <div className="trust">
-                  {checks && (failed.length === 0
-                    ? <span className="ok">✓ Every customer and figure traces back to the feedback you gave.</span>
-                    : <details><summary className="warnt">{failed.length} thing{failed.length > 1 ? "s" : ""} to double-check</summary><ul>{failed.map((c) => <li key={c.label}>{c.label}</li>)}</ul></details>)}
-                  <span className="note">{provider && provider !== "none" ? `Written by ${who(provider)}. ` : ""}<button className="link" onClick={() => setEditing((v) => !v)}>{editing ? "Done editing" : "Edit"}</button></span>
+                  {checks && (
+                    <details open={failed.length > 0}>
+                      <summary className={failed.length ? "warnt" : "okt"}>{failed.length === 0 ? "✓ All " + checks.length + " checks passed" : failed.length + " of " + checks.length + " checks need a look"}</summary>
+                      <ul className="checks">{checks.map((c) => <li key={c.label} className={c.ok ? "pass" : "fail"}>{c.ok ? "✓" : "!"} {c.label}</li>)}</ul>
+                    </details>
+                  )}
+                  <span className="note">{provider && provider !== "none" ? `Written by ${who(provider)}.` : ""}</span>
                 </div>
               </>
             )}
