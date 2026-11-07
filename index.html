@@ -921,8 +921,10 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 @media (max-width:480px){.navlinks{gap:0}.navlinks a{padding:8px 7px;font-size:13px}.navlinks{-webkit-mask-image:none!important;mask-image:none!important}.nav-in{flex-wrap:wrap;row-gap:2px;padding-block:6px}.mono-logo{order:1;flex:1;min-width:0}.nav-in .themebtn{order:2}.navlinks{order:3;flex:0 0 100%;width:100%;margin-left:0;padding-bottom:4px}}
 /* phone: denser, less vertical stacking */
 @media (max-width:560px){
-  .pins{columns:2;column-gap:10px;margin-top:14px}
-  .pin{margin-bottom:10px;border-radius:18px}
+  .pins{columns:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px;align-items:stretch}
+  .pin{margin:0;border-radius:18px;display:flex;flex-direction:column}
+  .pin .body{flex:1}
+  .pins>.pin:last-child:nth-child(odd){grid-column:1/-1}
   .pin .art{padding:12px 13px 10px}
   .pin .art b{font-size:clamp(24px,7vw,30px);overflow-wrap:anywhere}
   .pin .art small{font-size:10px}
