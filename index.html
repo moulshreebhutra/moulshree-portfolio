@@ -363,7 +363,10 @@ html:root[data-pal][data-pal]:not([data-pal="toned"]) .np[data-i] .np-art{backgr
 .tp .syn{color:var(--muted);max-width:60ch;margin:0 0 20px;font-size:17px}
 .tp .chips-row{margin-bottom:22px}
 .tp .btn.solid{background:var(--accent);border-color:var(--accent)}
+#projects>.sec:not(.proj-head){padding-top:0}
+.proj-head{padding-bottom:20px}
 @media (min-width:1000px){
+  .proj-head{grid-column:1/-1}
   #projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px;align-items:stretch}
   #projects>.sec{display:flex;flex-direction:column;min-width:0}
   #projects>.sec>.tp{flex:1;margin-top:20px;padding:clamp(24px,2.6vw,40px)}
@@ -1129,9 +1132,10 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 </section>
 
 <div id="projects">
+<div class="sec proj-head"><span class="eyebrow">Projects</span><h2 class="h2">Things I built.</h2><p class="lead">Two concept projects, built end to end and ready to try.</p></div>
 <!-- 3. RATIONALE -->
 <section id="rationale" class="sec" aria-label="Rationale project">
-  <span class="eyebrow">Project one · B2B SaaS</span>
+  <span class="eyebrow">B2B SaaS</span>
   <div class="tp tl" data-tabgroup="tl">
     <svg class="plogo" viewBox="0 0 48 48" width="54" height="54" role="img" aria-label="Rationale logo"><rect x="1" y="1" width="46" height="46" rx="12" fill="none" stroke="var(--line)" stroke-width="1.5"/><path class="rl-b rl-1" pathLength="1" d="M10 15H38" fill="none" stroke="var(--accent)" stroke-width="4.6" stroke-linecap="round"/><path class="rl-b rl-2" pathLength="1" d="M10 24.5H29" fill="none" stroke="var(--muted)" stroke-width="4.6" stroke-linecap="round"/><path class="rl-b rl-3" pathLength="1" d="M10 34H21" fill="none" stroke="var(--muted)" stroke-width="4.6" stroke-linecap="round" opacity=".7"/></svg>
     <h2>Rationale</h2>
@@ -1146,7 +1150,7 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 
 <!-- 4. SHELFMATE -->
 <section id="shelfmate" class="sec" aria-label="Shelfmate project">
-  <span class="eyebrow">Project two · D2C</span>
+  <span class="eyebrow">D2C</span>
   <div class="tp sv" data-tabgroup="sv">
     <svg class="plogo" viewBox="0 0 48 48" width="54" height="54" role="img" aria-label="Shelfmate logo"><rect x="1" y="1" width="46" height="46" rx="12" fill="none" stroke="var(--line)" stroke-width="1.5"/><path d="M7 38.5H41" fill="none" stroke="var(--muted)" stroke-width="2.6" stroke-linecap="round"/><rect class="sm-b sm-1" x="8.5" y="22" width="9.5" height="16" rx="3.4" fill="none" stroke="var(--muted)" stroke-width="2.4"/><rect class="sm-b sm-3" x="30" y="25" width="9.5" height="13" rx="3.4" fill="none" stroke="var(--muted)" stroke-width="2.4"/><g class="sm-b sm-2"><rect x="19" y="12" width="10" height="26" rx="4" fill="var(--accent)"/><rect class="sm-cap" x="21.5" y="7.5" width="5" height="5" rx="1.4" fill="var(--accent)"/></g></svg>
     <h2>Shelfmate</h2>
