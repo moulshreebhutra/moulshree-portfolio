@@ -968,7 +968,6 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
     <a class="mono-logo" href="#intro" aria-label="Moulshree Bhutra, home"><span>Moulshree Bhutra</span></a>
     <nav class="navlinks" aria-label="Sections">
       <a href="#intro" data-nav="intro">Intro</a>
-      <a href="#about" data-nav="about">About</a>
       <a href="#skills" data-nav="skills">Skills</a>
       <a href="#work" data-nav="work">Work</a>
       <a href="#projects" data-nav="projects">Projects</a>
@@ -1305,7 +1304,7 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
   });
 
   /* nav highlight */
-  var links={}, order=["intro","about","skills","work","projects","contact"];
+  var links={}, order=["intro","skills","work","projects","contact"];
   document.querySelectorAll("[data-nav]").forEach(function(a){links[a.getAttribute("data-nav")]=a;});
   var cur="";
   function spy(){
