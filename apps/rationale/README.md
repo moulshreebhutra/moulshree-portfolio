@@ -6,7 +6,7 @@ Paste customer feedback and Rationale groups it by the need underneath, ranks th
 
 ## How it works (three steps)
 1. **Add feedback.** Paste one comment per line (or `Customer | Tier | $84k | text`), upload a CSV, or try the sample.
-2. **See what matters.** Themes come back ranked, each with a plain reason, the number of customers, the revenue at stake and the comments behind it. Change a theme's effort (Low, Medium, High) and the ranking re-sorts. The score is `revenue at stake x confidence / effort`.
+2. **See what matters.** Themes come back ranked, each with a plain reason, the number of customers, the revenue at stake and the comments behind it. Change a theme's effort or confidence (Low, Medium, High) and the ranking re-sorts; rename themes, regroup with AI or rules, and export the ranking as CSV. The score is `revenue at stake x confidence / effort`.
 3. **Get the spec.** One page with problem, who is affected, evidence, goals, requirements, success metrics and risks. Copy it, download it as Markdown, edit it, or share the ranking by link.
 
 ## What happens under the hood
