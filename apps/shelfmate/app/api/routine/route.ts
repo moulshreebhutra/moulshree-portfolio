@@ -17,7 +17,7 @@ const Body = z.object({
 
 export async function POST(req: Request) {
   let body;
-  try { body = Body.parse(await req.json()); } catch { return NextResponse.json({ error: "Answer the four questions first." }, { status: 400 }); }
+  try { body = Body.parse(await req.json()); } catch { return NextResponse.json({ error: "Answer the questions first." }, { status: 400 }); }
   const a: Answers = { ...body.answers, free: redact(body.answers.free).trim(), size: body.answers.size as "3" | "4" };
   const risk = RISK.test(a.free);
   let routine = rulesRoutine(a, risk), note = "";

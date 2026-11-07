@@ -7,114 +7,103 @@ import { inr } from "@/lib/shop";
 interface Data {
   config: { discountPct: number };
   counts: { real: number; sample: number };
-  dial: { pct: number; revPerSession: number; marginPerSession: number; bundleMargin: number | null };
   stats: {
-    n: number; funnel: [string, number][]; conv: number; aov: number; bundleShare: number; orders: number; revPerSession: number; marginPerSession: number; bundleMargin: number | null;
-    withRoutine: { sessions: number; conv: number; aov: number; orders: number }; withoutRoutine: { sessions: number; conv: number; aov: number; orders: number };
-    swaps: { id: string; name: string; share: number }[]; asks: { label: string; share: number; count: number; hint: string }[]; freeCount: number; byDay: { label: string; aov: number | null; orders: number }[];
+    n: number; funnel: [string, number][]; conv: number; aov: number; orders: number; revenue: number;
+    withRoutine: { conv: number; sessions: number }; withoutRoutine: { conv: number; sessions: number };
+    topProducts: { id: string; name: string; count: number }[];
+    recent: { orderId: string; ts: number; total: number; items: number; routine: boolean; sample: boolean }[];
   };
 }
 const p1 = (x: number) => (x * 100).toFixed(1) + "%";
-const MARGIN_FLOOR = 0.4;
+const when = (t: number) => new Date(t).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
+const DISCOUNT_ON = 10;
+
+function insight(s: Data["stats"]): string {
+  if (!s.n) return "";
+  let worst: { a: string; b: string; lost: number } | null = null;
+  for (let i = 1; i < s.funnel.length; i++) {
+    const [a, av] = s.funnel[i - 1], [b, bv] = s.funnel[i];
+    if (av >= 5 && (!worst || (av - bv) / av > worst.lost)) worst = { a, b, lost: (av - bv) / av };
+  }
+  const parts: string[] = [];
+  if (worst) parts.push(`The biggest drop is between "${worst.a}" and "${worst.b}": ${Math.round(worst.lost * 100)}% of shoppers don't make that step.`);
+  if (s.withRoutine.sessions >= 5 && s.withoutRoutine.sessions >= 5) parts.push(`Shoppers who built a routine ordered ${p1(s.withRoutine.conv)} of the time, against ${p1(s.withoutRoutine.conv)} for those who didn't. That's a comparison, not proof the routine caused it.`);
+  return parts.join(" ");
+}
 
 export default function Merchant() {
   const [d, setD] = useState<Data | null>(null);
-  const [incl, setIncl] = useState(true);
-  const [dial, setDial] = useState<number | null>(null);
+  const [demo, setDemo] = useState(true);
   const [msg, setMsg] = useState("");
-  const [summary, setSummary] = useState<{ theme: string; count: number; suggestion: string }[] | null>(null);
-  const [sumNote, setSumNote] = useState("");
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [grown, setGrown] = useState(false);
+  const seeded = useRef(false);
+
+  const load = useCallback(async (withDemo: boolean) => {
+    const r = await fetch(`/api/merchant?sample=${withDemo ? 1 : 0}`, { cache: "no-store" });
+    if (!r.ok) return null;
+    const j = (await r.json()) as Data; setD(j); return j;
+  }, []);
+  useEffect(() => {
+    (async () => {
+      const j = await load(demo);
+      if (j && j.counts.sample === 0 && !seeded.current) {
+        seeded.current = true; setMsg("Setting up demo data…");
+        await post("/api/merchant/seed", {}); setMsg(""); await load(true);
+      }
+    })();
+  }, [demo, load]);
   useEffect(() => { if (!d) return; const t = setTimeout(() => setGrown(true), 60); return () => clearTimeout(t); }, [d !== null]);
 
-  const load = useCallback(async (sample: boolean, dialPct: number | null) => {
-    const r = await fetch(`/api/merchant?sample=${sample ? 1 : 0}${dialPct !== null ? "&dial=" + dialPct : ""}`, { cache: "no-store" });
-    if (r.ok) { const j = (await r.json()) as Data; setD(j); setDial((x) => x ?? j.config.discountPct); }
-  }, []);
-  useEffect(() => { load(incl, dial); /* eslint-disable-next-line */ }, [incl]);
-  useEffect(() => { if (dial === null) return; if (timer.current) clearTimeout(timer.current); timer.current = setTimeout(() => load(incl, dial), 200); /* eslint-disable-next-line */ }, [dial]);
+  async function toggleDiscount(on: boolean) {
+    const r = await post("/api/merchant/config", { discountPct: on ? DISCOUNT_ON : 0 });
+    setMsg(r.ok ? (on ? `Shoppers now see ${DISCOUNT_ON}% off a full routine.` : "The routine discount is off.") : r.data.error || "Couldn't change that.");
+    load(demo);
+  }
 
-  async function seed() { setMsg("Adding sample sessions. This takes a few seconds."); const r = await post("/api/merchant/seed", {}); setMsg(r.ok ? (r.data.added ? `Added ${r.data.added} sample sessions, clearly labelled.` : "Sample sessions are already there.") : r.data.error || "Could not add samples."); load(incl, dial); }
-  async function ship() { if (dial === null) return; const r = await post("/api/merchant/config", { discountPct: dial }); setMsg(r.ok ? `Shipped. Shoppers now see ${dial}% off a full routine.` : r.data.error || "Could not ship that."); load(incl, dial); }
-  async function summarise() { setSumNote("Reading the answers."); const r = await post("/api/merchant/summary", {}); if (r.ok) { setSummary(r.data.points); setSumNote(`Summarised by ${r.data.provider === "claude" ? "Claude" : "Gemini"} from ${r.data.basedOn} answers.`); } else setSumNote(r.data.error || "Could not summarise."); }
-
-  if (!d) return <main className="wrap" aria-busy="true"><section className="hero"><h1>What shoppers did, and what to change.</h1></section><div className="kpis">{[0, 1, 2, 3, 4].map((k) => <div key={k} className="skel" style={{ height: 96 }} />)}</div><div className="skel" style={{ height: 220 }} /></main>;
-  const s = d.stats, cur = d.config.discountPct, pct = dial ?? cur;
-  const empty = s.n === 0;
-  const revOk = d.dial.revPerSession >= s.revPerSession * 0.95 || s.revPerSession === 0;
-  const marginOk = d.dial.bundleMargin === null || Math.round(d.dial.bundleMargin * 1000) / 1000 >= MARGIN_FLOOR;
-  const W = 640, H = 220, ml = 46, mr = 24, mt = 14, mb = 28;
-  const pts = s.byDay.map((x, i) => ({ x: ml + (i * (W - ml - mr)) / 7, v: x.aov, l: x.label }));
-  const vals = pts.map((p) => p.v).filter((v): v is number => v !== null);
-  const lo = vals.length ? Math.floor(Math.min(...vals) / 100) * 100 - 100 : 0, hi = vals.length ? Math.ceil(Math.max(...vals) / 100) * 100 + 100 : 1000;
-  const y = (v: number) => mt + ((hi - v) / (hi - lo || 1)) * (H - mt - mb);
-  const line = pts.filter((p) => p.v !== null).map((p) => `${p.x.toFixed(1)},${y(p.v!).toFixed(1)}`).join(" ");
+  if (!d) return <main className="wrap" aria-busy="true"><section className="stage"><h1>How the shop is doing</h1><div className="kpis">{[0, 1, 2, 3].map((k) => <div key={k} className="skel" style={{ height: 96 }} />)}</div></section></main>;
+  const s = d.stats, on = d.config.discountPct > 0, tip = insight(s);
 
   return (
-    <main className="wrap" style={{ marginBottom: 60 }}>
-      <section className="hero rise">
-        <h1>What shoppers did, and what to change.</h1>
-        <p>Every number below is computed from the sessions and orders recorded by the shop on this site. Nothing is simulated, except where a label says "what-if".</p>
-        <div className="row" style={{ marginTop: 12 }}>
+    <main className="wrap">
+      <section className="stage rise">
+        <h1>How the shop is doing</h1>
+        <p className="lede">Every number is counted from the sessions and orders on this site.</p>
+        <div className="row">
           <span className="badge ok">{d.counts.real} real session{d.counts.real === 1 ? "" : "s"}</span>
-          <span className={"badge" + (d.counts.sample ? " warn" : "")}>{d.counts.sample} sample session{d.counts.sample === 1 ? "" : "s"}</span>
-          <label style={{ display: "flex", gap: 6, alignItems: "center", margin: 0 }}><input type="checkbox" checked={incl} onChange={(e) => setIncl(e.target.checked)} /> Include sample sessions</label>
-          {d.counts.sample === 0 && <button className="btn ghost sm" onClick={seed}>Add sample sessions</button>}
+          {d.counts.sample > 0 && <span className="badge warn">{d.counts.sample} demo sessions</span>}
+          {d.counts.sample > 0 && <label className="inl"><input type="checkbox" checked={demo} onChange={(e) => setDemo(e.target.checked)} /> Show demo data</label>}
         </div>
-        {incl && d.counts.sample > 0 && <div className="sample" style={{ marginTop: 10 }}>Sample sessions are generated by this app to show how the dashboard looks with traffic. Untick the box to see only real shoppers.</div>}
+        {demo && d.counts.sample > 0 && <div className="sample">Demo sessions are generated by this app so the dashboard isn't empty. Untick the box to see only real shoppers. Orders marked "demo" below are from that set.</div>}
         <div className="status" role="status" aria-live="polite">{msg}</div>
-      </section>
 
-      {empty ? <div className="empty">No sessions yet. <a href="/">Build a routine and place an order</a> to see it appear here, or add sample sessions above.</div> : (
-        <>
-          <div className="kpis">
-            <div className="kpi" style={{ ["--i" as string]: 0 } as React.CSSProperties}><span className="l">Sessions</span><b><AnimatedNumber value={s.n} /></b><i>{s.orders} orders</i></div>
-            <div className="kpi" style={{ ["--i" as string]: 1 } as React.CSSProperties}><span className="l">Conversion</span><b><AnimatedNumber value={s.conv * 100} format={(n) => n.toFixed(1) + "%"} /></b><i>orders ÷ sessions</i></div>
-            <div className="kpi" style={{ ["--i" as string]: 2 } as React.CSSProperties}><span className="l">Average order value</span><b><AnimatedNumber value={s.aov} format={inr} /></b><i>{p1(s.bundleShare)} of orders had a routine</i></div>
-            <div className="kpi" style={{ ["--i" as string]: 3 } as React.CSSProperties}><span className="l">Revenue per session</span><b><AnimatedNumber value={s.revPerSession} format={inr} /></b><i>at {cur}% routine discount</i></div>
-            <div className="kpi" style={{ ["--i" as string]: 4 } as React.CSSProperties}><span className="l">Margin per session</span><b><AnimatedNumber value={s.marginPerSession} format={inr} /></b><i>assumes 45% cost of goods</i></div>
-          </div>
-
-          <section className="panel" aria-labelledby="dial-h">
-            <div className="phead"><h2 id="dial-h">You are the founder: set the routine discount</h2><span className="note">Live now: {cur}% off</span></div>
-            <p className="note">What-if: re-prices every routine order in this data at the discount you pick, assuming the same shoppers buy the same baskets. It is arithmetic on real orders, not a forecast of how shoppers would react.</p>
-            <div className="dial"><input type="range" min={0} max={30} step={1} value={pct} aria-label="Routine discount percent" onChange={(e) => setDial(Number(e.target.value))} /><output>{pct}%</output></div>
-            <div className="tiles">
-              <div className={"tile " + (revOk ? "ok" : "fail")}><span className="l">Revenue per session (stays within 5% of today)</span><b><AnimatedNumber value={d.dial.revPerSession} format={inr} ms={350} /></b></div>
-              <div className="tile"><span className="l">Margin per session</span><b><AnimatedNumber value={d.dial.marginPerSession} format={inr} ms={350} /></b></div>
-              <div className={"tile " + (marginOk ? "ok" : "fail")}><span className="l">Margin on a routine (stays above {Math.round(MARGIN_FLOOR * 100)}%)</span><b>{d.dial.bundleMargin === null ? "no routine orders" : p1(d.dial.bundleMargin)}</b></div>
+        {s.n === 0 ? <div className="empty">No sessions yet. <a href="/">Build a routine and place an order</a> and it will appear here.</div> : (
+          <>
+            <div className="kpis">
+              <div className="kpi" style={{ ["--i" as string]: 0 }}><span className="l">Routines built</span><b><AnimatedNumber value={s.funnel[3]?.[1] ?? 0} /></b><i>of {s.n} sessions</i></div>
+              <div className="kpi" style={{ ["--i" as string]: 1 }}><span className="l">Orders</span><b><AnimatedNumber value={s.orders} /></b><i>{inr(s.revenue)} revenue</i></div>
+              <div className="kpi" style={{ ["--i" as string]: 2 }}><span className="l">Conversion</span><b><AnimatedNumber value={s.conv * 100} format={(n) => n.toFixed(1) + "%"} /></b><i>orders ÷ sessions</i></div>
+              <div className="kpi" style={{ ["--i" as string]: 3 }}><span className="l">Average order</span><b><AnimatedNumber value={s.aov} format={inr} /></b><i>per order</i></div>
             </div>
-            <div className="row"><button className="btn" onClick={ship} disabled={pct === cur}>{pct === cur ? "Already live" : `Ship ${pct}% to the shop`}</button>{!marginOk && <span className="note">That discount breaks the margin guardrail. You can still ship it.</span>}</div>
-          </section>
 
-          <div className="two2">
-            <section className="panel" aria-labelledby="f-h"><h2 id="f-h" style={{ marginBottom: 8 }}>Funnel</h2>
+            {tip && <div className="insight"><b>What stands out</b><p>{tip}</p></div>}
+
+            <section className="panel" aria-labelledby="f-h"><h2 id="f-h">Where shoppers drop off</h2>
               <div className="fun">{s.funnel.map(([l, v], i) => <div key={l}><span>{l}</span><span className="bar"><i style={{ width: grown ? `${s.n ? (v / s.n) * 100 : 0}%` : "0%", ["--i" as string]: i } as React.CSSProperties} /></span><b><AnimatedNumber value={v} /></b></div>)}</div></section>
-            <section className="panel" aria-labelledby="a-h"><h2 id="a-h" style={{ marginBottom: 8 }}>Average order value, last 8 days</h2>
-              {vals.length ? <svg className="chart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Line chart of average order value by day">
-                {[lo, (lo + hi) / 2, hi].map((t) => <g key={t}><line className="gl" x1={ml} x2={W - mr} y1={y(t)} y2={y(t)} /><text x={ml - 6} y={y(t) + 4} textAnchor="end">₹{Math.round(t)}</text></g>)}
-                {pts.map((p) => <text key={p.l} x={p.x} y={H - 8} textAnchor="middle">{p.l}</text>)}
-                <polyline className="ln" pathLength={1} points={line} key={line} />{pts.filter((p) => p.v !== null).map((p) => <circle key={p.l} className="dt" cx={p.x} cy={y(p.v!)} r="4" />)}
-              </svg> : <p className="note">No orders in the last 8 days.</p>}</section>
-          </div>
 
-          <section className="panel" aria-labelledby="c-h"><h2 id="c-h" style={{ marginBottom: 4 }}>Sessions with a routine vs without</h2>
-            <p className="note">Observational, not an experiment: shoppers who build a routine may differ from those who browse.</p>
-            <div className="tw"><table><thead><tr><th><span className="sr">Group</span></th><th className="n">Sessions</th><th className="n">Orders</th><th className="n">Conversion</th><th className="n">Avg order value</th></tr></thead><tbody>
-              <tr><td>Built a routine</td><td className="n">{s.withRoutine.sessions}</td><td className="n">{s.withRoutine.orders}</td><td className="n">{p1(s.withRoutine.conv)}</td><td className="n">{inr(s.withRoutine.aov)}</td></tr>
-              <tr><td>Browsed only</td><td className="n">{s.withoutRoutine.sessions}</td><td className="n">{s.withoutRoutine.orders}</td><td className="n">{p1(s.withoutRoutine.conv)}</td><td className="n">{inr(s.withoutRoutine.aov)}</td></tr></tbody></table></div></section>
+            <div className="two2">
+              <section className="panel" aria-labelledby="t-h"><h2 id="t-h">Best sellers</h2>
+                {s.topProducts.length ? <div className="tw"><table><thead><tr><th>Product</th><th className="n">Orders</th></tr></thead><tbody>{s.topProducts.map((x) => <tr key={x.id}><td>{x.name}</td><td className="n">{x.count}</td></tr>)}</tbody></table></div> : <p className="note">No orders yet.</p>}</section>
+              <section className="panel" aria-labelledby="r-h"><h2 id="r-h">Recent orders</h2>
+                {s.recent.length ? <div className="tw"><table><thead><tr><th>Order</th><th>When</th><th className="n">Items</th><th className="n">Total</th></tr></thead><tbody>{s.recent.map((o) => <tr key={o.orderId}><td>{o.orderId}{o.sample && <span className="pill" style={{ marginLeft: 6 }}>demo</span>}</td><td>{when(o.ts)}</td><td className="n">{o.items}</td><td className="n">{inr(o.total)}</td></tr>)}</tbody></table></div> : <p className="note">No orders yet.</p>}</section>
+            </div>
 
-          <div className="two2">
-            <section className="panel" aria-labelledby="s-h"><h2 id="s-h" style={{ marginBottom: 4 }}>What shoppers change</h2><p className="note">Share of routines where this product was swapped out.</p>
-              {s.swaps.length ? <div className="tw"><table><thead><tr><th>Product</th><th className="n">Swapped</th></tr></thead><tbody>{s.swaps.map((x) => <tr key={x.id}><td>{x.name}</td><td className="n">{p1(x.share)}</td></tr>)}</tbody></table></div> : <p className="note">No swaps yet.</p>}</section>
-            <section className="panel" aria-labelledby="k-h"><div className="phead"><h2 id="k-h">What shoppers typed</h2><button className="btn ghost sm" onClick={summarise}>Summarise with AI</button></div>
-              <p className="note">{s.freeCount} free-text answer{s.freeCount === 1 ? "" : "s"}, sorted by simple keyword rules. {sumNote}</p>
-              {s.asks.length ? <div className="tw"><table><thead><tr><th>Theme</th><th className="n">Share</th><th>What it suggests</th></tr></thead><tbody>{s.asks.map((x) => <tr key={x.label}><td>{x.label}</td><td className="n">{p1(x.share)}</td><td>{x.hint}</td></tr>)}</tbody></table></div> : <p className="note">Nobody has typed anything yet.</p>}
-              {summary && <><h4 style={{ margin: "12px 0 4px" }}>AI summary</h4><ul>{summary.map((x) => <li key={x.theme}><b>{x.theme}</b> ({x.count}): {x.suggestion}</li>)}</ul></>}</section>
-          </div>
-        </>
-      )}
+            <section className="panel" aria-labelledby="d-h">
+              <div className="phead"><div><h2 id="d-h">Routine discount</h2><p className="note" style={{ margin: "4px 0 0" }}>{on ? `Shoppers get ${d.config.discountPct}% off when they buy a full routine.` : "No discount on routines right now."}</p></div>
+                <button type="button" role="switch" aria-checked={on} aria-label="Routine discount" className={"switch" + (on ? " on" : "")} onClick={() => toggleDiscount(!on)}><i /></button></div>
+            </section>
+          </>
+        )}
+      </section>
     </main>
   );
 }

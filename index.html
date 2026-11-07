@@ -13,7 +13,7 @@
 <meta name="theme-color" content="#FBF9FF">
 <link rel="icon" type="image/jpeg" href="logos/moulshree.jpg">
 <link rel="apple-touch-icon" href="logos/moulshree.jpg">
-<script>(function(){var r=document.documentElement;r.setAttribute("data-pal","indigo");r.setAttribute("data-tone","lavender");r.classList.add("js");})()</script>
+<script>(function(){var r=document.documentElement;r.setAttribute("data-pal","indigo");r.setAttribute("data-tone","lavender");r.classList.add("js");var t="light";try{if(localStorage.getItem("mb-theme")==="dark")t="dark";}catch(e){}r.setAttribute("data-theme",t);r.setAttribute("data-mode",t);})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -888,6 +888,7 @@ html[data-mode="dark"] .totop{background:var(--surface);border-color:var(--line)
 dialog.pm{width:min(480px,calc(100vw - 28px))}
 .pm-head{padding-bottom:6px}.pm-foot{border-top:0;padding-top:4px}
 .btn .ar{flex:none;color:var(--arrow);stroke:currentColor}.btn.solid .ar{color:#000}.pm-x{font-family:system-ui,sans-serif}
+@media (max-width:480px){.nav-in{flex-wrap:wrap;row-gap:2px;padding-block:6px}.mono-logo{order:1;flex:1;min-width:0}.nav-in .themebtn{order:2}.navlinks{order:3;flex:0 0 100%;width:100%;margin-left:0;padding-bottom:4px}}
 </style><script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -1097,8 +1098,8 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
   <div class="tp tl" data-tabgroup="tl">
     <svg class="plogo" viewBox="0 0 48 48" width="54" height="54" role="img" aria-label="Rationale logo"><rect x="1" y="1" width="46" height="46" rx="12" fill="none" stroke="var(--line)" stroke-width="1.5"/><path class="rl-b rl-1" pathLength="1" d="M10 15H38" fill="none" stroke="var(--accent)" stroke-width="4.6" stroke-linecap="round"/><path class="rl-b rl-2" pathLength="1" d="M10 24.5H29" fill="none" stroke="var(--muted)" stroke-width="4.6" stroke-linecap="round"/><path class="rl-b rl-3" pathLength="1" d="M10 34H21" fill="none" stroke="var(--muted)" stroke-width="4.6" stroke-linecap="round" opacity=".7"/></svg>
     <h2>Rationale</h2>
-    <p class="log">Customer feedback in. A ranked roadmap out.</p>
-    <p class="syn">An AI copilot for product managers. It groups messy customer feedback by the need underneath, ranks themes by the revenue at stake, and drafts the PRD. Every judgement stays visible and editable.</p>
+    <p class="log">Turn customer feedback into what to build next.</p>
+    <p class="syn">Paste customer feedback and Rationale groups it by the need underneath, ranks what matters most by revenue and effort, and writes a one-page spec for the one you pick. Three steps, one screen each.</p>
     <div class="chips-row"><span class="chip">Concept project, built end to end</span><span class="chip">Evidence-backed PRDs</span><span class="chip">AI native</span><span class="chip">Shareable</span></div>
     <div class="pbtns"><button class="btn solid" type="button" data-modal="rationale" aria-haspopup="dialog">Project details</button>
     <a class="btn" href="https://moulshree-rationale.vercel.app" target="_blank" rel="noopener">Live demo <svg class="ar" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -1112,8 +1113,8 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
   <div class="tp sv" data-tabgroup="sv">
     <svg class="plogo" viewBox="0 0 48 48" width="54" height="54" role="img" aria-label="Shelfmate logo"><rect x="1" y="1" width="46" height="46" rx="12" fill="none" stroke="var(--line)" stroke-width="1.5"/><path d="M7 38.5H41" fill="none" stroke="var(--muted)" stroke-width="2.6" stroke-linecap="round"/><rect class="sm-b sm-1" x="8.5" y="22" width="9.5" height="16" rx="3.4" fill="none" stroke="var(--muted)" stroke-width="2.4"/><rect class="sm-b sm-3" x="30" y="25" width="9.5" height="13" rx="3.4" fill="none" stroke="var(--muted)" stroke-width="2.4"/><g class="sm-b sm-2"><rect x="19" y="12" width="10" height="26" rx="4" fill="var(--accent)"/><rect class="sm-cap" x="21.5" y="7.5" width="5" height="5" rx="1.4" fill="var(--accent)"/></g></svg>
     <h2>Shelfmate</h2>
-    <p class="log">A routine that builds itself, and a dashboard that proves it.</p>
-    <p class="syn">An AI routine builder for a skincare brand. Shoppers answer four questions and get a bundle built only from the store's catalog. The merchant gets conversion, order value and swap data to judge it. The skincare brand is invented.</p>
+    <p class="log">Your skincare routine, built in a minute.</p>
+    <p class="syn">A small store for an invented skincare brand. Shoppers answer three questions and get a routine built only from the shelf, then check out. The merchant view shows what happened: orders, where shoppers drop off, best sellers.</p>
     <div class="chips-row"><span class="chip">Concept brand, working store</span><span class="chip">AI native</span><span class="chip">Two-sided: shopper and merchant</span></div>
     <div class="pbtns"><button class="btn solid" type="button" data-modal="shelfmate" aria-haspopup="dialog">Project details</button>
     <a class="btn" href="https://moulshree-shelfmate.vercel.app" target="_blank" rel="noopener">Live demo <svg class="ar" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -1148,13 +1149,13 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 /* project details popup */
 (function(){
   var P={
-    rationale:{t:"Rationale",s:"Customer feedback in. A ranked roadmap out.",
-      d:"An AI copilot for product managers. Paste customer feedback, and it groups it by the need underneath, ranks the themes with one formula anyone can check, and drafts the PRD from the evidence.",
-      pts:["Ranks with ARR at stake × confidence ÷ effort, and you can overrule every input","Works without AI: falls back from Claude to Gemini to plain rules","Share a ranking by link, or export the PRD and a CSV"],
+    rationale:{t:"Rationale",s:"Turn customer feedback into what to build next.",
+      d:"Paste customer feedback and get a ranked list of what to build first, plus a one-page spec for the top item. Try the sample, or paste your own.",
+      pts:["Groups comments by the need underneath, not the wording","Ranks by revenue at stake and effort; change an effort level and the order updates","Every spec is checked against your feedback for invented customers or figures","Works without AI too, and you can share the ranking by link"],
       live:"https://moulshree-rationale.vercel.app",repo:"https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/rationale"},
-    shelfmate:{t:"Shelfmate",s:"A routine that builds itself, and a dashboard that proves it.",
-      d:"An AI routine builder for an invented skincare brand. Shoppers answer four questions and get a bundle built only from the store's catalog. The merchant view shows what happened and lets you set the discount.",
-      pts:["Every AI answer is checked, so an unsafe or made-up product never reaches a basket","Real cart and demo orders feed the merchant dashboard","A what-if discount dial with margin guardrails"],
+    shelfmate:{t:"Shelfmate",s:"Your skincare routine, built in a minute.",
+      d:"A small store for an invented skincare brand. Answer three questions, get a routine built from the shelf, swap anything, and place a demo order. Then open the merchant view to see it counted.",
+      pts:["Every product in a routine is checked against the shelf, your budget and your skin","Real cart and demo orders feed the merchant view","The merchant sees orders, drop-off, best sellers and can switch the routine discount on or off","Nothing is sold, and no payment or personal details are collected"],
       live:"https://moulshree-shelfmate.vercel.app",repo:"https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/shelfmate"}
   };
   var d=document.getElementById("pm"); if(!d||!d.showModal) return;
@@ -1182,13 +1183,13 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
   var g=function(id){return document.getElementById(id);};
 
 
-  /* light / dark toggle: follows the device until the visitor chooses */
+  /* light / dark toggle: always opens in light; a visitor's own choice is remembered */
   var root=document.documentElement, mq=window.matchMedia?window.matchMedia("(prefers-color-scheme: light)"):null;
-  function eff(){var t=root.getAttribute("data-theme");return t||(mq&&mq.matches?"light":"dark");}
+  function eff(){var t=root.getAttribute("data-theme");return t==="dark"?"dark":"light";}
   function sync(){root.setAttribute("data-mode",eff());var tm=document.querySelector('meta[name="theme-color"]');if(tm)tm.setAttribute("content",getComputedStyle(root).getPropertyValue("--bg").trim()||"#F4F5FB");var b=g("btn-theme");if(b){var d=eff()==="dark";b.setAttribute("aria-label",d?"Switch to light theme":"Switch to dark theme");b.title=d?"Light theme":"Dark theme";}}
   try{var saved=localStorage.getItem("mb-theme");if(saved==="light"||saved==="dark")root.setAttribute("data-theme",saved);}catch(e){}
   sync();
-  if(mq&&mq.addEventListener)mq.addEventListener("change",sync);
+  
   var tb=g("btn-theme");
   if(tb)tb.addEventListener("click",function(){
     var n=eff()==="dark"?"light":"dark";

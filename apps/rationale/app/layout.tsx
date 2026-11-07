@@ -4,11 +4,11 @@ import "@fontsource-variable/manrope";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 
-const THEME = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}})()`;
+const THEME = `(function(){var t="light";try{if(localStorage.getItem("theme")==="dark")t="dark"}catch(e){}document.documentElement.dataset.theme=t})()`;
 
 export const metadata: Metadata = {
-  title: "Rationale: customer feedback in, a ranked roadmap out",
-  description: "An AI copilot for product managers. Paste customer feedback, group it by the need underneath, rank themes with arithmetic anyone can check, and draft the PRD. A concept project by Moulshree Bhutra.",
+  title: "Rationale: turn customer feedback into what to build next",
+  description: "Paste customer feedback and get a ranked list of what to build first, plus a one-page spec for the top item. A concept project by Moulshree Bhutra.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

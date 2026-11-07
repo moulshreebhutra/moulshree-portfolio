@@ -66,13 +66,17 @@ export function summarize(sessions: Sess[], discountPct: number) {
     return { label: new Date(d * day).toLocaleDateString("en-IN", { day: "numeric", month: "short", timeZone: "UTC" }), aov: o.length ? o.reduce((a, s) => a + s.purchased!.total, 0) / o.length : null, orders: o.length };
   });
 
+  const prodCount = new Map<string, number>();
+  for (const o of orders) for (const id of o.ids) prodCount.set(id, (prodCount.get(id) ?? 0) + 1);
+  const topProducts = [...prodCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5).map(([id, count]) => ({ id, name: BY_ID.get(id)?.name ?? id, count }));
+  const recent = sessions.filter((s) => s.purchased).sort((a, b) => b.ts - a.ts).slice(0, 8).map((s) => ({ orderId: s.purchased!.orderId, ts: s.ts, total: s.purchased!.total, items: s.purchased!.ids.length, routine: s.purchased!.bundle, sample: !!s.sample }));
   const cur = whatIf(sessions, discountPct);
   return {
     n, real: c((s) => !s.sample), sample: c((s) => s.sample),
     funnel: [["Sessions", n], ["Started the quiz", started], ["Finished the quiz", finished], ["Viewed a routine", viewed], ["Added to cart", carted], ["Purchased", bought]] as [string, number][],
     conv: pct(bought, n), aov, bundleShare: pct(orders.filter((o) => o.bundle).length, orders.length), orders: orders.length,
     revPerSession: cur.revPerSession, marginPerSession: cur.marginPerSession, bundleMargin: cur.bundleMargin,
-    withRoutine: grp(withR), withoutRoutine: grp(without), swaps, asks, freeCount: frees.length, byDay,
+    withRoutine: grp(withR), withoutRoutine: grp(without), swaps, asks, freeCount: frees.length, byDay, topProducts, recent, revenue: orders.reduce((a, o) => a + o.total, 0),
   };
 }
 

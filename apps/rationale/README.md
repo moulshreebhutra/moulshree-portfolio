@@ -1,15 +1,18 @@
 # Rationale
 
-Customer feedback in. A ranked roadmap out. A concept project by [Moulshree Bhutra](https://moulshree-portfolio.vercel.app).
+Turn customer feedback into what to build next. A concept project by [Moulshree Bhutra](https://moulshree-portfolio.vercel.app).
 
-Paste or upload customer feedback, group it by the need underneath, rank the themes with one formula anyone can read aloud (`ARR at stake × confidence ÷ effort`), draft the PRD from the evidence, and share the result by link. The feedback in the sample is invented.
+Paste customer feedback and Rationale groups it by the need underneath, ranks the themes by revenue at stake and effort, and writes a one-page spec for the one you pick. The feedback in the sample is invented.
 
-## What works end to end
-- **Add feedback:** paste lines, `Customer | Tier | $84k | text` rows, or a CSV (customer, tier, arr, text). Edit any item, move it between themes, delete it.
-- **Group:** with AI (by need), or by rules (word overlap, no AI). If the AI call fails or its answer is invalid, the page says so and falls back to rules.
-- **Rank:** arithmetic only. The model proposes effort and confidence; you can overrule both with sliders.
-- **PRD:** AI draft from the theme's evidence, or a template. Four checks run on every draft and again as you edit: cites items, cites only this theme's items, no dollar figures outside the evidence, names the customers it relies on.
-- **Share and export:** save a session to a link (`/s/<id>`), download the PRD as Markdown, download the ranking as CSV.
+## How it works (three steps)
+1. **Add feedback.** Paste one comment per line (or `Customer | Tier | $84k | text`), upload a CSV, or try the sample.
+2. **See what matters.** Themes come back ranked, each with a plain reason, the number of customers, the revenue at stake and the comments behind it. Change a theme's effort (Low, Medium, High) and the ranking re-sorts. The score is `revenue at stake x confidence / effort`.
+3. **Get the spec.** One page with problem, who is affected, evidence, goals, requirements, success metrics and risks. Copy it, download it as Markdown, edit it, or share the ranking by link.
+
+## What happens under the hood
+- **Grouping:** by AI (by need), or by simple word-overlap rules when AI is off or fails.
+- **Spec checks:** every AI spec is checked for invented customers, ids and dollar figures. The page shows one line when everything traces back to your feedback, and lists what to double-check otherwise.
+- **Sharing:** a saved ranking opens at `/s/<id>`.
 
 ## AI providers
 Order: **Claude** (`ANTHROPIC_API_KEY`), then **Gemini** free tier (`GEMINI_API_KEY`), then rules. A provider's answer that fails validation counts as a failure and the next provider gets a turn.

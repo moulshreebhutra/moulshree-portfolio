@@ -34,7 +34,7 @@ export async function loadSessions(max = 400): Promise<Sess[]> {
 export const bust = () => { cache = undefined; };
 
 /** Clearly flagged sample sessions so an empty dashboard is not mistaken for broken. They are never mixed with real ones unless the viewer asks. */
-export async function seedSamples(count = 160): Promise<number> {
+export async function seedSamples(count = 80): Promise<number> {
   if (await getJson("seeded.json")) return 0;
   const r = prng(20261103), day = 86_400_000, now = Date.now();
   const pick = <T,>(a: readonly T[]) => a[Math.floor(r() * a.length)];

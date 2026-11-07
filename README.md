@@ -6,14 +6,16 @@ Personal portfolio of Moulshree Bhutra, Product Manager (Founding APM at Vudio.a
 
 ## What is in here
 
-A single static page, no build step and no dependencies.
+A single static page, no build step and no dependencies. The two concept projects are full apps in `apps/` that deploy separately.
 
 - `index.html`: the whole site (HTML, CSS and a little JavaScript)
 - `logos/`: company, school and profile images used on the page
+- `apps/rationale`: turn customer feedback into what to build next (Next.js, own Vercel project, live at https://moulshree-rationale.vercel.app)
+- `apps/shelfmate`: a skincare routine builder with a shopper and a merchant view (Next.js, own Vercel project, live at https://moulshree-shelfmate.vercel.app)
 
 ## Theme
 
-One colour theme, **lavender**, with a light and a dark mode (the sun/moon button switches mode).
+One colour theme, **lavender**. The site always opens in light mode; the sun/moon button switches to dark, and the choice is remembered.
 
 ## Run it locally
 

@@ -41,8 +41,8 @@ export function mdToHtml(md: string): string {
     const l = raw.trimEnd();
     if (/^\s*[-*]\s+/.test(l)) { if (!list) { out.push("<ul>"); list = true; } out.push("<li>" + inline(l.replace(/^\s*[-*]\s+/, "")) + "</li>"); continue; }
     if (list) { out.push("</ul>"); list = false; }
-    if (/^#\s+/.test(l)) out.push("<h3>" + inline(l.replace(/^#\s+/, "")) + "</h3>");
-    else if (/^#{2,3}\s+/.test(l)) out.push("<h4>" + inline(l.replace(/^#{2,3}\s+/, "")) + "</h4>");
+    if (/^#\s+/.test(l)) out.push("<h2>" + inline(l.replace(/^#\s+/, "")) + "</h2>");
+    else if (/^#{2,3}\s+/.test(l)) out.push("<h3>" + inline(l.replace(/^#{2,3}\s+/, "")) + "</h3>");
     else if (l.trim()) out.push("<p>" + inline(l) + "</p>");
   }
   if (list) out.push("</ul>");
