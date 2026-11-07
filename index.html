@@ -363,6 +363,14 @@ html:root[data-pal][data-pal]:not([data-pal="toned"]) .np[data-i] .np-art{backgr
 .tp .syn{color:var(--muted);max-width:60ch;margin:0 0 20px;font-size:17px}
 .tp .chips-row{margin-bottom:22px}
 .tp .btn.solid{background:var(--accent);border-color:var(--accent)}
+@media (min-width:1000px){
+  #projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px;align-items:stretch}
+  #projects>.sec{display:flex;flex-direction:column;min-width:0}
+  #projects>.sec>.tp{flex:1;margin-top:20px;padding:clamp(24px,2.6vw,40px)}
+  #projects .tp{display:flex;flex-direction:column;align-items:flex-start}
+  #projects .tp .chips-row{margin-top:auto}
+  #projects .tp h2{font-size:clamp(44px,5.6vw,80px)}
+}
 .pd-toggle{margin-top:22px}
 .pd-toggle small{display:inline-block;transition:transform .2s}
 .pd-toggle[aria-expanded="true"] small{transform:rotate(180deg)}
