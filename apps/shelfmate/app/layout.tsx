@@ -8,7 +8,7 @@ import Shell from "@/components/Shell";
 const THEME = `(function(){var t="light";try{if(localStorage.getItem("theme")==="dark")t="dark"}catch(e){}document.documentElement.dataset.theme=t})()`;
 
 export const metadata: Metadata = {
-  title: "Shelfmate: your skincare routine, built in a minute",
+  title: "Shelfmate",
   description: "Answer three questions and get a skincare routine built from the store's own shelf. The merchant view shows what shoppers did. A concept project by Moulshree Bhutra.",
 };
 
