@@ -919,6 +919,20 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 .btn .ar{flex:none;color:var(--arrow);stroke:currentColor}.btn.solid .ar{color:#000}.pm-x{font-family:system-ui,sans-serif}
 @media (max-width:380px){.navlinks{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent)!important;mask-image:linear-gradient(90deg,#000 88%,transparent)!important}}
 @media (max-width:480px){.navlinks{gap:0}.navlinks a{padding:8px 7px;font-size:13px}.navlinks{-webkit-mask-image:none!important;mask-image:none!important}.nav-in{flex-wrap:wrap;row-gap:2px;padding-block:6px}.mono-logo{order:1;flex:1;min-width:0}.nav-in .themebtn{order:2}.navlinks{order:3;flex:0 0 100%;width:100%;margin-left:0;padding-bottom:4px}}
+/* phone: denser, less vertical stacking */
+@media (max-width:560px){
+  .mailrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .mailrow code,.mailrow #copynote{grid-column:1/-1}
+  .mailrow code{font-size:13.5px;padding:11px 14px;text-align:center;overflow-wrap:anywhere}
+  .mailrow .btn{justify-content:center;padding:11px 10px;font-size:14px;gap:7px}
+  .pbtns{flex-wrap:nowrap;gap:6px}
+  .pbtns .btn{padding:10px 6px;font-size:12.5px;gap:4px;flex:1 1 0;min-width:0;justify-content:center;white-space:nowrap}
+  .tp .chips-row,.tools .chips-row{gap:6px}
+  .tp .chip{padding:5px 11px;font-size:13px}
+  .tools>div{padding:16px 16px;gap:10px}
+  .tools .chip{padding:5px 10px;font-size:13px}
+  .chips-row.owned .chip,.row-h+.chips-row .chip{font-size:13px}
+}
 </style><script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
