@@ -321,17 +321,16 @@ html:root[data-pal][data-pal]:not([data-pal="toned"]) .np[data-i] .np-art{backgr
 .row-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px;margin:30px 0 12px}
 .row-h h4{font-size:26px;font-weight:800}
 .row-h span{color:var(--muted);font-size:14px}
-.pins{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;align-items:stretch}
-.pins>.pin{grid-column:span 4}.pins>.pin:nth-child(-n+4){grid-column:span 3}
-@media (max-width:900px){.pins{grid-template-columns:repeat(2,minmax(0,1fr))}.pins>.pin,.pins>.pin:nth-child(-n+4){grid-column:auto}.pins>.pin:last-child:nth-child(odd){grid-column:span 2}}
-@media (max-width:560px){.pins{grid-template-columns:minmax(0,1fr)}.pins>.pin:last-child:nth-child(odd){grid-column:auto}}
-.pin{display:flex;flex-direction:column;margin:0;border-radius:22px;overflow:hidden;background:var(--surface);border:1px solid var(--line);transition:transform .2s,box-shadow .2s}
+.pins{columns:3 280px;column-gap:16px}
+.pin{break-inside:avoid;margin:0 0 16px;border-radius:22px;overflow:hidden;background:var(--surface);border:1px solid var(--line);transition:transform .2s,box-shadow .2s}
 .pin:hover{transform:translateY(-4px);box-shadow:0 22px 40px -24px var(--shadow)}
 .pin .art{padding:20px 20px 16px;color:var(--art-ink);display:flex;flex-direction:column;justify-content:flex-end}
 .pin .art small{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.72}
 .pin .art b{font-family:var(--font-display);font-weight:800;line-height:.95;letter-spacing:-.04em;font-size:clamp(46px,6vw,68px)}
-.pin .art,.pin .art.tall,.pin .art.mid,.pin .art.short{min-height:190px}
-.pin .body{padding:16px 20px 20px;flex:1}
+.pin .art.tall{min-height:200px}
+.pin .art.mid{min-height:150px}
+.pin .art.short{min-height:110px}
+.pin .body{padding:16px 20px 20px}
 .pin h5{font-family:var(--font-display);font-size:20px;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
 .pin p{margin:0;color:var(--muted);font-size:15px}
 .lqs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
@@ -367,8 +366,8 @@ html:root[data-pal][data-pal]:not([data-pal="toned"]) .np[data-i] .np-art{backgr
 @media (min-width:900px){
   .tp{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:48px;align-items:end}
   .tp>.plogo,.tp>h2,.tp>.log,.tp>.syn{grid-column:1}
-  .tp>.chips-row{grid-column:2;grid-row:3;margin:0}
-  .tp>.pbtns{grid-column:2;grid-row:4;margin-top:16px;align-self:start}
+  .tp>.chips-row{grid-column:2;grid-row:2;align-self:end;margin:0 0 14px}
+  .tp>.pbtns{grid-column:2;grid-row:4;margin:0;align-self:end}
   .tp>.syn{margin-bottom:0}
   .tp>.log{max-width:none}
 }
@@ -936,7 +935,7 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 <div class="wrap">
 
 <!-- 1. INTRO -->
-<section id="intro" aria-label="Introduction">
+<main id="main"><section id="intro" aria-label="Introduction">
   <div class="hero"><svg class="hk-blobs" viewBox="0 0 800 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path fill="var(--sig,#B8407A)" d="M752.6,120.0C752.4,158.5 713.0,208.1 682.0,228.3C651.0,248.5 598.8,249.5 566.6,241.4C534.3,233.2 503.5,210.5 488.5,179.5C473.4,148.4 463.6,88.4 476.2,55.2C488.9,22.0 529.9,-10.1 564.4,-19.8C599.0,-29.4 652.0,-26.0 683.4,-2.7C714.8,20.6 752.8,81.5 752.6,120.0Z"/><path fill="var(--s2,#8A5CC2)" d="M813.3,300.0C815.8,329.5 808.7,377.2 789.9,392.7C771.2,408.2 726.0,401.1 700.8,392.8C675.5,384.5 653.0,366.4 638.4,343.1C623.7,319.7 603.1,278.8 612.9,252.7C622.7,226.7 670.0,192.9 697.0,186.8C724.0,180.7 755.5,197.0 774.9,215.9C794.3,234.7 810.8,270.5 813.3,300.0Z"/><path fill="var(--s3,#E2915F)" d="M234.4,400.0C236.8,428.5 213.2,457.4 188.2,475.2C163.3,493.1 115.4,511.6 84.7,507.2C54.1,502.7 18.4,475.9 4.1,448.7C-10.2,421.6 -15.0,372.0 -1.0,344.2C13.0,316.3 59.0,288.2 88.1,281.6C117.1,274.9 149.0,284.6 173.3,304.3C197.7,324.0 231.9,371.5 234.4,400.0Z"/></svg>
     <div>
       <span class="tag"><b></b><span class="shim">Open to APM and PM roles · Bengaluru</span></span>
@@ -983,7 +982,7 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
   </div>
 
   <div class="wrapped-h"><h2>Moulshree, wrapped</h2><span class="note" style="color:var(--muted);font-size:14px">Vudio.ai, April 2024 to present</span></div>
-  <div class="wrapped" role="list">
+  <div class="wrapped" role="list" tabindex="0" aria-label="Wrapped highlights, scrollable">
     <div class="wcard wg1" role="listitem"><div><small>Products</small><b>4</b></div><span>0 to 1 launches I contributed to</span></div>
     <div class="wcard wg2" role="listitem"><div><small>Views</small><b>10M+</b></div><span>widget views driven for clients</span></div>
     <div class="wcard wg3" role="listitem"><div><small>Brands</small><b>1,000+</b></div><span>D2C brands on the platform</span></div>
@@ -1170,7 +1169,7 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
     <a class="btn" href="https://www.linkedin.com/in/moulshree-bhutra-159a99118" target="_blank" rel="noopener"><svg class="ic-li" viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
     <span class="note" id="copynote" style="color:var(--muted);font-size:13px" aria-live="polite"></span>
   </div>
-</section>
+</section></main>
 
 </div>
 
