@@ -288,12 +288,19 @@ html:root[data-pal][data-pal]:not([data-pal="toned"]) .np[data-i] .np-art{backgr
 .how h3{font-size:24px;margin:10px 0 6px}
 .how p{margin:0;color:var(--muted);font-size:15px}
 .how .n{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;color:var(--on)}
-.tools{margin-top:36px;display:grid;grid-template-columns:minmax(0,1fr);gap:0;border-top:1px solid var(--line)}
-.tools>div{display:grid;grid-template-columns:170px minmax(0,1fr);gap:8px 28px;align-items:start;padding:20px 0;border-bottom:1px solid var(--line)}
-.tools>div h3{margin:8px 0 0}
-.tools .chips-row{margin:0}
-@media (max-width:700px){.tools>div{grid-template-columns:minmax(0,1fr)}.tools>div h3{margin:0}}
-.tools h3{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:10px}
+.tools{margin-top:20px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.tools>div{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.tools>div:nth-child(1){grid-column:span 8}.tools>div:nth-child(2){grid-column:span 4}
+.tools>div:nth-child(3){grid-column:span 6}.tools>div:nth-child(4){grid-column:span 6}
+.tools>div:nth-child(5){grid-column:span 12}
+.tools .th{display:flex;align-items:center;gap:10px}
+.tools .th i{width:12px;height:12px;border-radius:4px;background:var(--tc,var(--brand));flex:none}
+.tools .th h3{font-family:var(--font-display);font-size:22px;font-weight:800;margin:0;letter-spacing:-.01em}
+.tools .th small{margin-left:auto;font-family:var(--font-mono);font-size:12px;color:var(--muted)}
+.tools>div:nth-child(1){--tc:var(--brand)}.tools>div:nth-child(2){--tc:var(--lilac)}.tools>div:nth-child(3){--tc:var(--saffron)}.tools>div:nth-child(4){--tc:var(--teal)}.tools>div:nth-child(5){--tc:var(--pink)}
+.tools .chip{background:color-mix(in srgb,var(--tc,var(--brand)) 7%,var(--surface))}
+@media (max-width:900px){.tools{grid-template-columns:repeat(2,minmax(0,1fr))}.tools>div:nth-child(n){grid-column:auto}.tools>div:nth-child(1),.tools>div:nth-child(4),.tools>div:nth-child(5){grid-column:span 2}}
+@media (max-width:600px){.tools{grid-template-columns:minmax(0,1fr)}.tools>div:nth-child(n){grid-column:auto}}
 
 /* work */
 .co{position:relative;overflow:hidden;border-radius:28px;border:1px solid var(--line);padding:clamp(22px,4vw,44px);margin-top:36px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:end;min-height:260px}
@@ -1006,11 +1013,11 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 
   <div class="row-h"><h4>Skills</h4><span>What I bring to a product team</span></div>
   <div class="tools">
-    <div><h3>Product</h3><div class="chips-row"><span class="chip">Product discovery</span><span class="chip">Market &amp; user research</span><span class="chip">Competitive analysis</span><span class="chip">PRDs &amp; user stories</span><span class="chip">Roadmapping &amp; prioritisation</span><span class="chip">Agile, Scrum &amp; backlog</span><span class="chip">Activation &amp; onboarding</span><span class="chip">A/B testing</span><span class="chip">OKRs, KPIs &amp; metrics</span><span class="chip">0 to 1 &amp; go-to-market</span><span class="chip">Stakeholder &amp; cross-functional leadership</span></div></div>
-    <div><h3>Design</h3><div class="chips-row"><span class="chip">Information architecture</span><span class="chip">Wireframing &amp; prototyping</span><span class="chip">Design systems</span></div></div>
-    <div><h3>AI and building</h3><div class="chips-row"><span class="chip">LLM workflows &amp; prompt frameworks</span><span class="chip">Agentic coding</span><span class="chip">MCP &amp; API integrations</span><span class="chip">AI product evaluation</span></div></div>
-    <div><h3>Tools and frameworks</h3><div class="chips-row"><span class="chip">Figma</span><span class="chip">Jira</span><span class="chip">Miro</span><span class="chip">Notion</span><span class="chip">Google Analytics</span><span class="chip">Google Slides</span><span class="chip">Excel</span><span class="chip">n8n</span><span class="chip">Vercel &amp; GitHub</span><span class="chip">Claude Code</span></div></div>
-    <div><h3>Soft skills</h3><div class="chips-row"><span class="chip">Ownership</span><span class="chip">Customer obsession</span><span class="chip">Building &amp; mentoring teams</span><span class="chip">Evidence over opinion</span><span class="chip">Clarity before building</span></div></div>
+    <div><div class="th"><i></i><h3>Product</h3><small>11</small></div><div class="chips-row"><span class="chip">Product discovery</span><span class="chip">Market &amp; user research</span><span class="chip">Competitive analysis</span><span class="chip">PRDs &amp; user stories</span><span class="chip">Roadmapping &amp; prioritisation</span><span class="chip">Agile, Scrum &amp; backlog</span><span class="chip">Activation &amp; onboarding</span><span class="chip">A/B testing</span><span class="chip">OKRs, KPIs &amp; metrics</span><span class="chip">0 to 1 &amp; go-to-market</span><span class="chip">Stakeholder &amp; cross-functional leadership</span></div></div>
+    <div><div class="th"><i></i><h3>Design</h3><small>3</small></div><div class="chips-row"><span class="chip">Information architecture</span><span class="chip">Wireframing &amp; prototyping</span><span class="chip">Design systems</span></div></div>
+    <div><div class="th"><i></i><h3>AI and building</h3><small>4</small></div><div class="chips-row"><span class="chip">LLM workflows &amp; prompt frameworks</span><span class="chip">Agentic coding</span><span class="chip">MCP &amp; API integrations</span><span class="chip">AI product evaluation</span></div></div>
+    <div><div class="th"><i></i><h3>Tools and frameworks</h3><small>10</small></div><div class="chips-row"><span class="chip">Figma</span><span class="chip">Jira</span><span class="chip">Miro</span><span class="chip">Notion</span><span class="chip">Google Analytics</span><span class="chip">Google Slides</span><span class="chip">Excel</span><span class="chip">n8n</span><span class="chip">Vercel &amp; GitHub</span><span class="chip">Claude Code</span></div></div>
+    <div><div class="th"><i></i><h3>Soft skills</h3><small>5</small></div><div class="chips-row"><span class="chip">Ownership</span><span class="chip">Customer obsession</span><span class="chip">Building &amp; mentoring teams</span><span class="chip">Evidence over opinion</span><span class="chip">Clarity before building</span></div></div>
   </div>
 </section>
 
