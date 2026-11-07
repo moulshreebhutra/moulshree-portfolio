@@ -921,6 +921,11 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 @media (max-width:480px){.navlinks{gap:0}.navlinks a{padding:8px 7px;font-size:13px}.navlinks{-webkit-mask-image:none!important;mask-image:none!important}.nav-in{flex-wrap:wrap;row-gap:2px;padding-block:6px}.mono-logo{order:1;flex:1;min-width:0}.nav-in .themebtn{order:2}.navlinks{order:3;flex:0 0 100%;width:100%;margin-left:0;padding-bottom:4px}}
 /* phone: denser, less vertical stacking */
 @media (max-width:560px){
+  .hero .chips-row{gap:6px;margin-bottom:18px}
+  .hero .chip{padding:5px 11px;font-size:13px}
+  .hero .cta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .hero .cta .btn{padding:11px 6px;font-size:13px;gap:5px;justify-content:center;white-space:nowrap}
+  .np{padding:18px}
   .mailrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .mailrow code,.mailrow #copynote{grid-column:1/-1}
   .mailrow code{font-size:13.5px;padding:11px 14px;text-align:center;overflow-wrap:anywhere}
@@ -933,6 +938,7 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
   .tools .chip{padding:5px 10px;font-size:13px}
   .chips-row.owned .chip,.row-h+.chips-row .chip{font-size:13px}
 }
+@media (max-width:340px){.hero .cta .btn{font-size:11.5px;padding:10px 4px}.hero .cta .btn svg{display:none}}
 </style><script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
