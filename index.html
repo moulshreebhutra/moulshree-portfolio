@@ -921,10 +921,9 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 @media (max-width:480px){.navlinks{gap:0}.navlinks a{padding:8px 7px;font-size:13px}.navlinks{-webkit-mask-image:none!important;mask-image:none!important}.nav-in{flex-wrap:wrap;row-gap:2px;padding-block:6px}.mono-logo{order:1;flex:1;min-width:0}.nav-in .themebtn{order:2}.navlinks{order:3;flex:0 0 100%;width:100%;margin-left:0;padding-bottom:4px}}
 /* phone: denser, less vertical stacking */
 @media (max-width:560px){
-  .pins{columns:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px;align-items:stretch}
-  .pin{margin:0;border-radius:18px;display:flex;flex-direction:column}
-  .pin .body{flex:1}
-  .pins>.pin:last-child:nth-child(odd){grid-column:1/-1}
+  .pins{columns:auto;display:flex;gap:10px;margin-top:14px;align-items:flex-start}
+  .pins .mcol{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:10px}
+  .pin{margin:0;border-radius:18px}
   .pin .art{padding:12px 13px 10px}
   .pin .art b{font-size:clamp(24px,7vw,30px);overflow-wrap:anywhere}
   .pin .art small{font-size:10px}
@@ -1516,6 +1515,22 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
       var sc=Math.max(0,1-d/R);tx=dx*I*sc;ty=dy*I*sc;go()});
     el.addEventListener('pointerleave',function(){tx=0;ty=0;go()});
   });
+})();
+</script>
+<script>
+/* phone: stagger Impact cards, each card goes to the shorter column */
+(function(){
+  var box=document.querySelector(".pins"); if(!box) return;
+  var items=[].slice.call(box.children), mq=window.matchMedia("(max-width:560px)"), on=false;
+  function build(){
+    var cols=[document.createElement("div"),document.createElement("div")];
+    cols.forEach(function(c){c.className="mcol";box.appendChild(c);});
+    items.forEach(function(it){var h=[cols[0].offsetHeight,cols[1].offsetHeight];cols[h[1]<h[0]?1:0].appendChild(it);});
+  }
+  function flat(){ items.forEach(function(it){box.appendChild(it);}); [].slice.call(box.querySelectorAll(".mcol")).forEach(function(c){c.remove();}); }
+  function sync(){ if(mq.matches&&!on){on=true;build();} else if(!mq.matches&&on){on=false;flat();} }
+  sync(); if(mq.addEventListener) mq.addEventListener("change",sync); else mq.addListener(sync);
+  window.addEventListener("load",function(){ if(on){flat();build();} });
 })();
 </script>
 </body>
