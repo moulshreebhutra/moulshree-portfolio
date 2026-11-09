@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --c-ink: 247 248 252;
+  --c-panel: 255 255 255;
+  --c-panel2: 240 242 248;
+  --c-line: 224 228 238;
+  --c-mut: 91 101 119;
+  --c-fg: 15 23 42;
+  --c-aster: 109 74 255;
+  --c-aster2: 90 55 230;
+  --c-good: 21 128 61;
+  --c-warn: 161 98 7;
+  --c-bad: 185 28 28;
+  --bg-glow-1: rgba(109, 74, 255, 0.10);
+  --bg-glow-2: rgba(21, 128, 61, 0.05);
+  --card-top: rgba(255, 255, 255, 0.96);
+  --card-bottom: rgba(246, 247, 252, 0.96);
+}
+
+.dark {
+  color-scheme: dark;
+  --c-ink: 14 17 22;
+  --c-panel: 22 27 34;
+  --c-panel2: 28 35 45;
+  --c-line: 42 51 64;
+  --c-mut: 139 152 169;
+  --c-fg: 230 237 243;
+  --c-aster: 124 92 255;
+  --c-aster2: 169 139 255;
+  --c-good: 63 185 80;
+  --c-warn: 210 153 34;
+  --c-bad: 248 81 73;
+  --bg-glow-1: rgba(124, 92, 255, 0.14);
+  --bg-glow-2: rgba(63, 185, 80, 0.06);
+  --card-top: rgba(28, 35, 45, 0.9);
+  --card-bottom: rgba(22, 27, 34, 0.9);
+}
+
+html,
+body {
+  background: radial-gradient(1200px 600px at 80% -10%, var(--bg-glow-1), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, var(--bg-glow-2), transparent 55%), rgb(var(--c-ink));
+  color: rgb(var(--c-fg));
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  border-color: rgb(var(--c-line));
+}
+
+::selection {
+  background: rgba(124, 92, 255, 0.35);
+}
+
+/* Thin scrollbars */
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgb(var(--c-line));
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--c-mut));
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.28s ease both;
+}
+
+@keyframes pulse-dot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+.typing span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 2px;
+  border-radius: 999px;
+  background: rgb(var(--c-aster2));
+  animation: pulse-dot 1.2s infinite ease-in-out;
+}
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+.card {
+  background: linear-gradient(180deg, var(--card-top), var(--card-bottom));
+  border: 1px solid rgb(var(--c-line));
+  border-radius: 16px;
+}
+
+.glow {
+  box-shadow: 0 0 0 1px rgba(124, 92, 255, 0.25), 0 10px 40px -12px rgba(124, 92, 255, 0.45);
+}
+
+.pill {
+  border: 1px solid rgb(var(--c-line));
+  border-radius: 999px;
+  background: rgba(124, 92, 255, 0.06);
+}

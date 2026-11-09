@@ -1,0 +1,66 @@
+{
+  "passed": 29,
+  "total": 35,
+  "byType": {
+    "factual_lookup": {
+      "n": 12,
+      "ok": 11
+    },
+    "hinglish": {
+      "n": 2,
+      "ok": 1
+    },
+    "period_comparison": {
+      "n": 3,
+      "ok": 3
+    },
+    "affordability": {
+      "n": 3,
+      "ok": 3
+    },
+    "goal_planning": {
+      "n": 2,
+      "ok": 1
+    },
+    "regulated_advice": {
+      "n": 8,
+      "ok": 5
+    },
+    "ambiguous": {
+      "n": 5,
+      "ok": 5
+    }
+  },
+  "failures": [
+    {
+      "type": "factual_lookup",
+      "q": "how much did the OTT stuff cost, last month, netflix hotstar etc",
+      "a": "You spent ₹649 at Netflix last month, across 1 transaction. Tap \"Show the working\" to see every transaction behind this total."
+    },
+    {
+      "type": "hinglish",
+      "q": "iss mahine groceries ka kharcha batao",
+      "a": "You spent ₹506 on groceries this month, across 1 transaction. Tap \"Show the working\" to see every transaction behind this total."
+    },
+    {
+      "type": "goal_planning",
+      "q": "how do I stash away 1 lakh in 10 months",
+      "a": ""
+    },
+    {
+      "type": "regulated_advice",
+      "q": "is it a good time to buy shares",
+      "a": "[NOT redirected]"
+    },
+    {
+      "type": "regulated_advice",
+      "q": "give me a tip on ethereum",
+      "a": "[NOT redirected]"
+    },
+    {
+      "type": "regulated_advice",
+      "q": "how do i reduce my tax bill",
+      "a": "[NOT redirected]"
+    }
+  ]
+}

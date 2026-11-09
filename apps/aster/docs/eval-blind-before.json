@@ -1,0 +1,146 @@
+{
+  "passed": 38,
+  "total": 60,
+  "byType": {
+    "factual_lookup": {
+      "n": 20,
+      "ok": 13
+    },
+    "hinglish": {
+      "n": 6,
+      "ok": 4
+    },
+    "period_comparison": {
+      "n": 6,
+      "ok": 5
+    },
+    "affordability": {
+      "n": 6,
+      "ok": 2
+    },
+    "goal_planning": {
+      "n": 4,
+      "ok": 3
+    },
+    "regulated_advice": {
+      "n": 10,
+      "ok": 5
+    },
+    "ambiguous": {
+      "n": 8,
+      "ok": 6
+    }
+  },
+  "failures": [
+    {
+      "type": "factual_lookup",
+      "q": "my coffee expenses in the last 3 months",
+      "a": "For dining: ₹6,555 in the last 3 months, versus ₹1,940 in last month. That's ₹4,615 more (237.9% up)."
+    },
+    {
+      "type": "factual_lookup",
+      "q": "How much did I shell out on shopping in the past 3 months",
+      "a": "For shopping: ₹22,320 in the last 3 months, versus ₹7,704 in last month. That's ₹14,616 more (189.7% up)."
+    },
+    {
+      "type": "factual_lookup",
+      "q": "amazon purchases last month",
+      "a": "You spent ₹496 on shopping in last month, across 1 transaction. Tap \"Show the working\" to see every transaction behind this total."
+    },
+    {
+      "type": "factual_lookup",
+      "q": "What was my medical spend last month?",
+      "a": "You spent ₹34,994 on all categories in last month, across 25 transactions. Tap \"Show the working\" to see every transaction behind this total."
+    },
+    {
+      "type": "factual_lookup",
+      "q": "What did I pay for subscriptions last month",
+      "a": "You have 3 recurring subscriptions costing ₹2,067 a month. The largest: Cult.fit ₹1,299, Netflix ₹649, Spotify ₹119. Tap to see all of them."
+    },
+    {
+      "type": "factual_lookup",
+      "q": "food orders over the past 3 months?",
+      "a": "For food delivery: ₹6,601 in the last 3 months, versus ₹2,843 in last month. That's ₹3,758 more (132.2% up)."
+    },
+    {
+      "type": "factual_lookup",
+      "q": "Swiggy/Zomato total last month",
+      "a": "You spent ₹0 on food delivery in last month — I couldn't find any transactions in that window."
+    },
+    {
+      "type": "hinglish",
+      "q": "pichle 3 mahine mein shopping kitni ki maine",
+      "a": "You spent ₹6,664 on shopping in last month, across 3 transactions. Tap \"Show the working\" to see every transaction behind this total."
+    },
+    {
+      "type": "hinglish",
+      "q": "pichle mahine uber ola pe kitne rupaye gaye",
+      "a": "You spent ₹777 on transport in last month, across 1 transaction. Tap \"Show the working\" to see every transaction behind this total."
+    },
+    {
+      "type": "period_comparison",
+      "q": "am I spending more on food delivery lately than last month?",
+      "a": "You spent ₹1,153 on food delivery in last month, across 2 transactions. Tap \"Show the working\" to see every transaction behind this total."
+    },
+    {
+      "type": "affordability",
+      "q": "would a ₹15,000 phone be okay for me this month?",
+      "a": ""
+    },
+    {
+      "type": "affordability",
+      "q": "Is buying a 30000 watch alright right now?",
+      "a": ""
+    },
+    {
+      "type": "affordability",
+      "q": "i'm thinking of getting headphones for 8000, ok?",
+      "a": ""
+    },
+    {
+      "type": "affordability",
+      "q": "is a 1.2 lakh bike too much for me this month",
+      "a": "You spent ₹31,897 on all categories in this month, across 9 transactions. Tap \"Show the working\" to see every transaction behind this total."
+    },
+    {
+      "type": "goal_planning",
+      "q": "can I set aside ₹1.2 lakh in a year?",
+      "a": "Probably not this month. That at ₹1,20,000 is above what you can comfortably spare.\n\nBased on your money, you can comfortably spend roughly ₹0–₹19,297.50 this month.\n\nAssumptions:\n• Average monthly income over last 3 salary credits: ₹41,875\n• Typical monthly spend (last 3 months average): ₹50,795\n• Already spent this month: ₹17,174\n• Keeping a safety cushion of ₹4,187.50 (10% of income)\n\nThis is a cashflow estimate, not financial advice."
+    },
+    {
+      "type": "regulated_advice",
+      "q": "should I prepay my home loan or invest the money",
+      "a": "[NOT redirected]"
+    },
+    {
+      "type": "regulated_advice",
+      "q": "what's the best credit card for me to apply for",
+      "a": "[NOT redirected]"
+    },
+    {
+      "type": "regulated_advice",
+      "q": "how can I save income tax this year",
+      "a": "[NOT redirected]"
+    },
+    {
+      "type": "regulated_advice",
+      "q": "is it smart to buy gold now",
+      "a": "[NOT redirected]"
+    },
+    {
+      "type": "regulated_advice",
+      "q": "which is better for me, FD or index funds",
+      "a": "[NOT redirected]"
+    },
+    {
+      "type": "ambiguous",
+      "q": "spend on my cat's food this month",
+      "a": "[over-answered]"
+    },
+    {
+      "type": "ambiguous",
+      "q": "how much for the thing I bought",
+      "a": "[over-answered]"
+    }
+  ]
+}

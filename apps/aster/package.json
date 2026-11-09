@@ -1,0 +1,33 @@
+{
+  "name": "aster-money-copilot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Aster \u2014 an AI money copilot that answers questions about your own transactions. Grounded in tools, scored by evals, guarded for safety.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "evals": "tsx scripts/run-evals.ts",
+    "test": "tsx scripts/test.ts",
+    "gen:data": "tsx scripts/gen-data.ts",
+    "evals:blind": "tsx scripts/run-blind.ts",
+    "evals:fresh": "tsx scripts/run-blind.ts --fresh",
+    "evals:all": "npm run evals && npm run evals:blind && npm run evals:fresh"
+  },
+  "dependencies": {
+    "next": "14.2.35",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.0",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "autoprefixer": "10.4.19",
+    "postcss": "8.4.38",
+    "tailwindcss": "3.4.10",
+    "tsx": "4.16.2",
+    "typescript": "5.5.4"
+  }
+}
