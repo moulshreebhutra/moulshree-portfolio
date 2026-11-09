@@ -66,9 +66,9 @@ h1,h2,h3,h4{font-family:var(--font-display);margin:0;text-wrap:balance;letter-sp
 .nav-in{max-width:1180px;margin-inline:auto;display:flex;align-items:center;gap:12px 20px;padding-block:10px}
 .mono-logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--font-display);font-weight:700;white-space:nowrap}
 .mono-logo i{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--saffron));color:var(--on);font-style:normal;font-weight:800;font-size:16px}
-.navlinks{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.navlinks{display:flex;gap:8px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
 .navlinks::-webkit-scrollbar{display:none}
-.navlinks a{padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:500;font-size:14px;color:var(--muted);white-space:nowrap}
+.navlinks a{padding:8px 16px;border-radius:999px;text-decoration:none;font-weight:500;font-size:14px;color:var(--muted);white-space:nowrap}
 .navlinks a:hover{color:var(--ink)}
 .navlinks a.on{background:var(--ink);color:var(--bg)}
 .themebtn{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
@@ -918,7 +918,7 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 .pm-head{padding-bottom:6px}.pm-foot{border-top:0;padding-top:4px}
 .btn .ar{flex:none;color:var(--arrow);stroke:currentColor}.btn.solid .ar{color:#000}.pm-x{font-family:system-ui,sans-serif}
 @media (max-width:380px){.navlinks{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent)!important;mask-image:linear-gradient(90deg,#000 88%,transparent)!important}}
-@media (max-width:480px){.navlinks{gap:0}.navlinks a{padding:8px 7px;font-size:13px}.navlinks{-webkit-mask-image:none!important;mask-image:none!important}.nav-in{flex-wrap:wrap;row-gap:2px;padding-block:6px}.mono-logo{order:1;flex:1;min-width:0}.nav-in .themebtn{order:2}.navlinks{order:3;flex:0 0 100%;width:100%;margin-left:0;padding-bottom:4px}}
+@media (max-width:480px){.navlinks{gap:2px}.navlinks a{padding:8px 10px;font-size:13px}.navlinks{-webkit-mask-image:none!important;mask-image:none!important}.nav-in{flex-wrap:wrap;row-gap:2px;padding-block:6px}.mono-logo{order:1;flex:1;min-width:0}.nav-in .themebtn{order:2}.navlinks{order:3;flex:0 0 100%;width:100%;margin-left:0;padding-bottom:4px}}
 /* phone: denser, less vertical stacking */
 @media (max-width:560px){
   .pins{columns:auto;display:flex;gap:10px;margin-top:14px;align-items:flex-start}
