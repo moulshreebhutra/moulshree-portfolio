@@ -893,7 +893,7 @@ html.te .te-c{opacity:0;filter:blur(12px);transform:translateY(20px);animation:t
 @keyframes shim{to{background-position:0% center}}
 /* TextLoop */
 .tloop{display:inline-grid;vertical-align:bottom;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
-.tloop>span{grid-area:1/1;white-space:nowrap;opacity:0;transform:translateY(100%);transition:opacity .2s var(--ease-out,ease-out),transform .2s var(--ease-out,ease-out);pointer-events:none}
+.tloop>span{grid-area:1/1;white-space:nowrap;opacity:0;transform:translateY(100%);transition:opacity .3s var(--ease-out,ease-out),transform .3s var(--ease-out,ease-out);pointer-events:none}
 .tloop>span.on{opacity:1;transform:none;color:var(--sig,inherit)}
 .tloop>span.off{opacity:0;transform:translateY(-100%)}
 /* BorderTrail on the now-playing card until it is played */
@@ -1526,14 +1526,14 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
       }else if(n.nodeType===1)walk(n)})})(h1);
     root.classList.add('te');
   }
-  /* TextLoop: rotate the contact headline continuously, every 1.5s */
+  /* TextLoop: rotate the contact headline continuously, every 2s */
   var loop=document.querySelector('.tloop');
   if(loop&&!reduce){
     var items=[].slice.call(loop.children),k=0,timer=null;
     function tick(){var cur=items[k];cur.classList.remove('on');cur.classList.add('off');
-      setTimeout(function(){cur.classList.remove('off')},200);
+      setTimeout(function(){cur.classList.remove('off')},300);
       k=(k+1)%items.length;items[k].classList.add('on')}
-    timer=setInterval(tick,1500);
+    timer=setInterval(tick,2000);
   }
   /* BorderTrail: fades once the demo has been run */
   var npc=document.getElementById('np');
