@@ -795,7 +795,15 @@ button,a,.chip{touch-action:manipulation}
 @keyframes smRise{0%{transform:translateY(9px);opacity:0}10%{transform:translateY(9px);opacity:0}28%,80%{transform:none;opacity:1}92%,100%{transform:none;opacity:0}}
 .sm-cap{transform-box:fill-box;transform-origin:50% 100%;animation:smCap 6s ease infinite;animation-delay:.24s}
 @keyframes smCap{0%,26%{transform:none}32%{transform:translateY(-3px)}38%,100%{transform:none}}
-@media (prefers-reduced-motion:reduce){.rl-b,.sm-b,.sm-cap{animation:none!important}}
+/* animated logo: the three strokes draw in, the star turns, then it fades and loops */
+.as-b{stroke-dasharray:1;animation:asDraw 6s cubic-bezier(.45,0,.2,1) infinite}
+.as-2{animation-delay:.18s}.as-3{animation-delay:.36s}
+@keyframes asDraw{0%{stroke-dashoffset:1;opacity:0}3%{opacity:1}30%,80%{stroke-dashoffset:0;opacity:1}92%,100%{stroke-dashoffset:0;opacity:0}}
+.as-g{transform-box:fill-box;transform-origin:50% 50%;animation:asSpin 6s ease-in-out infinite}
+@keyframes asSpin{0%,30%{transform:rotate(0)}55%,100%{transform:rotate(60deg)}}
+.as-dot{transform-box:fill-box;transform-origin:50% 50%;animation:asDot 6s ease infinite}
+@keyframes asDot{0%,26%{transform:scale(1)}32%{transform:scale(1.25)}40%,100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.rl-b,.sm-b,.sm-cap,.as-b,.as-g{animation:none!important}}
 
 /* every surface reacts to the pointer in the same quiet way */
 @media (hover:hover) and (prefers-reduced-motion:no-preference){
@@ -1212,7 +1220,7 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 <section id="aster" class="sec" aria-label="Aster project">
   <span class="eyebrow">Fintech, AI</span>
   <div class="tp as" data-tabgroup="as">
-    <svg class="plogo" viewBox="0 0 48 48" width="54" height="54" role="img" aria-label="Aster logo"><rect x="1" y="1" width="46" height="46" rx="12" fill="none" stroke="var(--line)" stroke-width="1.5"/><path d="M24 10V38M11.9 17L36.1 31M11.9 31L36.1 17" fill="none" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round"/></svg>
+    <svg class="plogo" viewBox="0 0 48 48" width="54" height="54" role="img" aria-label="Aster logo"><rect x="1" y="1" width="46" height="46" rx="12" fill="none" stroke="var(--line)" stroke-width="1.5"/><g class="as-g" fill="none" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round"><path class="as-b as-1" pathLength="1" d="M24 10V38"/><path class="as-b as-2" pathLength="1" d="M11.9 17L36.1 31"/><path class="as-b as-3" pathLength="1" d="M11.9 31L36.1 17"/></g></svg>
     <h2>Aster</h2>
     <p class="log">Ask your money anything.</p>
     <p class="syn">An AI money copilot for everyday spending questions: can I afford this, where did my money go, was I charged twice. Every number is computed from the user's own transactions, checked before it is shown, and scored by an eval suite.</p>

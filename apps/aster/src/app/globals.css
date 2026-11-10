@@ -114,3 +114,13 @@ body {
   border-radius: 999px;
   background: rgba(124, 92, 255, 0.06);
 }
+
+/* animated logo: the three strokes draw in, the star turns, then it fades and loops */
+.as-b{stroke-dasharray:1;animation:asDraw 6s cubic-bezier(.45,0,.2,1) infinite}
+.as-2{animation-delay:.18s}.as-3{animation-delay:.36s}
+@keyframes asDraw{0%{stroke-dashoffset:1;opacity:0}3%{opacity:1}30%,80%{stroke-dashoffset:0;opacity:1}92%,100%{stroke-dashoffset:0;opacity:0}}
+.as-g{transform-box:fill-box;transform-origin:50% 50%;animation:asSpin 6s ease-in-out infinite}
+@keyframes asSpin{0%,30%{transform:rotate(0)}55%,100%{transform:rotate(60deg)}}
+.as-dot{transform-box:fill-box;transform-origin:50% 50%;animation:asDot 6s ease infinite}
+@keyframes asDot{0%,26%{transform:scale(1)}32%{transform:scale(1.25)}40%,100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.as-b,.as-g,.as-dot{animation:none!important}}
