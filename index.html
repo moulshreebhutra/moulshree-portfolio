@@ -281,6 +281,7 @@ html:root[data-pal][data-pal]:not([data-pal="toned"]) .np[data-i] .np-art{backgr
 .about{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:40px;margin-top:32px;align-items:start}
 @media (max-width:860px){.about{grid-template-columns:minmax(0,1fr)}}
 .about p{margin:0 0 16px;font-size:18px;max-width:60ch}
+@media (min-width:1100px){.about{grid-template-columns:minmax(0,7fr) minmax(300px,3fr);gap:56px}.about p{max-width:none;font-size:clamp(18px,1.25vw,21px)}}
 .about p.first::first-letter{font-family:var(--font-display);font-weight:800;font-size:3.2em;float:left;line-height:.85;margin:6px 10px 0 0;color:var(--brand)}
 .liner{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:6px 20px}
 .liner div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;padding-block:14px;border-bottom:1px solid var(--line);font-size:15px}
@@ -552,7 +553,7 @@ html:root[data-pal][data-pal]:not([data-pal="toned"]) .np[data-i] .np-art{backgr
 /* contact */
 .contact{margin-top:80px;border-radius:32px;border:1px solid var(--line);padding:clamp(24px,5vw,60px);text-align:left;background:radial-gradient(520px 360px at 100% 100%,color-mix(in srgb,var(--brand) 38%,transparent),transparent 70%),radial-gradient(420px 300px at 0% 0%,color-mix(in srgb,var(--lilac) 34%,transparent),transparent 70%),var(--bg2)}
 .contact h2{font-size:clamp(34px,6.4vw,76px);font-weight:800;line-height:.98;margin:12px 0 14px}
-.contact p{color:var(--muted);max-width:52ch;font-size:18px;margin:0 0 22px}
+.contact p{color:var(--muted);max-width:none;font-size:18px;margin:0 0 22px}
 .mailrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .mailrow code{font-family:var(--font-mono);font-size:15px;padding:12px 16px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 60%,transparent);user-select:all}
 footer{padding-block:28px 40px;color:var(--muted);font-size:13px;max-width:760px}
