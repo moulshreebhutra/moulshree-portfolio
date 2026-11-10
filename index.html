@@ -294,16 +294,16 @@ html:root[data-pal][data-pal]:not([data-pal="toned"]) .np[data-i] .np-art{backgr
 .how p{margin:0;color:var(--muted);font-size:15px}
 .how .n{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;color:var(--on)}
 .tools{margin-top:20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
-.tools>div{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px 22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.tools .tcol{display:flex;flex-direction:column;gap:16px;min-width:0}
+.tools .tcol>div:last-child{flex:1}
+.tools .tcol>div{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px 22px;display:flex;flex-direction:column;gap:12px;min-width:0}
 .tools .th{display:flex;align-items:center;gap:10px}
 .tools .th i{width:12px;height:12px;border-radius:4px;background:var(--tc,var(--brand));flex:none}
 .tools .th h3{font-family:var(--font-display);font-size:22px;font-weight:800;margin:0;letter-spacing:-.01em}
 .tools .th small{margin-left:auto;font-family:var(--font-mono);font-size:12px;color:var(--muted)}
-.tools>div:nth-child(1){--tc:var(--lilac)}.tools>div:nth-child(2){--tc:color-mix(in srgb,var(--lilac) 65%,var(--ink))}.tools>div:nth-child(3){--tc:color-mix(in srgb,var(--lilac) 50%,var(--bg))}.tools>div:nth-child(4){--tc:color-mix(in srgb,var(--lilac) 40%,var(--ink))}.tools>div:nth-child(5){--tc:color-mix(in srgb,var(--lilac) 75%,var(--bg))}
+.tools .tcol:nth-child(1)>div:nth-child(1){--tc:var(--lilac)}.tools .tcol:nth-child(2)>div:nth-child(1){--tc:color-mix(in srgb,var(--lilac) 65%,var(--ink))}.tools .tcol:nth-child(2)>div:nth-child(2){--tc:color-mix(in srgb,var(--lilac) 50%,var(--bg))}.tools .tcol:nth-child(2)>div:nth-child(3){--tc:color-mix(in srgb,var(--lilac) 40%,var(--ink))}.tools .tcol:nth-child(1)>div:nth-child(2){--tc:color-mix(in srgb,var(--lilac) 75%,var(--bg))}
 .tools .chip{background:color-mix(in srgb,var(--tc,var(--brand)) 7%,var(--surface))}
-@media (min-width:761px){.tools>div:nth-child(1){grid-column:1;grid-row:1/span 2}.tools>div:nth-child(5){grid-column:1;grid-row:3}.tools>div:nth-child(2){grid-column:2;grid-row:1}.tools>div:nth-child(3){grid-column:2;grid-row:2}.tools>div:nth-child(4){grid-column:2;grid-row:3}}
-@media (max-width:760px){.tools{grid-template-columns:minmax(0,1fr)}}
-@media (max-width:700px){.tools{columns:1}}
+@media (max-width:760px){.tools{grid-template-columns:minmax(0,1fr)}.tools .tcol{display:contents}.tools .tcol>div:last-child{flex:none}}
 
 /* work */
 .co{position:relative;overflow:hidden;border-radius:28px;border:1px solid var(--line);padding:clamp(22px,4vw,44px);margin-top:36px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:stretch;min-height:260px}
@@ -972,7 +972,7 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
   .pbtns .btn{padding:11px 8px;font-size:12.5px;gap:4px;flex:1 1 0;min-width:0;justify-content:center;white-space:nowrap}
   .tp .chips-row,.tools .chips-row{gap:6px}
   .tp .chip{padding:5px 11px;font-size:13px}
-  .tools>div{padding:14px 14px;gap:9px}
+  .tools .tcol>div{padding:14px 14px;gap:9px}
   .tools .chip{padding:4px 9px;font-size:12.5px}
   .tools .chips-row{gap:5px}
   .chips-row.owned .chip,.row-h+.chips-row .chip{font-size:13px}
@@ -1084,11 +1084,15 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 
   <div id="skills"><div class="row-h"><h4>Skills</h4><span>What I bring to a product team</span></div>
   <div class="tools">
+    <div class="tcol">
     <div><div class="th"><i></i><h3>Product</h3></div><div class="chips-row"><span class="chip">Product discovery</span><span class="chip">Market &amp; user research</span><span class="chip">Competitive analysis</span><span class="chip">PRDs &amp; user stories</span><span class="chip">Roadmapping &amp; prioritisation</span><span class="chip">Agile, Scrum &amp; backlog</span><span class="chip">Activation &amp; onboarding</span><span class="chip">A/B testing</span><span class="chip">OKRs, KPIs &amp; metrics</span><span class="chip">0 to 1 &amp; go-to-market</span><span class="chip">Stakeholder &amp; cross-functional leadership</span></div></div>
+    <div><div class="th"><i></i><h3>Soft skills</h3></div><div class="chips-row"><span class="chip">Ownership</span><span class="chip">Customer obsession</span><span class="chip">Building &amp; mentoring teams</span><span class="chip">Evidence over opinion</span><span class="chip">Clarity before building</span></div></div>
+    </div>
+    <div class="tcol">
     <div><div class="th"><i></i><h3>Design</h3></div><div class="chips-row"><span class="chip">Information architecture</span><span class="chip">Wireframing &amp; prototyping</span><span class="chip">Design systems</span></div></div>
     <div><div class="th"><i></i><h3>AI and building</h3></div><div class="chips-row"><span class="chip">LLM workflows &amp; prompt frameworks</span><span class="chip">Agentic coding</span><span class="chip">MCP &amp; API integrations</span><span class="chip">AI product evaluation</span></div></div>
     <div><div class="th"><i></i><h3>Tools and frameworks</h3></div><div class="chips-row"><span class="chip">Figma</span><span class="chip">Jira</span><span class="chip">Miro</span><span class="chip">Notion</span><span class="chip">Google Analytics</span><span class="chip">Google Slides</span><span class="chip">Excel</span><span class="chip">n8n</span><span class="chip">Vercel &amp; GitHub</span><span class="chip">Claude Code</span></div></div>
-    <div><div class="th"><i></i><h3>Soft skills</h3></div><div class="chips-row"><span class="chip">Ownership</span><span class="chip">Customer obsession</span><span class="chip">Building &amp; mentoring teams</span><span class="chip">Evidence over opinion</span><span class="chip">Clarity before building</span></div></div>
+    </div>
   </div></div>
 </section>
 
