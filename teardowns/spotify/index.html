@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spotify teardown: personalisation as a product | Moulshree Bhutra</title>
+<meta name="description" content="A product teardown of Spotify: how listening data becomes Discover Weekly and Wrapped, where control falls short, and two experiments to test. Independent analysis from public sources.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spotify teardown: personalisation as a product">
+<meta property="og:description" content="A product teardown of Spotify: how listening data becomes Discover Weekly and Wrapped, where control falls short, and two experiments to test. Independent analysis from public sources.">
+<meta property="og:image" content="https://moulshree-portfolio.vercel.app/logos/og.jpg">
+<meta name="theme-color" content="#F4F5FB">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/page.css">
+<script src="/assets/page.js"></script>
+</head>
+<body>
+<header class="bar pad"><div class="bar-in">
+  <a class="back" href="/#teardowns"><span aria-hidden="true">&larr;</span> Back to teardowns</a>
+  <span class="who">Moulshree Bhutra</span>
+  <button class="themebtn" id="btn-theme" type="button" aria-label="Switch theme"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</div></header>
+<main class="pad"><div class="col">
+
+<section class="hero">
+  <span class="eyebrow">Product teardown · Music and audio</span>
+  <h1>Spotify: personalisation as a product, not a feature</h1>
+  <p class="sub">A teardown of how listening data becomes Discover Weekly, Wrapped and the feeling that the app knows you, and where the same loop can quietly narrow taste.</p>
+  <div class="chips"><span class="chip">Personalisation</span><span class="chip">Engagement loops</span><span class="chip">Trust and control</span><span class="chip">Experiment design</span></div>
+  <p class="note"><b>How to read this.</b> Independent analysis from public sources: company results, Spotify's own newsroom and published commentary. Numbers are from Q3 2026 unless dated otherwise.</p>
+</section>
+
+<section class="sec">
+  <span class="kicker">1 · The product in numbers</span>
+  <h2>A huge free base, a large paying one</h2>
+  <div class="stats">
+    <div class="stat"><small>Monthly active users</small><b>788M</b><span>up 11% year on year</span></div>
+    <div class="stat"><small>Premium subscribers</small><b>306M</b><span>up 9% year on year</span></div>
+    <div class="stat"><small>Ad-supported users</small><b>499M</b><span>monthly active</span></div>
+    <div class="stat"><small>Revenue</small><b>&euro;4.97B</b><span>up 16% year on year</span></div>
+  </div>
+  <p class="src-note">Source: Spotify Q3 2026 results as reported by Hypebot and Music Business Worldwide.</p>
+  <p>By my arithmetic, about 39% of monthly users pay (306M divided by 788M). The rest is both Spotify's advertising audience and its pool of future subscribers. Personalisation is what links the two: the better the app knows someone, the more reasons they have to stay, and eventually to pay.</p>
+</section>
+
+<section class="sec">
+  <span class="kicker">2 · The core loop</span>
+  <h2>Listening teaches the app, and the app teaches listening</h2>
+  <div class="loop">
+    <div class="step"><i>1</i><b>Listen</b><span>Plays, skips, saves and playlist adds all count as signals about taste.</span></div>
+    <div class="step"><i>2</i><b>Model</b><span>Spotify describes a Taste Profile built from what you play and how you play it.</span></div>
+    <div class="step"><i>3</i><b>Serve</b><span>The profile shapes Home, Daily Mix and the Monday Discover Weekly playlist.</span></div>
+    <div class="step"><i>4</i><b>Reflect</b><span>Wrapped turns a year of listening into a story about you.</span></div>
+    <div class="step"><i>5</i><b>Share</b><span>People post their Wrapped, which markets the product to friends.</span></div>
+  </div>
+  <p class="loopback">Personalisation is the product, and sharing is the growth channel. Both run on the same data.</p>
+</section>
+
+<section class="sec">
+  <span class="kicker">3 · What works, what strains</span>
+  <h2>The ritual is strong. The control is uneven.</h2>
+  <div class="grid2">
+    <div class="card good"><h3>What it does well</h3>
+      <ul class="tight">
+        <li><b>A weekly ritual.</b> Discover Weekly has landed every Monday for more than a decade, which gives people a reason to open the app on a schedule.</li>
+        <li><b>Visible engagement lift.</b> In 2019 data, Spotify said Discover Weekly users streamed more than twice as long as non-users. That is correlation, since people who like discovery choose it, but it shows the feature is central.</li>
+        <li><b>Personalisation as marketing.</b> Wrapped had 245M users engage with it in 2024 and doubles as a year-end ad people post for free.</li>
+        <li><b>Making the model visible.</b> A Taste Profile beta shows Premium users in the US how Spotify reads their taste, and people can already exclude a track from it.</li>
+      </ul></div>
+    <div class="card weak"><h3>Where it strains</h3>
+      <ul class="tight">
+        <li><b>Taste can narrow.</b> Critics argue that recommendation loops reinforce what people already like, so preferences harden into identity.</li>
+        <li><b>Control is uneven.</b> Genre controls on Discover Weekly and prompt-based playlists are Premium or beta features, so free users shape less.</li>
+        <li><b>Reflection is annual.</b> Wrapped is a great mirror, but it arrives once a year. In the other eleven months people get no view of how their taste is changing.</li>
+      </ul></div>
+  </div>
+</section>
+
+<section class="sec">
+  <span class="kicker">4 · What I would test</span>
+  <h2>Two changes, each with a way to be wrong</h2>
+
+  <div class="prop">
+    <span class="tag">Discovery</span><span class="tag">Retention</span>
+    <h3>Taste drift: a mid-year mirror</h3>
+    <p>Wrapped is loved because it makes taste visible. I would bring a small version of that moment into the year, with a reason to explore.</p>
+    <dl>
+      <dt>Idea</dt><dd>Once a quarter, show a short in-app card: how your listening moved, three artists new to you, and one tap to get more or less like them.</dd>
+      <dt>Hypothesis</dt><dd>A recurring reflection moment increases exploration and gives long-time repeat listeners a reason to try new music, which supports longer-term retention.</dd>
+      <dt>Primary metric</dt><dd>Share of listening time on artists first streamed in the last 90 days.</dd>
+      <dt>Secondary</dt><dd>Saves and playlist adds from the card, 90-day retention of heavy repeat listeners, shares of the card.</dd>
+      <dt>Guardrails</dt><dd>Skip rate, session length, and a short satisfaction survey. If the card feels like an interruption, it should lose.</dd>
+      <dt>Test design</dt><dd>A/B test with a holdout among users with at least a year of history. Read exploration at four weeks and retention at 12.</dd>
+      <dt>Risk</dt><dd>Reflection can feel like surveillance. The card should show only what the person already did and let them dismiss it permanently.</dd>
+    </dl>
+  </div>
+
+  <div class="prop">
+    <span class="tag">Control</span><span class="tag">Trust</span>
+    <h3>A session-only "not in this mood" signal</h3>
+    <p>Spotify already lets people exclude a track from their Taste Profile. That is a permanent edit. Much of the time, the reason for skipping is a mood, not a verdict on taste.</p>
+    <dl>
+      <dt>Idea</dt><dd>On any recommended item, offer a one-tap "not right now". It steers the rest of the session and leaves the long-term profile alone.</dd>
+      <dt>Hypothesis</dt><dd>If people worry that a skip will pollute their profile, a safe temporary signal increases honest feedback and improves the next few recommendations.</dd>
+      <dt>Primary metric</dt><dd>Share of recommended tracks played to completion within a session after the signal is used.</dd>
+      <dt>Secondary</dt><dd>Signal usage rate, saves per session, edits made to the Taste Profile.</dd>
+      <dt>Guardrails</dt><dd>Seven-day return rate and long-term recommendation quality. Session steering must not leak into the profile.</dd>
+      <dt>Test design</dt><dd>A/B test on one Home shelf first. Before building, I would run interviews to check whether the fear of polluting the profile is real, since that belief is my assumption.</dd>
+      <dt>Risk</dt><dd>Another control adds clutter. It only ships if usage is high enough to justify the space it takes.</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="sec">
+  <span class="kicker">5 · How I would measure it</span>
+  <h2>Metrics to watch, and how each can mislead</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Metric</th><th>Why it matters</th><th>Watch out for</th></tr></thead>
+    <tbody>
+      <tr><td class="pick">Discovery rate (listening on newly found artists)</td><td>Shows whether personalisation widens taste or narrows it.</td><td>Novelty for its own sake can lower satisfaction.</td></tr>
+      <tr><td class="pick">Skip rate and completion rate by surface</td><td>The fastest signal of whether recommendations fit.</td><td>Skips can mean mood, not dislike.</td></tr>
+      <tr><td class="pick">Weekly return to Discover Weekly</td><td>Measures the ritual directly.</td><td>Self-selection: fans of discovery return more by nature.</td></tr>
+      <tr><td class="pick">Cohort retention (D30, D90)</td><td>Shows if personalisation holds people over time.</td><td>Needs cohorts by tenure, not blended averages.</td></tr>
+      <tr><td class="pick">Free to Premium conversion</td><td>The business outcome of engagement.</td><td>Upsell prompts can damage the habit that drives conversion.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout"><b class="t">The takeaway for a PM</b><p>Spotify's moat is not the catalogue, which rivals can match. It is the sense of being understood. That makes trust the thing to protect: the more the product learns, the more control people need to feel they can steer it.</p></div>
+</section>
+
+<section class="sec">
+  <span class="kicker">Sources</span>
+  <h2>Where the facts come from</h2>
+  <ol class="sources"><li><a href="https://www.hypebot.com/spotify-q3-2026-788m-users-and-306m-subscribers/" target="_blank" rel="noopener">Hypebot: Spotify Q3 2026, 788M users and 306M subscribers</a></li><li><a href="https://musicbusinessworldwide.com/spotify-is-on-course-for-a-3-3b-annual-operating-profit-in-2026-after-adding-6m-subscribers-in-q3" target="_blank" rel="noopener">Music Business Worldwide: Spotify Q3 2026 results</a></li><li><a href="https://newsroom.spotify.com/tag/discover-weekly" target="_blank" rel="noopener">Spotify newsroom: Discover Weekly and Taste Profile</a></li><li><a href="https://ads.spotify.com/en-GB/news-and-insights/five-years-of-discovery-and-engagement-through-discover-weekly" target="_blank" rel="noopener">Spotify Advertising: five years of Discover Weekly (2019 first-party data)</a></li><li><a href="https://letsdatascience.com/news/spotify-builds-wrapped-through-yearlong-process-5a793b8b" target="_blank" rel="noopener">Let's Data Science: how Spotify builds Wrapped</a></li><li><a href="https://www.itechguides.com/spotify-subscriber-gains-beat-expectations-driving-double-digit-revenue-growth-in-q3-2026/" target="_blank" rel="noopener">iTechGuides: Q3 2026 coverage including the Taste Profile beta</a></li><li><a href="https://www.phoenixnewtimes.com/?p=40633304" target="_blank" rel="noopener">Phoenix New Times: commentary on recommendation loops and taste</a></li></ol>
+</section>
+
+<footer class="pf">
+  <p>Independent analysis by Moulshree Bhutra, written from public information. Not affiliated with or endorsed by Spotify, and no internal data was used. Proposals are hypotheses to test, not results.</p>
+  <div class="cta"><a class="btn solid" href="/#contact">Say hello</a><a class="btn" href="/#teardowns">Back to teardowns</a></div>
+</footer>
+</div></main>
+</body>
+</html>
