@@ -98,6 +98,8 @@ h1,h2,h3,h4{font-family:var(--font-display);margin:0;text-wrap:balance;letter-sp
 .chip{display:inline-block;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--surface) 70%,transparent);font-size:14px;font-weight:500}
 .mailrow .ic-res,.cta .ic-res{color:var(--pink)}
 .mailrow .ic-cl,.cta .ic-cl{color:var(--teal)}
+.ic-cs,.cta .ic-cs{color:#8B7BE0}
+@media (max-width:480px){.hero .cta .csbtn{grid-column:1/-1}}
 .mailrow .ic-li,.cta .ic-li{color:#0A66C2}
 :root[data-mode="dark"] .mailrow .ic-li,:root[data-mode="dark"] .cta .ic-li{color:#4A9BE8}
 .before .chip{display:inline-flex;align-items:center;min-height:38px;box-sizing:border-box}
@@ -1009,9 +1011,10 @@ html[data-mode="dark"] .blogo .lg-d{display:block}
 .dnote{margin:14px 0 0}
 .contact{margin-top:var(--sec);margin-bottom:var(--sec);padding-block:clamp(32px,4vw,48px)}
 footer{padding-block:20px 32px}
-.cs-cta{margin:0 0 18px}
 </style>
 <style>
+@media (max-width:640px){.navback~.mono-logo{display:none}.navback{margin-right:auto}}
+
 .blogo{display:inline-flex;align-items:center;height:48px;flex:none}
 .blogo img{height:100%;width:auto;max-width:170px;object-fit:contain;display:block}
 .blogo .lg-d{display:none}
@@ -1129,7 +1132,7 @@ html[data-mode="dark"] .blogo .lg-d{display:block}
 
 <footer class="dfoot">
   <p>Independent analysis by Moulshree Bhutra, written from public information. Not affiliated with or endorsed by Hub, and no internal data was used. Proposals are hypotheses to test, not results.</p>
-  <div class="cta"><a class="btn solid" href="/#contact">Say hello</a><a class="btn" href="/">Back to portfolio</a></div>
+  <div class="cta"><a class="btn solid" href="/#contact">Say hello</a><a class="btn" href="/">Back to home</a></div>
 </footer>
 </main>
 </div>
