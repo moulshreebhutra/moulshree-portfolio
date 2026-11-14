@@ -1147,7 +1147,7 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 <section class="sec">
   <span class="eyebrow">6 · How I would test it</span>
   <h2 class="h2">Test by zone and time, not by user</h2>
-  <p>A marketplace has a trap: riders and drivers share supply, so a rider-level A/B test spills over, and the control group benefits from the treatment. I would use a switchback test, where a zone alternates between the new flow and the old one by time block, or compare matched cities.</p>
+  <p>A marketplace has a trap: riders and drivers share supply, so a rider-level A/B test spills over, and the control group benefits from the treatment. Because this is a large change to the app flow, I would lead with a matched-zone or matched-city holdout. A switchback, where a zone alternates between the new flow and the old one by time block, suits smaller changes, such as dispatch tweaks, and is a fallback here.</p>
   <ul class="tight">
     <li><b>Start:</b> one or two zones in one city for about four weeks, comparing like for like on time of day and day of week.</li>
     <li><b>Read:</b> completion rate first, then driver earnings per hour. Both must hold.</li>
