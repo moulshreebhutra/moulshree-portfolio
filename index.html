@@ -1590,19 +1590,31 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 })();
 </script>
 <script>
-/* phone: stagger Impact cards, each card goes to the shorter column */
+/* phone: stagger Impact cards, each card goes to the shorter column (re-balanced whenever card heights change) */
 (function(){
   var box=document.querySelector(".pins"); if(!box) return;
-  var items=[].slice.call(box.children), mq=window.matchMedia("(max-width:560px)"), on=false;
-  function build(){
-    var cols=[document.createElement("div"),document.createElement("div")];
-    cols.forEach(function(c){c.className="mcol";box.appendChild(c);});
-    items.forEach(function(it){var h=[cols[0].offsetHeight,cols[1].offsetHeight];cols[h[1]<h[0]?1:0].appendChild(it);});
+  var items=[].slice.call(box.children), mq=window.matchMedia("(max-width:560px)"), on=false, cols=null, t;
+  function assign(){
+    var G=10, h=[0,0], side=items.map(function(it){var k=h[1]<h[0]?1:0; h[k]+=it.offsetHeight+G; return k;});
+    return side;
   }
-  function flat(){ items.forEach(function(it){box.appendChild(it);}); [].slice.call(box.querySelectorAll(".mcol")).forEach(function(c){c.remove();}); }
+  function place(side){ items.forEach(function(it,i){cols[side[i]].appendChild(it);}); }
+  function build(){
+    cols=[document.createElement("div"),document.createElement("div")];
+    cols.forEach(function(c){c.className="mcol";box.appendChild(c);});
+    items.forEach(function(it,i){cols[i%2].appendChild(it);});   /* temporary, equal widths so heights are real */
+    var side=assign(); place(side);
+    /* heights may shift once fonts land: repeat until stable */
+    for(var n=0;n<4;n++){var s2=assign(); if(s2.join()===side.join())break; side=s2; place(side);}
+  }
+  function flat(){ items.forEach(function(it){box.appendChild(it);}); [].slice.call(box.querySelectorAll(".mcol")).forEach(function(c){c.remove();}); cols=null; }
   function sync(){ if(mq.matches&&!on){on=true;build();} else if(!mq.matches&&on){on=false;flat();} }
+  function rebal(){ if(!on)return; clearTimeout(t); t=setTimeout(function(){ var side=assign(); place(side); },60); }
   sync(); if(mq.addEventListener) mq.addEventListener("change",sync); else mq.addListener(sync);
-  window.addEventListener("load",function(){ if(on){flat();build();} });
+  window.addEventListener("load",function(){rebal();setTimeout(rebal,500);});
+  window.addEventListener("resize",rebal);
+  if(document.fonts){ if(document.fonts.ready) document.fonts.ready.then(rebal); if(document.fonts.addEventListener) document.fonts.addEventListener("loadingdone",rebal); }
+  if(window.ResizeObserver){ var ro=new ResizeObserver(rebal); items.forEach(function(it){ro.observe(it);}); }
 })();
 </script>
 </body>
