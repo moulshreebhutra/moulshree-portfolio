@@ -988,18 +988,22 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 .dcard .chips-row{margin-top:auto}
 .dcard .go{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--ink)}
 .dnote{margin-top:16px;font-size:14px;color:var(--muted)}
-.blogo{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-family:var(--font-display);font-weight:800;font-size:20px;line-height:1;overflow:hidden;flex:none}
-.blogo::before{content:attr(data-b)}
-.blogo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:7px;background:var(--surface)}
-.dcard>.blogo{margin-bottom:12px}
-.hero.dh .blogo{margin-bottom:14px;width:52px;height:52px;border-radius:14px}
+.blogo{display:inline-flex;align-items:center;height:48px;flex:none}
+.blogo img{height:100%;width:auto;max-width:170px;object-fit:contain;display:block}
+.blogo .lg-d{display:none}
+html[data-mode="dark"] .blogo .lg-l{display:none}
+html[data-mode="dark"] .blogo .lg-d{display:block}
+.dcard>.blogo{margin-bottom:14px}
+.hero.dh .blogo{height:60px;margin-bottom:16px}
 </style>
 <style>
-.blogo{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-family:var(--font-display);font-weight:800;font-size:20px;line-height:1;overflow:hidden;flex:none}
-.blogo::before{content:attr(data-b)}
-.blogo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:7px;background:var(--surface)}
-.dcard>.blogo{margin-bottom:12px}
-.hero.dh .blogo{margin-bottom:14px;width:52px;height:52px;border-radius:14px}
+.blogo{display:inline-flex;align-items:center;height:48px;flex:none}
+.blogo img{height:100%;width:auto;max-width:170px;object-fit:contain;display:block}
+.blogo .lg-d{display:none}
+html[data-mode="dark"] .blogo .lg-l{display:none}
+html[data-mode="dark"] .blogo .lg-d{display:block}
+.dcard>.blogo{margin-bottom:14px}
+.hero.dh .blogo{display:flex;height:60px;margin-bottom:16px}
 
 .navback{display:inline-flex;align-items:center;gap:7px;padding:7px 14px 7px 11px;border-radius:999px;border:1px solid var(--line,rgba(127,127,127,.28));background:transparent;color:var(--ink);text-decoration:none;font-weight:600;font-size:13.5px;white-space:nowrap;flex:none;transition:background .25s,color .25s,border-color .25s,transform .25s}
 .navback svg{transition:transform .28s cubic-bezier(.2,.8,.2,1)}
@@ -1083,7 +1087,7 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 
 <div class="hero dh"><svg class="hk-blobs" viewBox="0 0 800 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path fill="var(--sig,#B8407A)" d="M752.6,120.0C752.4,158.5 713.0,208.1 682.0,228.3C651.0,248.5 598.8,249.5 566.6,241.4C534.3,233.2 503.5,210.5 488.5,179.5C473.4,148.4 463.6,88.4 476.2,55.2C488.9,22.0 529.9,-10.1 564.4,-19.8C599.0,-29.4 652.0,-26.0 683.4,-2.7C714.8,20.6 752.8,81.5 752.6,120.0Z"/><path fill="var(--s2,#8A5CC2)" d="M813.3,300.0C815.8,329.5 808.7,377.2 789.9,392.7C771.2,408.2 726.0,401.1 700.8,392.8C675.5,384.5 653.0,366.4 638.4,343.1C623.7,319.7 603.1,278.8 612.9,252.7C622.7,226.7 670.0,192.9 697.0,186.8C724.0,180.7 755.5,197.0 774.9,215.9C794.3,234.7 810.8,270.5 813.3,300.0Z"/><path fill="var(--s3,#E2915F)" d="M234.4,400.0C236.8,428.5 213.2,457.4 188.2,475.2C163.3,493.1 115.4,511.6 84.7,507.2C54.1,502.7 18.4,475.9 4.1,448.7C-10.2,421.6 -15.0,372.0 -1.0,344.2C13.0,316.3 59.0,288.2 88.1,281.6C117.1,274.9 149.0,284.6 173.3,304.3C197.7,324.0 231.9,371.5 234.4,400.0Z"/></svg>
     <div>
-      <span class="blogo" data-b="D"><img src="/assets/logos/duolingo.svg" alt="Duolingo logo" onerror="this.remove()"></span>
+      <span class="blogo"><img src="/assets/logos/duolingo.png" alt="Duolingo logo"></span>
       <span class="tag"><b></b><span class="shim">Product teardown · Edtech</span></span>
       <h1 class="name">Duolingo: how a daily habit became a business</h1>
       <p class="tagline">A teardown of the streak loop. What brings 64.9M people back every day, where it strains, and two changes I would test.</p>

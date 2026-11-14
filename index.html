@@ -988,11 +988,13 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
 .dcard .chips-row{margin-top:auto}
 .dcard .go{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--ink)}
 .dnote{margin-top:16px;font-size:14px;color:var(--muted)}
-.blogo{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-family:var(--font-display);font-weight:800;font-size:20px;line-height:1;overflow:hidden;flex:none}
-.blogo::before{content:attr(data-b)}
-.blogo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:7px;background:var(--surface)}
-.dcard>.blogo{margin-bottom:12px}
-.hero.dh .blogo{margin-bottom:14px;width:52px;height:52px;border-radius:14px}
+.blogo{display:inline-flex;align-items:center;height:48px;flex:none}
+.blogo img{height:100%;width:auto;max-width:170px;object-fit:contain;display:block}
+.blogo .lg-d{display:none}
+html[data-mode="dark"] .blogo .lg-l{display:none}
+html[data-mode="dark"] .blogo .lg-d{display:block}
+.dcard>.blogo{margin-bottom:14px}
+.hero.dh .blogo{height:60px;margin-bottom:16px}
 </style><script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -1265,8 +1267,8 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
   <span class="eyebrow">Product thinking</span><h2 class="h2">Teardowns</h2>
   <p class="lead">Two products I admire, taken apart: what drives them, where they strain, and what I would test next.</p>
   <div class="dgrid">
-    <a class="dcard d1" href="/teardowns/duolingo/"><span class="blogo" data-b="D"><img src="/assets/logos/duolingo.svg" alt="Duolingo logo" loading="lazy" onerror="this.remove()"></span><span class="eyebrow">Edtech</span><h3>Duolingo: how a daily habit became a business</h3><p>The streak loop behind 64.9M daily users, where it trades learning for showing up, and two experiments to close the gap.</p><div class="chips-row"><span class="chip">Retention</span><span class="chip">Habit loops</span></div><span class="go">Read the teardown <span aria-hidden="true">&rarr;</span></span></a>
-    <a class="dcard d2" href="/teardowns/spotify/"><span class="blogo" data-b="S"><img src="/assets/logos/spotify.svg" alt="Spotify logo" loading="lazy" onerror="this.remove()"></span><span class="eyebrow">Music and audio</span><h3>Spotify: personalisation as a product</h3><p>How listening data becomes Discover Weekly and Wrapped, and why control and trust decide whether it keeps working.</p><div class="chips-row"><span class="chip">Personalisation</span><span class="chip">Trust</span></div><span class="go">Read the teardown <span aria-hidden="true">&rarr;</span></span></a>
+    <a class="dcard d1" href="/teardowns/duolingo/"><span class="blogo"><img src="/assets/logos/duolingo.png" alt="Duolingo logo"></span><span class="eyebrow">Edtech</span><h3>Duolingo: how a daily habit became a business</h3><p>The streak loop behind 64.9M daily users, where it trades learning for showing up, and two experiments to close the gap.</p><div class="chips-row"><span class="chip">Retention</span><span class="chip">Habit loops</span></div><span class="go">Read the teardown <span aria-hidden="true">&rarr;</span></span></a>
+    <a class="dcard d2" href="/teardowns/spotify/"><span class="blogo"><img src="/assets/logos/spotify.png" alt="Spotify logo"></span><span class="eyebrow">Music and audio</span><h3>Spotify: personalisation as a product</h3><p>How listening data becomes Discover Weekly and Wrapped, and why control and trust decide whether it keeps working.</p><div class="chips-row"><span class="chip">Personalisation</span><span class="chip">Trust</span></div><span class="go">Read the teardown <span aria-hidden="true">&rarr;</span></span></a>
   </div>
   <p class="dnote">Independent analysis from public sources. No internal data.</p>
 </section>
@@ -1275,8 +1277,8 @@ dialog.pm{width:min(480px,calc(100vw - 28px))}
   <span class="eyebrow">Problem solving</span><h2 class="h2">Case studies</h2>
   <p class="lead">Two product problems in domains I have not worked in, framed, prioritised and turned into an experiment plan.</p>
   <div class="dgrid">
-    <a class="dcard d3" href="/case-studies/cult-fit/"><span class="blogo" data-b="C"><img src="/assets/logos/cult-fit.svg" alt="Cult.fit logo" loading="lazy" onerror="this.remove()"></span><span class="eyebrow">Health and fitness</span><h3>Cult.fit: building the habit in the first 30 days</h3><p>Most members pay for a year upfront. How a guided first month could make sure that year gets used.</p><div class="chips-row"><span class="chip">Onboarding</span><span class="chip">Retention</span></div><span class="go">Read the case study <span aria-hidden="true">&rarr;</span></span></a>
-    <a class="dcard d4" href="/case-studies/uber-india/"><span class="blogo" data-b="U"><img src="/assets/logos/uber.svg" alt="Uber logo" loading="lazy" onerror="this.remove()"></span><span class="eyebrow">Mobility</span><h3>Uber Auto: fewer cancellations, intact driver earnings</h3><p>Cutting post-acceptance cancellations in a zero-commission market, and testing it without spillover.</p><div class="chips-row"><span class="chip">Marketplace</span><span class="chip">Trade-offs</span></div><span class="go">Read the case study <span aria-hidden="true">&rarr;</span></span></a>
+    <a class="dcard d3" href="/case-studies/cult-fit/"><span class="blogo"><img class="lg-l" src="/assets/logos/cult-fit-light.png" alt="Cult.fit logo"><img class="lg-d" src="/assets/logos/cult-fit-dark.png" alt="" aria-hidden="true"></span><span class="eyebrow">Health and fitness</span><h3>Cult.fit: building the habit in the first 30 days</h3><p>Most members pay for a year upfront. How a guided first month could make sure that year gets used.</p><div class="chips-row"><span class="chip">Onboarding</span><span class="chip">Retention</span></div><span class="go">Read the case study <span aria-hidden="true">&rarr;</span></span></a>
+    <a class="dcard d4" href="/case-studies/uber-india/"><span class="blogo"><img class="lg-l" src="/assets/logos/uber-light.png" alt="Uber logo"><img class="lg-d" src="/assets/logos/uber-dark.png" alt="" aria-hidden="true"></span><span class="eyebrow">Mobility</span><h3>Uber Auto: fewer cancellations, intact driver earnings</h3><p>Cutting post-acceptance cancellations in a zero-commission market, and testing it without spillover.</p><div class="chips-row"><span class="chip">Marketplace</span><span class="chip">Trade-offs</span></div><span class="go">Read the case study <span aria-hidden="true">&rarr;</span></span></a>
   </div>
   <p class="dnote">Independent analysis from public information. Assumptions are labelled.</p>
 </section>
