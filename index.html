@@ -734,7 +734,7 @@ html[data-mode="dark"] .hero,html[data-mode="dark"] .tp,html[data-mode="dark"] .
 @media (max-width:999px){html.js .wrapped .rv{opacity:1;transform:none}}
 /* performance: promote only the things that move a lot; never on containers */
 .navlinks .ind{will-change:transform}
-#contact{margin-bottom:clamp(56px,10vw,120px)}
+#contact{margin-bottom:var(--sec)}
 /* ===== "toned" palette: the original vivid theme (light) + its original dark ===== */
 
 
@@ -995,6 +995,20 @@ html[data-mode="dark"] .blogo .lg-l{display:none}
 html[data-mode="dark"] .blogo .lg-d{display:block}
 .dcard>.blogo{margin-bottom:14px}
 .hero.dh .blogo{height:60px;margin-bottom:16px}
+/* spacing rhythm: one scale for the whole site */
+:root{--sec:clamp(44px,5vw,64px);--blk:clamp(24px,2.6vw,32px)}
+.sec{padding-block:var(--sec) 0}
+.hero{padding-bottom:clamp(32px,4vw,48px)}
+.wrapped-h{margin:var(--blk) 0 12px}
+.about{margin-top:var(--blk)}
+.row-h{margin-top:var(--blk)}
+.how{margin-top:var(--blk)}
+#work .chips-row{margin-bottom:0}
+.co{margin-top:var(--blk);padding-block:clamp(24px,3vw,36px)}
+.dgrid{margin-top:22px}
+.dnote{margin:14px 0 0}
+.contact{margin-top:var(--sec);margin-bottom:var(--sec);padding-block:clamp(32px,4vw,48px)}
+footer{padding-block:20px 32px}
 </style><script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -1147,7 +1161,7 @@ html[data-mode="dark"] .blogo .lg-d{display:block}
   </div>
 
   <div class="row-h"><h4>What I owned</h4><span>Scope of the role</span></div>
-  <div class="chips-row" style="margin-bottom:28px">
+  <div class="chips-row">
     <span class="chip wl"><span class="lg ow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></svg></span>Funnel optimisation for Shoppable Widgets</span>
     <span class="chip wl"><span class="lg ow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2"/><path d="M12 15l-3-3a22 22 0 0 1 2-4 12 12 0 0 1 11-5c0 3-1 8-5 11a22 22 0 0 1-4 2z"/><path d="M9 12H4s.6-3 2-4c1.6-1 5 0 5 0M12 15v5s3-.6 4-2c1-1.6 0-5 0-5"/></svg></span>PLG: self-serve activation, Shopify App Store launch, usage-based upgrade triggers</span>
     <span class="chip wl"><span class="lg ow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M17.5 14v7M14 17.5h7"/></svg></span>Platform expansion: AI Studio, Content Library, Social Media Posting, DM Automation</span>
