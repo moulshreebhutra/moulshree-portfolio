@@ -43,7 +43,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
       </div></header>
       <div id="main" tabIndex={-1} style={{ outline: "none" }}>{children}</div>
       <div className={"toast" + (show ? " show" : "")} role="status" aria-live="polite">{t && <><span>{t.text}</span>{t.href && <a href={t.href}>{t.label ?? "View"}</a>}</>}</div>
-      <footer><div className="wrap">Shelfmate is a concept project by <a href="https://moulshree-portfolio.vercel.app">Moulshree Bhutra</a>. The skincare brand is invented, nothing here is sold, and no payment or personal details are collected. <a href="https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/shelfmate">Source</a></div></footer>
+      <footer><div className="wrap">Shelfmate by <a href="https://moulshree-portfolio.vercel.app">Moulshree Bhutra</a>. Nothing here is sold, and no payment or personal details are collected. <a href="https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/shelfmate">Source</a></div></footer>
     </>
   );
 }

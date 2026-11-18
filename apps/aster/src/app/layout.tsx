@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
         <footer className="mx-auto max-w-6xl px-4 py-10 text-xs text-mut">
-          Aster · prototype on synthetic data · grounded in tools, scored by evals, guarded for safety · not financial advice
+          Aster · grounded in tools, scored by evals, guarded for safety · not financial advice
         </footer>
       </body>
     </html>

@@ -86,7 +86,7 @@ export default function Store() {
             : <p className="note"><button className="link" onClick={() => setNote(true)}>Add a note (optional)</button></p>}
           {error && <p className="err" role="alert">{error}</p>}
           <div className="row cta"><button className={"btn big" + (busy ? " loading" : "")} onClick={build} disabled={!sid || busy}>{busy ? "Building your routine…" : "Build my routine"}</button></div>
-          <p className="note">A concept store for an invented brand. Nothing is sold and there is no payment. Please don't type personal details.</p>
+          <p className="note">Nothing is sold and there is no payment. Please don't type personal details.</p>
         </section>
       ) : (
         <section className="stage rise" aria-labelledby="h-res">

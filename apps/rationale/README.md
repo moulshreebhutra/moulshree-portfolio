@@ -1,8 +1,8 @@
 # Rationale
 
-Turn customer feedback into what to build next. A concept project by [Moulshree Bhutra](https://moulshree-portfolio.vercel.app).
+Turn customer feedback into what to build next. By [Moulshree Bhutra](https://moulshree-portfolio.vercel.app).
 
-Paste customer feedback and Rationale groups it by the need underneath, ranks the themes by revenue at stake and effort, and writes a one-page spec for the one you pick. The feedback in the sample is invented.
+Paste customer feedback and Rationale groups it by the need underneath, ranks the themes by revenue at stake and effort, and writes a one-page spec for the one you pick.
 
 ## How it works (three steps)
 1. **Add feedback.** Paste one comment per line (or `Customer | Tier | $84k | text`), upload a CSV, or try the sample.

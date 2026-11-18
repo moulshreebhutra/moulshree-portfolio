@@ -170,7 +170,7 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
               <button className="btn ghost big" onClick={loadSample} disabled={busy === "rank"}>Try sample feedback</button>
             </div>
             <input ref={fileRef} type="file" accept=".csv,.txt,text/csv,text/plain" hidden onChange={(e) => onFile(e.target.files?.[0])} />
-            <p className="note">Have a spreadsheet? <button className="link" onClick={() => fileRef.current?.click()}>Upload a CSV</button>. Use invented or anonymised feedback; emails, phone numbers and links are removed before any AI sees it.</p>
+            <p className="note">Have a spreadsheet? <button className="link" onClick={() => fileRef.current?.click()}>Upload a CSV</button>. Use anonymised feedback; emails, phone numbers and links are removed before any AI sees it.</p>
           </section>
         )}
 
@@ -288,7 +288,7 @@ export default function Workspace({ initial, sharedId }: { initial?: WS; sharedI
         )}
       </main>
 
-      <footer><div className="wrap narrow">Rationale is a concept project by <a href="https://moulshree-portfolio.vercel.app">Moulshree Bhutra</a>. The customers in the sample are invented. <a href="https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/rationale">Code</a></div></footer>
+      <footer><div className="wrap narrow">Rationale by <a href="https://moulshree-portfolio.vercel.app">Moulshree Bhutra</a>. <a href="https://github.com/moulshreebhutra/moulshree-portfolio/tree/main/apps/rationale">Code</a></div></footer>
       <div className={"toast" + (toast ? " show" : "")} role="status" aria-live="polite">{toast}</div>
     </>
   );

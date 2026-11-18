@@ -1,6 +1,6 @@
 # Shelfmate
 
-Your skincare routine, built in a minute. A concept project by [Moulshree Bhutra](https://moulshree-portfolio.vercel.app). The skincare brand is invented, nothing is sold, and no payment, name or address is collected.
+Your skincare routine, built in a minute. By [Moulshree Bhutra](https://moulshree-portfolio.vercel.app). Nothing is sold, and no payment, name or address is collected.
 
 ## What works end to end
 **Shopper**

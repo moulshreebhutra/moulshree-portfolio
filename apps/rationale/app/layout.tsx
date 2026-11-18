@@ -8,7 +8,7 @@ const THEME = `(function(){var t="light";try{if(localStorage.getItem("theme")===
 
 export const metadata: Metadata = {
   title: "Rationale",
-  description: "Paste customer feedback and get a ranked list of what to build first, plus a one-page spec for the top item. A concept project by Moulshree Bhutra.",
+  description: "Paste customer feedback and get a ranked list of what to build first, plus a one-page spec for the top item. Built by Moulshree Bhutra.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

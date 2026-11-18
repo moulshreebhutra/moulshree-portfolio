@@ -9,7 +9,7 @@ const THEME = `(function(){var t="light";try{if(localStorage.getItem("theme")===
 
 export const metadata: Metadata = {
   title: "Shelfmate",
-  description: "Answer three questions and get a skincare routine built from the store's own shelf. The merchant view shows what shoppers did. A concept project by Moulshree Bhutra.",
+  description: "Answer three questions and get a skincare routine built from the store's own shelf. The merchant view shows what shoppers did. Built by Moulshree Bhutra.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

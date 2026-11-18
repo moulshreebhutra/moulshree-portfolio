@@ -6,7 +6,7 @@ Personal portfolio of Moulshree Bhutra, Product Manager (Founding APM at Vudio.a
 
 ## What is in here
 
-A single static page, no build step and no dependencies. The two concept projects are full apps in `apps/` that deploy separately.
+A single static page, no build step and no dependencies. The projects are full apps in `apps/` that deploy separately.
 
 - `index.html`: the whole site (HTML, CSS and a little JavaScript)
 - `logos/`: company, school and profile images used on the page
